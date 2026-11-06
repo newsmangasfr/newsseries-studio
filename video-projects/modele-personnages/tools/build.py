@@ -255,7 +255,7 @@ for i, s in enumerate(shots):
         sfx += [[round(at("cta", "VF") - 0.1, 3), "pop-high", 0.3], [round(at("cta", "VOSTFR") - 0.1, 3), "pop-mid", 0.3]]
     elif k in ("logo-in", "logo-out"):
         rays = "".join(f'<div class="ray" style="transform: rotate({j * 20 + (7 if j % 2 else 0)}deg)"><div class="ray-in" style="width:{520 + (j * 137) % 260}px"></div></div>' for j in range(18))
-        line = '<div class="lg-line">L\'ACTU ANIME &amp; MANGA</div>' if k == "logo-in" else '<div class="lg-line">ABONNE-TOI POUR PLUS D\'ACTUS</div><div class="lg-site">newsseries.fr</div>'
+        line = '<div class="lg-line">L\'ACTU SÉRIES</div>' if k == "logo-in" else '<div class="lg-line">ABONNE-TOI POUR PLUS D\'ACTUS</div><div class="lg-site">newsseries.fr</div>'
         body.append(f'''<div {attrs}>
   <div class="lg-glow"></div><div class="lg-rays">{rays}</div><div class="lg-ring"></div>
   <div class="lg-content"><div class="lg-logo"><img src="assets/brand/logo.png" alt="NewsSeries"></div>{line}</div>

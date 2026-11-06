@@ -236,7 +236,7 @@ for i, s in enumerate(shots):
     elif s["kind"] in ("logo-in", "logo-out"):
         rays = "".join(f'<div class="ray" style="transform: rotate({i * 360 / 18 + (7 if i % 2 else 0):.1f}deg)"><div class="ray-in" style="width:{520 + (i * 137) % 260}px"></div></div>' for i in range(18))
         if s["kind"] == "logo-in":
-            line = '<div class="lg-line">L\'ACTU ANIME &amp; MANGA</div>'
+            line = '<div class="lg-line">L\'ACTU SÉRIES</div>'
         else:
             line = '<div class="lg-line">ABONNE-TOI POUR PLUS D\'ACTUS</div><div class="lg-site">newsseries.fr</div>'
         body.append(f'''<div {attrs}>
