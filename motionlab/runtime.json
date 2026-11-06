@@ -1,0 +1,75 @@
+{
+  "name": "motionlab-runtime",
+  "version": "0.2.11",
+  "setup_version": 1,
+  "node": ">=22.12",
+  "packs": [
+    {
+      "name": "full-visual",
+      "version": "0.2.0",
+      "setup_version": 1,
+      "command": "/full-visual",
+      "runtime": ">=0.2.10",
+      "first_run": {
+        "rank": 1,
+        "why": "il part de tout ce que tu veux expliquer, rien à filmer"
+      },
+      "needs": {
+        "account": false,
+        "keys": [],
+        "optional_keys": [
+          "ELEVENLABS_API_KEY",
+          "OPENAI_API_KEY",
+          "FISH_API_KEY",
+          "COMPOSIO_API_KEY"
+        ],
+        "keys_note": "Une voix off demande la clé du client pour un seul service : ElevenLabs (timing exact de chaque mot, la voix maison), OpenAI ou Fish Audio.",
+        "inputs": [
+          "tout ce que le créateur veut expliquer, ou son propre script"
+        ],
+        "deps": {
+          "platform": "macOS, Windows ou Linux. Le rendu, la voix off et les vérifications sont les mêmes partout ; une voix sans horodatage des mots est calée par whisper.cpp, que le dossier télécharge une fois.",
+          "ffmpeg": "le ffmpeg et le ffprobe de la machine, car les scripts du moteur les appellent par leur nom",
+          "python": "numpy, lancé par le lanceur Python du dossier (scripts/py.mjs), pas besoin de python3 dans le PATH",
+          "node": "remotion et @remotion/google-fonts depuis le package.json du dossier",
+          "browser": "le navigateur headless que Remotion télécharge ; CHROME le remplace"
+        },
+        "tools": [
+          {
+            "name": "ffmpeg",
+            "why": "le calage de la voix off, la coupe des silences et les vérifications du rendu",
+            "bin": "ffmpeg",
+            "args": [
+              "-version"
+            ],
+            "install": {
+              "darwin": "brew install ffmpeg",
+              "win32": "winget install -e --id Gyan.FFmpeg --accept-package-agreements --accept-source-agreements",
+              "linux": "sudo apt install -y ffmpeg"
+            }
+          },
+          {
+            "name": "ffprobe",
+            "why": "lire la durée d’une prise, et il est fourni avec ffmpeg",
+            "bin": "ffprobe",
+            "args": [
+              "-version"
+            ],
+            "install": {
+              "darwin": "brew install ffmpeg",
+              "win32": "winget install -e --id Gyan.FFmpeg --accept-package-agreements --accept-source-agreements",
+              "linux": "sudo apt install -y ffmpeg"
+            }
+          }
+        ]
+      },
+      "keep": [
+        "engine/full-visual/reels",
+        "engine/full-visual/public",
+        "engine/full-visual/output"
+      ],
+      "at": "2026-10-23T13:24:12.652Z"
+    }
+  ],
+  "compositions": []
+}

@@ -1,0 +1,1176 @@
+{
+ "duration": 32.091,
+ "silences": [
+  [
+   1.27,
+   1.41
+  ],
+  [
+   2.4,
+   2.57
+  ],
+  [
+   3.17,
+   3.44
+  ],
+  [
+   3.95,
+   4.12
+  ],
+  [
+   5.34,
+   5.48
+  ],
+  [
+   6.22,
+   6.39
+  ],
+  [
+   7.43,
+   7.59
+  ],
+  [
+   8.32,
+   8.5
+  ],
+  [
+   9.64,
+   9.93
+  ],
+  [
+   10.72,
+   10.88
+  ],
+  [
+   11.97,
+   12.24
+  ],
+  [
+   12.79,
+   12.95
+  ],
+  [
+   13.76,
+   13.91
+  ],
+  [
+   15.61,
+   15.87
+  ],
+  [
+   16.47,
+   16.62
+  ],
+  [
+   17.6,
+   17.81
+  ],
+  [
+   18.88,
+   19.05
+  ],
+  [
+   19.63,
+   19.77
+  ],
+  [
+   20.5,
+   20.65
+  ],
+  [
+   21.78,
+   21.96
+  ],
+  [
+   22.84,
+   23.13
+  ],
+  [
+   24.03,
+   24.18
+  ],
+  [
+   25.06,
+   25.27
+  ],
+  [
+   25.93,
+   26.11
+  ],
+  [
+   27.23,
+   27.4
+  ],
+  [
+   28.88,
+   29.14
+  ],
+  [
+   29.71,
+   29.87
+  ],
+  [
+   30.68,
+   30.83
+  ],
+  [
+   31.65,
+   32.09
+  ]
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "ground": "dark",
+   "firstWord": 0
+  },
+  {
+   "id": "jan",
+   "ground": "dark",
+   "firstWord": 11
+  },
+  {
+   "id": "ete",
+   "ground": "dark",
+   "firstWord": 31
+  },
+  {
+   "id": "oct",
+   "ground": "dark",
+   "firstWord": 39
+  },
+  {
+   "id": "films",
+   "ground": "dark",
+   "firstWord": 50
+  },
+  {
+   "id": "tba",
+   "ground": "dark",
+   "firstWord": 75
+  },
+  {
+   "id": "cta",
+   "ground": "dark",
+   "firstWord": 96
+  }
+ ],
+ "blocks": [
+  {
+   "words": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "slot": "top",
+   "scene": 0
+  },
+  {
+   "words": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "slot": "top",
+   "scene": 0
+  },
+  {
+   "words": [
+    9,
+    10
+   ],
+   "slot": "top",
+   "scene": 0
+  },
+  {
+   "words": [
+    11,
+    12
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    13,
+    14,
+    15,
+    16
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    17,
+    18,
+    19
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    20,
+    21,
+    22,
+    23
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    24,
+    25
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "slot": "top",
+   "scene": 1
+  },
+  {
+   "words": [
+    31,
+    32,
+    33,
+    34
+   ],
+   "slot": "top",
+   "scene": 2
+  },
+  {
+   "words": [
+    35,
+    36,
+    37,
+    38
+   ],
+   "slot": "top",
+   "scene": 2
+  },
+  {
+   "words": [
+    39,
+    40
+   ],
+   "slot": "top",
+   "scene": 3
+  },
+  {
+   "words": [
+    41,
+    42,
+    43
+   ],
+   "slot": "top",
+   "scene": 3
+  },
+  {
+   "words": [
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ],
+   "slot": "top",
+   "scene": 3
+  },
+  {
+   "words": [
+    50,
+    51
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    52,
+    53,
+    54,
+    55
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    56,
+    57,
+    58,
+    59
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    60,
+    61,
+    62
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    63,
+    64,
+    65,
+    66
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    67,
+    68,
+    69,
+    70,
+    71
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    72,
+    73,
+    74
+   ],
+   "slot": "top",
+   "scene": 4
+  },
+  {
+   "words": [
+    75,
+    76,
+    77,
+    78,
+    79
+   ],
+   "slot": "top",
+   "scene": 5
+  },
+  {
+   "words": [
+    80,
+    81,
+    82,
+    83
+   ],
+   "slot": "top",
+   "scene": 5
+  },
+  {
+   "words": [
+    84,
+    85,
+    86
+   ],
+   "slot": "top",
+   "scene": 5
+  },
+  {
+   "words": [
+    87,
+    88,
+    89
+   ],
+   "slot": "top",
+   "scene": 5
+  },
+  {
+   "words": [
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+   ],
+   "slot": "top",
+   "scene": 5
+  },
+  {
+   "words": [
+    96,
+    97
+   ],
+   "slot": "top",
+   "scene": 6
+  },
+  {
+   "words": [
+    98,
+    99,
+    100,
+    101
+   ],
+   "slot": "top",
+   "scene": 6
+  },
+  {
+   "words": [
+    102,
+    103,
+    104
+   ],
+   "slot": "top",
+   "scene": 6
+  }
+ ],
+ "words": [
+  {
+   "w": "2027",
+   "key": true,
+   "emoji": null,
+   "t": 0.06,
+   "e": 0.281
+  },
+  {
+   "w": "va",
+   "key": false,
+   "emoji": null,
+   "t": 0.336,
+   "e": 0.447
+  },
+  {
+   "w": "être",
+   "key": false,
+   "emoji": null,
+   "t": 0.502,
+   "e": 0.723
+  },
+  {
+   "w": "une",
+   "key": false,
+   "emoji": null,
+   "t": 0.778,
+   "e": 0.944
+  },
+  {
+   "w": "année",
+   "key": false,
+   "emoji": null,
+   "t": 0.999,
+   "e": 1.276
+  },
+  {
+   "w": "complètement",
+   "key": false,
+   "emoji": null,
+   "t": 1.415,
+   "e": 1.795
+  },
+  {
+   "w": "folle",
+   "key": true,
+   "emoji": null,
+   "t": 1.827,
+   "e": 1.985
+  },
+  {
+   "w": "pour",
+   "key": false,
+   "emoji": null,
+   "t": 2.017,
+   "e": 2.143
+  },
+  {
+   "w": "l'anime.",
+   "key": false,
+   "emoji": null,
+   "t": 2.175,
+   "e": 2.428
+  },
+  {
+   "w": "Regardez",
+   "key": true,
+   "emoji": null,
+   "t": 2.569,
+   "e": 2.976
+  },
+  {
+   "w": "ça.",
+   "key": false,
+   "emoji": null,
+   "t": 3.027,
+   "e": 3.18
+  },
+  {
+   "w": "Dès",
+   "key": false,
+   "emoji": null,
+   "t": 3.44,
+   "e": 3.576
+  },
+  {
+   "w": "janvier:",
+   "key": true,
+   "emoji": null,
+   "t": 3.621,
+   "e": 3.982
+  },
+  {
+   "w": "Shangri-La",
+   "key": true,
+   "emoji": null,
+   "t": 4.122,
+   "e": 4.542
+  },
+  {
+   "w": "Frontier",
+   "key": false,
+   "emoji": null,
+   "t": 4.584,
+   "e": 4.921
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 4.963,
+   "e": 5.215
+  },
+  {
+   "w": "3,",
+   "key": false,
+   "emoji": null,
+   "t": 5.257,
+   "e": 5.342
+  },
+  {
+   "w": "Mashle",
+   "key": true,
+   "emoji": null,
+   "t": 5.476,
+   "e": 5.761
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 5.809,
+   "e": 6.094
+  },
+  {
+   "w": "3,",
+   "key": false,
+   "emoji": null,
+   "t": 6.142,
+   "e": 6.237
+  },
+  {
+   "w": "Sakamoto",
+   "key": true,
+   "emoji": null,
+   "t": 6.376,
+   "e": 6.751
+  },
+  {
+   "w": "Days",
+   "key": false,
+   "emoji": null,
+   "t": 6.798,
+   "e": 6.985
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 7.032,
+   "e": 7.313
+  },
+  {
+   "w": "2,",
+   "key": false,
+   "emoji": null,
+   "t": 7.36,
+   "e": 7.454
+  },
+  {
+   "w": "Medaka",
+   "key": true,
+   "emoji": null,
+   "t": 7.587,
+   "e": 7.897
+  },
+  {
+   "w": "Kuroiwa,",
+   "key": false,
+   "emoji": null,
+   "t": 7.948,
+   "e": 8.361
+  },
+  {
+   "w": "et",
+   "key": false,
+   "emoji": null,
+   "t": 8.5,
+   "e": 8.586
+  },
+  {
+   "w": "Marriage",
+   "key": true,
+   "emoji": null,
+   "t": 8.629,
+   "e": 8.974
+  },
+  {
+   "w": "Toxin",
+   "key": false,
+   "emoji": null,
+   "t": 9.017,
+   "e": 9.233
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 9.276,
+   "e": 9.534
+  },
+  {
+   "w": "2.",
+   "key": false,
+   "emoji": null,
+   "t": 9.577,
+   "e": 9.663
+  },
+  {
+   "w": "Cet",
+   "key": false,
+   "emoji": null,
+   "t": 9.925,
+   "e": 10.078
+  },
+  {
+   "w": "été,",
+   "key": true,
+   "emoji": null,
+   "t": 10.129,
+   "e": 10.333
+  },
+  {
+   "w": "le",
+   "key": false,
+   "emoji": null,
+   "t": 10.384,
+   "e": 10.487
+  },
+  {
+   "w": "film",
+   "key": false,
+   "emoji": null,
+   "t": 10.538,
+   "e": 10.742
+  },
+  {
+   "w": "One",
+   "key": false,
+   "emoji": null,
+   "t": 10.882,
+   "e": 11.031
+  },
+  {
+   "w": "Piece:",
+   "key": true,
+   "emoji": null,
+   "t": 11.081,
+   "e": 11.381
+  },
+  {
+   "w": "God",
+   "key": false,
+   "emoji": null,
+   "t": 11.431,
+   "e": 11.58
+  },
+  {
+   "w": "Valley.",
+   "key": false,
+   "emoji": null,
+   "t": 11.63,
+   "e": 11.98
+  },
+  {
+   "w": "En",
+   "key": false,
+   "emoji": null,
+   "t": 12.239,
+   "e": 12.341
+  },
+  {
+   "w": "octobre,",
+   "key": true,
+   "emoji": null,
+   "t": 12.391,
+   "e": 12.796
+  },
+  {
+   "w": "Frieren",
+   "key": true,
+   "emoji": null,
+   "t": 12.936,
+   "e": 13.279
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 13.328,
+   "e": 13.622
+  },
+  {
+   "w": "3…",
+   "key": false,
+   "emoji": null,
+   "t": 13.671,
+   "e": 13.769
+  },
+  {
+   "w": "et",
+   "key": false,
+   "emoji": null,
+   "t": 13.906,
+   "e": 14.009
+  },
+  {
+   "w": "Delicious",
+   "key": true,
+   "emoji": null,
+   "t": 14.061,
+   "e": 14.525
+  },
+  {
+   "w": "in",
+   "key": false,
+   "emoji": null,
+   "t": 14.577,
+   "e": 14.68
+  },
+  {
+   "w": "Dungeon",
+   "key": false,
+   "emoji": null,
+   "t": 14.732,
+   "e": 15.093
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 15.145,
+   "e": 15.455
+  },
+  {
+   "w": "2.",
+   "key": false,
+   "emoji": null,
+   "t": 15.506,
+   "e": 15.61
+  },
+  {
+   "w": "Côté",
+   "key": false,
+   "emoji": null,
+   "t": 15.869,
+   "e": 16.09
+  },
+  {
+   "w": "films:",
+   "key": true,
+   "emoji": null,
+   "t": 16.146,
+   "e": 16.477
+  },
+  {
+   "w": "Solo",
+   "key": true,
+   "emoji": null,
+   "t": 16.617,
+   "e": 16.776
+  },
+  {
+   "w": "Leveling",
+   "key": false,
+   "emoji": null,
+   "t": 16.816,
+   "e": 17.135
+  },
+  {
+   "w": "est",
+   "key": false,
+   "emoji": null,
+   "t": 17.174,
+   "e": 17.294
+  },
+  {
+   "w": "attendu,",
+   "key": false,
+   "emoji": null,
+   "t": 17.334,
+   "e": 17.652
+  },
+  {
+   "w": "The",
+   "key": false,
+   "emoji": null,
+   "t": 17.792,
+   "e": 17.945
+  },
+  {
+   "w": "Eminence",
+   "key": true,
+   "emoji": null,
+   "t": 17.996,
+   "e": 18.404
+  },
+  {
+   "w": "in",
+   "key": false,
+   "emoji": null,
+   "t": 18.455,
+   "e": 18.557
+  },
+  {
+   "w": "Shadow",
+   "key": false,
+   "emoji": null,
+   "t": 18.608,
+   "e": 18.914
+  },
+  {
+   "w": "et",
+   "key": false,
+   "emoji": null,
+   "t": 19.054,
+   "e": 19.126
+  },
+  {
+   "w": "Haikyu",
+   "key": true,
+   "emoji": null,
+   "t": 19.163,
+   "e": 19.38
+  },
+  {
+   "w": "aussi…",
+   "key": false,
+   "emoji": null,
+   "t": 19.417,
+   "e": 19.635
+  },
+  {
+   "w": "et",
+   "key": false,
+   "emoji": null,
+   "t": 19.766,
+   "e": 19.849
+  },
+  {
+   "w": "la",
+   "key": false,
+   "emoji": null,
+   "t": 19.891,
+   "e": 19.974
+  },
+  {
+   "w": "rumeur",
+   "key": true,
+   "emoji": null,
+   "t": 20.015,
+   "e": 20.264
+  },
+  {
+   "w": "parle",
+   "key": false,
+   "emoji": null,
+   "t": 20.306,
+   "e": 20.513
+  },
+  {
+   "w": "du",
+   "key": false,
+   "emoji": null,
+   "t": 20.653,
+   "e": 20.731
+  },
+  {
+   "w": "deuxième",
+   "key": false,
+   "emoji": null,
+   "t": 20.77,
+   "e": 21.082
+  },
+  {
+   "w": "film",
+   "key": false,
+   "emoji": null,
+   "t": 21.121,
+   "e": 21.277
+  },
+  {
+   "w": "Demon",
+   "key": true,
+   "emoji": null,
+   "t": 21.316,
+   "e": 21.511
+  },
+  {
+   "w": "Slayer,",
+   "key": false,
+   "emoji": null,
+   "t": 21.55,
+   "e": 21.823
+  },
+  {
+   "w": "la",
+   "key": false,
+   "emoji": null,
+   "t": 21.959,
+   "e": 22.042
+  },
+  {
+   "w": "Forteresse",
+   "key": true,
+   "emoji": null,
+   "t": 22.083,
+   "e": 22.496
+  },
+  {
+   "w": "Infinie.",
+   "key": false,
+   "emoji": null,
+   "t": 22.537,
+   "e": 22.867
+  },
+  {
+   "w": "Et",
+   "key": false,
+   "emoji": null,
+   "t": 23.126,
+   "e": 23.191
+  },
+  {
+   "w": "sans",
+   "key": false,
+   "emoji": null,
+   "t": 23.224,
+   "e": 23.354
+  },
+  {
+   "w": "date",
+   "key": true,
+   "emoji": null,
+   "t": 23.386,
+   "e": 23.516
+  },
+  {
+   "w": "pour",
+   "key": false,
+   "emoji": null,
+   "t": 23.549,
+   "e": 23.679
+  },
+  {
+   "w": "l'instant:",
+   "key": false,
+   "emoji": null,
+   "t": 23.711,
+   "e": 24.036
+  },
+  {
+   "w": "Shield",
+   "key": true,
+   "emoji": null,
+   "t": 24.175,
+   "e": 24.449
+  },
+  {
+   "w": "Hero",
+   "key": false,
+   "emoji": null,
+   "t": 24.494,
+   "e": 24.677
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 24.722,
+   "e": 24.996
+  },
+  {
+   "w": "5,",
+   "key": false,
+   "emoji": null,
+   "t": 25.041,
+   "e": 25.132
+  },
+  {
+   "w": "Alya",
+   "key": true,
+   "emoji": null,
+   "t": 25.272,
+   "e": 25.474
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 25.524,
+   "e": 25.826
+  },
+  {
+   "w": "2,",
+   "key": false,
+   "emoji": null,
+   "t": 25.876,
+   "e": 25.977
+  },
+  {
+   "w": "World's",
+   "key": false,
+   "emoji": null,
+   "t": 26.115,
+   "e": 26.451
+  },
+  {
+   "w": "Finest",
+   "key": true,
+   "emoji": null,
+   "t": 26.498,
+   "e": 26.786
+  },
+  {
+   "w": "Assassin,",
+   "key": false,
+   "emoji": null,
+   "t": 26.834,
+   "e": 27.265
+  },
+  {
+   "w": "et",
+   "key": false,
+   "emoji": null,
+   "t": 27.405,
+   "e": 27.503
+  },
+  {
+   "w": "Lord",
+   "key": true,
+   "emoji": null,
+   "t": 27.552,
+   "e": 27.748
+  },
+  {
+   "w": "of",
+   "key": false,
+   "emoji": null,
+   "t": 27.797,
+   "e": 27.895
+  },
+  {
+   "w": "Mysteries",
+   "key": false,
+   "emoji": null,
+   "t": 27.944,
+   "e": 28.386
+  },
+  {
+   "w": "saison",
+   "key": false,
+   "emoji": null,
+   "t": 28.435,
+   "e": 28.729
+  },
+  {
+   "w": "2.",
+   "key": false,
+   "emoji": null,
+   "t": 28.778,
+   "e": 28.877
+  },
+  {
+   "w": "Alors,",
+   "key": false,
+   "emoji": null,
+   "t": 29.136,
+   "e": 29.411
+  },
+  {
+   "w": "lequel",
+   "key": true,
+   "emoji": null,
+   "t": 29.456,
+   "e": 29.731
+  },
+  {
+   "w": "vous",
+   "key": false,
+   "emoji": null,
+   "t": 29.871,
+   "e": 30.018
+  },
+  {
+   "w": "attendez",
+   "key": false,
+   "emoji": null,
+   "t": 30.055,
+   "e": 30.349
+  },
+  {
+   "w": "le",
+   "key": false,
+   "emoji": null,
+   "t": 30.385,
+   "e": 30.459
+  },
+  {
+   "w": "plus?",
+   "key": true,
+   "emoji": null,
+   "t": 30.496,
+   "e": 30.68
+  },
+  {
+   "w": "Dites-le",
+   "key": false,
+   "emoji": null,
+   "t": 30.822,
+   "e": 31.108
+  },
+  {
+   "w": "en",
+   "key": false,
+   "emoji": null,
+   "t": 31.144,
+   "e": 31.215
+  },
+  {
+   "w": "commentaire!",
+   "key": true,
+   "emoji": null,
+   "t": 31.251,
+   "e": 31.679
+  }
+ ]
+}

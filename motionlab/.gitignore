@@ -1,0 +1,9 @@
+.env*
+node_modules/
+workspace/
+context/
+dist/
+.DS_Store
+engine/full-visual/output/
+engine/full-visual/reels/*/stills/
+whisper.cpp/

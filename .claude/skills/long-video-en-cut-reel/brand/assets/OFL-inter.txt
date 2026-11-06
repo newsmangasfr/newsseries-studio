@@ -1,0 +1,2 @@
+Les polices Inter (Inter-ExtraBold.otf, Inter-Bold.otf) sont sous licence SIL Open Font License 1.1 :
+https://openfontlicense.org (copyright The Inter Project Authors, https://github.com/rsms/inter).

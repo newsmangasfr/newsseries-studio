@@ -1,0 +1,77 @@
+{
+  "id": "05-etiquettes",
+  "name": "Étiquettes",
+  "tendency": "sombre",
+  "theme": {
+    "font": {
+      "caption": "Fraunces, serif"
+    },
+    "caption": {
+      "size": 56,
+      "lineHeight": 84,
+      "top": 1480,
+      "bottom": 1480,
+      "wrap": 900,
+      "spokenWeight": 700,
+      "chip": {
+        "bg": "#E2603A",
+        "ink": "#FFF4E2",
+        "keyBg": "#F5C443",
+        "keyInk": "#2A1808",
+        "padX": 14,
+        "padY": 4,
+        "radius": 6,
+        "tilt": 1.6
+      }
+    },
+    "marker": {
+      "style": "none"
+    },
+    "grounds": {
+      "dark": {
+        "bg": "#141833",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFF4E2",
+        "spoken": "#FFF4E2",
+        "card": "#1E2346",
+        "hairline": "#2E3462",
+        "dim": "#A7ABCB"
+      },
+      "light": {
+        "bg": "#141833",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFF4E2",
+        "spoken": "#FFF4E2",
+        "card": "#1E2346",
+        "hairline": "#2E3462",
+        "dim": "#A7ABCB"
+      }
+    },
+    "atmosphere": {
+      "gradient": {
+        "dark": [
+          "#1F2550",
+          "#0A0C1C"
+        ],
+        "light": [
+          "#1F2550",
+          "#0A0C1C"
+        ]
+      },
+      "glow": {
+        "color": "rgba(255,190,90,0.14)",
+        "x": 540,
+        "y": 900,
+        "r": 700
+      },
+      "vignette": 0.5
+    },
+    "hud": {
+      "kind": "tape",
+      "left": "{title}",
+      "color": "#1E1A16",
+      "accent": "#E2603A",
+      "top": 140
+    }
+  }
+}

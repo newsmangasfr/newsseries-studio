@@ -1,0 +1,18 @@
+# Faits que tu peux montrer (tout le reste à l’écran est illustratif et n’affirme rien)
+
+Son script est pris pour vrai. Voici les vrais noms, chiffres et textes pour les images.
+
+- PewDiePie (Felix Kjellberg), YouTube, 109M d’abonnés. Vidéo : "I seriously should NOT be dropping this." (30 sept. 2026). Miniature : public/pewdiepie-abliteration/pewdiepie-thumb.jpg. https://www.youtube.com/watch?v=ODDJXGY_1kQ
+- Page d’Ajax (data.pewdiepie.com) : logo hexagone noir + "Ajax" en serif italique noir sur crème (#F9F8F4) ; "Odysseus ↗" en haut à gauche ; "I've decided to release Ajax when it's ready instead of putting a timer." / "About Ajax ↓". Section About : "Ajax is a fine-tuned Qwen 3.5 9B model, trained for Odysseus to be your always on agent." "Ajax's refusal has been ablated for a freer, less restricted AI experience. Please use responsibly." Capture : ref-ajax-page.png.
+- Modèle de base : Qwen3.5-9B (Qwen d’Alibaba). 32 couches, 4,096 nombres par token (hidden size). https://huggingface.co/Qwen/Qwen3.5-9B
+- OpenAI l’a banni deux fois (son compte ; l’e-mail d’OpenAI qu’il montre parle de "distillation"). Dessiner le bannissement comme un avis de compte OpenAI désactivé ; NE PAS inventer de corps d’e-mail au-delà de : un titre du style "Your OpenAI account has been deactivated". Ne jamais montrer de fausse raison autre que "distillation".
+- L’article : "Refusal in Language Models Is Mediated by a Single Direction", Andy Arditi, Oscar Obeso, Aaquib Syed, Daniel Paleka, Nina Panickssery, Wes Gurnee, Neel Nanda. arXiv:2406.11717, juin 2024 (NeurIPS 2024). "13 popular open-source chat models up to 72B parameters." Capture : ref-arxiv.png.
+- Méthode : 128 instructions nuisibles + 128 inoffensives ; activations lues au dernier token du prompt ; différence des moyennes = direction du refus ; on l’ablate -> les refus s’arrêtent ; on l’ajoute à des prompts inoffensifs -> le modèle refuse ; orthogonalisation des poids = modification permanente, sans entraînement par gradient. Les nuages se séparent le long d’un seul axe (figure ACP, Gemma 7B).
+- "abliteration" = ablate + obliterate (fiche modèle de FailSpy : "Ablate + obliterated = Abliterated").
+- Dégâts : étude indépendante (arXiv 2512.13655), maths (GSM8K) en baisse jusqu’à 18.81 points. Llama 3 70B dans l’article lui-même : MMLU 79.9 -> 79.8.
+- Heretic : github.com/p-e-w/heretic, "Fully automatic censorship removal for language models", 33.1k stars, 3.7k forks, AGPL-3.0, sujets abliteration / llm / transformer. Trouve la modification qui minimise à la fois les refus et la divergence KL (les dégâts). Son propre test, Gemma 3 12B : refuse 97/100 à l’origine, 3/100 après Heretic, KL 0.16 (contre 1.04 à la main). Capture : ref-heretic.png.
+- Les mots de PewDiePie (Tom's Hardware) : retirer le refus "without doing 'brain damage'".
+- Retournement : le caractère nuisible et le refus sont des directions séparées (Zhao et al. 2025, "LLMs Encode Harmfulness and Refusal Separately", arXiv 2507.11878).
+- Hugging Face : 8,305 modèles avec "abliterated" dans le nom (3 oct. 2026). Capture : ref-hf-search.png. Suffixes de nom : -abliterated, -uncensored, -heretic.
+- Anthropic : "since Claude's weights are not provided to users, they cannot be abliterated" (rapport du 29 sept. 2026).
+- Détail des dégâts (arXiv 2512.13655, Young 2025, tableau 3 + conclusion) : la baisse de -18.81 pp sur GSM8K venait de HERETIC sur Yi-1.5-9B (70.89% -> 52.08%, -26.5% en relatif) ; DECCP sur le même modèle gardait 72.40%. ErisForge moyenne GSM8K -0.28 pp, DECCP -0.13 pp. Article : "suggesting potential overlap between mathematical reasoning circuits and refusal-related representations." Heretic sur Mistral-7B : -0.12 pp en moyenne.

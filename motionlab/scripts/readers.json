@@ -1,0 +1,190 @@
+{
+  "note": "Le contexte du compte utilise 90 jours de légendes et au plus 12 miniatures. context.mjs prend par défaut ce périmètre léger. Seul un format installé peut demander des lectures détaillées : Trial Reels choisit les 50 meilleures vidéos sur six mois, classe d’abord les aperçus, et mesure jusqu’à trois références par format ou une source. Les mesures en cache restent des entrées ; de nouvelles légendes ne relancent pas l’analyse du compte.",
+  "readers": [
+    {
+      "id": "profile",
+      "what": "tes posts et tes chiffres",
+      "run": "profile.mjs",
+      "needs": [],
+      "writes": [
+        "context/profile.json",
+        "context/posts.json"
+      ],
+      "source": true,
+      "scopes": [
+        "account",
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "structure",
+      "what": "la forme des références choisies",
+      "run": "structure.mjs",
+      "needs": [
+        "profile"
+      ],
+      "per": "post",
+      "writes": [
+        "context/structure/<id>.json"
+      ],
+      "from": [
+        "context/posts/<id>.mp4",
+        "context/posts/<id>.jpg"
+      ],
+      "scopes": [
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "sounds",
+      "what": "les posts qui partagent un même son",
+      "run": "sounds.mjs",
+      "needs": [
+        "profile"
+      ],
+      "writes": [
+        "context/sounds.json"
+      ],
+      "from": [
+        "context/posts.json"
+      ],
+      "scopes": [
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "formats",
+      "what": "tes posts regroupés en formats",
+      "run": "formats.mjs",
+      "needs": [
+        "structure",
+        "sounds"
+      ],
+      "writes": [
+        "context/formats.json"
+      ],
+      "from": [
+        "context/structure",
+        "context/sounds.json",
+        "context/posts.json"
+      ],
+      "scopes": [
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "text",
+      "what": "les textes à l’écran, ligne par ligne",
+      "run": "text.mjs all",
+      "needs": [
+        "structure"
+      ],
+      "per": "post",
+      "writes": [
+        "context/text/<id>.json"
+      ],
+      "from": [
+        "context/structure/<id>.json"
+      ],
+      "scopes": [
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "text-system",
+      "what": "comment une ligne est construite sur ton compte",
+      "run": "textsystem.mjs",
+      "needs": [
+        "formats",
+        "text"
+      ],
+      "writes": [
+        "context/text-system.json"
+      ],
+      "from": [
+        "context/formats.json",
+        "context/text"
+      ],
+      "scopes": [
+        "trial-reels"
+      ]
+    },
+    {
+      "id": "captions",
+      "what": "comment tu écris une légende",
+      "run": "captions.mjs",
+      "needs": [
+        "formats"
+      ],
+      "writes": [
+        "context/captions.json"
+      ],
+      "from": [
+        "context/posts.json",
+        "context/formats.json"
+      ],
+      "scopes": [
+        "account",
+        "trial-reels"
+      ]
+    }
+  ],
+  "written": [
+    {
+      "id": "profile.md",
+      "what": "qui tu es et ce qui a marché",
+      "by": "agent",
+      "writes": [
+        "context/profile.md"
+      ],
+      "from": [
+        "context/profile.json",
+        "context/posts.json",
+        "context/formats.json"
+      ]
+    },
+    {
+      "id": "formats.md",
+      "what": "tes formats, en zones",
+      "by": "agent",
+      "writes": [
+        "context/formats.md"
+      ],
+      "from": [
+        "context/formats.json",
+        "context/structure"
+      ]
+    },
+    {
+      "id": "text-system.md",
+      "what": "ce à partir de quoi une ligne est écrite",
+      "by": "agent",
+      "writes": [
+        "context/text-system.md"
+      ],
+      "from": [
+        "context/text-system.json"
+      ]
+    },
+    {
+      "id": "voice.md",
+      "what": "ce à partir de quoi une légende est écrite",
+      "by": "agent",
+      "writes": [
+        "context/voice.md"
+      ],
+      "from": [
+        "context/captions.json",
+        "context/posts.json"
+      ]
+    },
+    {
+      "id": "preferences",
+      "what": "ce que la personne nous a dit, valable quoi qu’elle fasse",
+      "writes": [
+        "context/preferences.md"
+      ],
+      "by": "agent"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "pop-bounce": {
+    "label": "Pop bounce",
+    "best_for": "travel, lifestyle, food, personality-led creators",
+    "layout": "card",
+    "radius": 56,
+    "shadow": "hard",
+    "decor": "blobs",
+    "transition": "clip",
+    "title": {
+      "case": "none",
+      "tilt": 0,
+      "stagger": 0.06,
+      "from": {
+        "scale": 0.4,
+        "y": 40,
+        "opacity": 0
+      },
+      "ease": "back.out(2.2)",
+      "dur": 0.5
+    },
+    "enter": {
+      "from": {
+        "scale": 0.5,
+        "opacity": 0,
+        "y": 24
+      },
+      "ease": "back.out(2)",
+      "dur": 0.42
+    },
+    "exit": {
+      "to": {
+        "scale": 0.92,
+        "opacity": 0
+      },
+      "ease": "power2.in",
+      "dur": 0.18
+    },
+    "caption": {
+      "case": "none",
+      "size": 76,
+      "mode": "color",
+      "stroke": 14,
+      "shadow": 6,
+      "pop": 1.12
+    },
+    "camera_ease": "power3.inOut"
+  },
+  "editorial-clean": {
+    "label": "Editorial clean",
+    "best_for": "premium brands, architecture, fashion, consulting, health",
+    "layout": "card",
+    "radius": 8,
+    "shadow": "none",
+    "decor": "plain",
+    "transition": "fade",
+    "title": {
+      "case": "none",
+      "tilt": 0,
+      "stagger": 0.1,
+      "from": {
+        "y": 26,
+        "opacity": 0
+      },
+      "ease": "power3.out",
+      "dur": 0.8
+    },
+    "enter": {
+      "from": {
+        "y": 16,
+        "opacity": 0
+      },
+      "ease": "power3.out",
+      "dur": 0.6
+    },
+    "exit": {
+      "to": {
+        "opacity": 0
+      },
+      "ease": "power1.in",
+      "dur": 0.3
+    },
+    "caption": {
+      "case": "none",
+      "size": 58,
+      "mode": "none",
+      "stroke": 0,
+      "shadow": 0,
+      "pop": 1
+    },
+    "camera_ease": "sine.inOut"
+  },
+  "kinetic-bold": {
+    "label": "Kinetic bold",
+    "best_for": "fast education, opinion, finance, podcast clips",
+    "layout": "full",
+    "radius": 0,
+    "shadow": "none",
+    "decor": "plain",
+    "transition": "cut",
+    "title": {
+      "case": "upper",
+      "tilt": 0,
+      "stagger": 0.05,
+      "from": {
+        "scale": 1.7,
+        "opacity": 0
+      },
+      "ease": "expo.out",
+      "dur": 0.32
+    },
+    "enter": {
+      "from": {
+        "x": -90,
+        "opacity": 0
+      },
+      "ease": "expo.out",
+      "dur": 0.3
+    },
+    "exit": {
+      "to": {
+        "x": 90,
+        "opacity": 0
+      },
+      "ease": "expo.in",
+      "dur": 0.14
+    },
+    "caption": {
+      "case": "upper",
+      "size": 92,
+      "mode": "box",
+      "stroke": 10,
+      "shadow": 0,
+      "pop": 1.06
+    },
+    "camera_ease": "expo.inOut"
+  },
+  "tech-glitch": {
+    "label": "Tech dry",
+    "best_for": "software, AI, gaming, technical tutorials",
+    "layout": "card",
+    "radius": 14,
+    "shadow": "hard",
+    "decor": "grid",
+    "transition": "clip",
+    "title": {
+      "case": "none",
+      "tilt": 0,
+      "stagger": 0.03,
+      "from": {
+        "x": -30,
+        "opacity": 0
+      },
+      "ease": "steps(5)",
+      "dur": 0.25
+    },
+    "enter": {
+      "from": {
+        "x": -24,
+        "opacity": 0
+      },
+      "ease": "steps(4)",
+      "dur": 0.2
+    },
+    "exit": {
+      "to": {
+        "opacity": 0
+      },
+      "ease": "steps(3)",
+      "dur": 0.1
+    },
+    "caption": {
+      "case": "none",
+      "size": 66,
+      "mode": "color",
+      "stroke": 8,
+      "shadow": 0,
+      "pop": 1
+    },
+    "camera_ease": "power4.inOut"
+  },
+  "cinematic-minimal": {
+    "label": "Cinematic minimal",
+    "best_for": "documentary, real estate, weddings, nature, b-roll",
+    "layout": "full",
+    "radius": 0,
+    "shadow": "none",
+    "decor": "plain",
+    "transition": "fade",
+    "title": {
+      "case": "upper",
+      "tilt": 0,
+      "stagger": 0.14,
+      "from": {
+        "opacity": 0,
+        "y": 12
+      },
+      "ease": "sine.out",
+      "dur": 1.1
+    },
+    "enter": {
+      "from": {
+        "opacity": 0
+      },
+      "ease": "sine.out",
+      "dur": 0.8
+    },
+    "exit": {
+      "to": {
+        "opacity": 0
+      },
+      "ease": "sine.in",
+      "dur": 0.5
+    },
+    "caption": {
+      "case": "none",
+      "size": 54,
+      "mode": "none",
+      "stroke": 6,
+      "shadow": 0,
+      "pop": 1
+    },
+    "camera_ease": "sine.inOut"
+  },
+  "scrapbook": {
+    "label": "Scrapbook",
+    "best_for": "family, DIY, recipes, warm and playful brands",
+    "layout": "card",
+    "radius": 18,
+    "shadow": "hard",
+    "decor": "dots",
+    "transition": "clip",
+    "title": {
+      "case": "none",
+      "tilt": -3,
+      "stagger": 0.08,
+      "from": {
+        "scale": 0.7,
+        "rotation": -10,
+        "opacity": 0
+      },
+      "ease": "back.out(3)",
+      "dur": 0.45
+    },
+    "enter": {
+      "from": {
+        "scale": 0.7,
+        "rotation": -6,
+        "opacity": 0
+      },
+      "ease": "back.out(2.6)",
+      "dur": 0.4
+    },
+    "exit": {
+      "to": {
+        "rotation": 4,
+        "scale": 0.9,
+        "opacity": 0
+      },
+      "ease": "power2.in",
+      "dur": 0.16
+    },
+    "caption": {
+      "case": "none",
+      "size": 72,
+      "mode": "box",
+      "stroke": 0,
+      "shadow": 0,
+      "pop": 1.08
+    },
+    "camera_ease": "back.inOut(1.2)"
+  }
+}

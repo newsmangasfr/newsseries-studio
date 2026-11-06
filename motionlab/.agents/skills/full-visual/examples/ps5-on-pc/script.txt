@@ -1,0 +1,40 @@
+GTA 5, Spider-Man, Silent Hill 2.
+Their PS5 versions already boot on a PC, with a free emulator called KytyPS5.
+And another project skips the emulator entirely.
+
+But first, why is this even possible?
+On the PS3, the processor was so different from a PC's that every line of code had to be translated.
+The PS5 uses the same family of processor as your PC, Intel or AMD.
+Same language.
+So most of the game's code just runs, directly on your processor.
+What's missing is the rest of the console.
+A game spends its whole time asking the PS5 for things.
+Save my progress. Play this sound. What is the controller doing?
+On a PC, nobody answers.
+And the game draws with tiny programs called shaders, written in the PS5's own graphics language.
+Your graphics card can't read them.
+
+KytyPS5 fixes that while you play.
+It launches the game, and every time the game asks the PS5 for something, KytyPS5 answers instead, with its own copy of that function.
+Every shader gets translated on the fly, into Vulkan, a language your graphics card speaks.
+And it works. Big games already reach playable scenes.
+Silent Hill 2 runs, at 6 frames per second.
+There are still bugs, crashes, and very uneven performance.
+Reaching a scene is not finishing the game.
+
+AnyPS5 does that work before you play.
+It converts the game itself into a normal Windows or Linux program, already wired to rewritten PS5 functions.
+No emulator to open. You double-click the game, and it starts, like any app.
+That's why AnyPS5 calls itself a porting tool, not an emulator.
+For now, its official list has exactly one game.
+Dreaming Sarah, a small 2D platformer, at 60 frames per second on a GTX 1050 Ti.
+
+And it's speeding up.
+At the end of July, KytyPS5 shipped 2 to 3 new versions a day.
+Since mid-September, more than 7.
+More than 80 people have worked on its code, and its last weekly report shows progress on about fifteen games, in one week.
+
+Neither one gives you games.
+You need your own, dumped from your own PS5, legally.
+Send this to the friend still waiting for a PC port.
+And comment "PS5", I'll send you both official GitHub pages.

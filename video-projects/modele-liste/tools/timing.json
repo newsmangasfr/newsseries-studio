@@ -1,0 +1,459 @@
+{
+ "sfx": [
+  [
+   8.226,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   9.677,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   14.516,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   17.419,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   22.742,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   28.548,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   33.649,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   34.549,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   39.194,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   40.094,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   44.516,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   48.871,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   49.839,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   53.226,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   56.613,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   60.484,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   62.419,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   63.871,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   66.774,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   70.645,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   75.484,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   79.197,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   87.07,
+   "whoosh-short-low",
+   0.35
+  ],
+  [
+   10.027,
+   "pop-mid",
+   0.25
+  ],
+  [
+   14.866,
+   "pop-mid",
+   0.25
+  ],
+  [
+   17.769,
+   "pop-mid",
+   0.25
+  ],
+  [
+   23.092,
+   "pop-mid",
+   0.25
+  ],
+  [
+   28.898,
+   "pop-mid",
+   0.25
+  ],
+  [
+   34.899,
+   "pop-mid",
+   0.25
+  ],
+  [
+   40.444,
+   "pop-mid",
+   0.25
+  ],
+  [
+   44.866,
+   "pop-mid",
+   0.25
+  ],
+  [
+   50.189,
+   "pop-mid",
+   0.25
+  ],
+  [
+   53.576,
+   "pop-mid",
+   0.25
+  ],
+  [
+   56.963,
+   "pop-mid",
+   0.25
+  ],
+  [
+   60.834,
+   "pop-mid",
+   0.25
+  ],
+  [
+   64.221,
+   "pop-mid",
+   0.25
+  ],
+  [
+   67.124,
+   "pop-mid",
+   0.25
+  ],
+  [
+   70.995,
+   "pop-mid",
+   0.25
+  ],
+  [
+   75.834,
+   "pop-mid",
+   0.25
+  ],
+  [
+   4.638,
+   "hit",
+   0.45
+  ]
+ ],
+ "total": 90.67,
+ "lead": 2.85,
+ "gap": 0.35,
+ "vo_dir": "vo-lucian",
+ "segments": {
+  "hook": [
+   2.85,
+   5.186462585034014
+  ],
+  "jan": [
+   8.386462585034014,
+   1.0267573696145125
+  ],
+  "jan-shangri": [
+   9.763219954648527,
+   4.5810884353741494
+  ],
+  "jan-mashle": [
+   14.694308390022677,
+   2.7905215419501133
+  ],
+  "jan-sakamoto": [
+   17.83482993197279,
+   4.847596371882086
+  ],
+  "jan-medaka": [
+   23.032426303854876,
+   5.149092970521542
+  ],
+  "jan-toxin": [
+   28.531519274376418,
+   4.8678004535147394
+  ],
+  "ete": [
+   33.749319727891155,
+   5.302108843537415
+  ],
+  "oct": [
+   39.40142857142857,
+   4.720022675736962
+  ],
+  "oct-dungeon": [
+   44.47145124716553,
+   4.370725623582766
+  ],
+  "films": [
+   49.1921768707483,
+   3.747777777777778
+  ],
+  "films-eminence": [
+   53.28995464852608,
+   3.3387074829931973
+  ],
+  "films-haikyu": [
+   56.97866213151927,
+   1.227641723356009
+  ],
+  "films-demon": [
+   58.55630385487528,
+   3.7320861678004533
+  ],
+  "tba": [
+   62.638390022675736,
+   4.0921768707482995
+  ],
+  "tba-alya": [
+   67.08056689342403,
+   3.261768707482993
+  ],
+  "tba-assassin": [
+   70.69233560090703,
+   4.675351473922903
+  ],
+  "tba-lord": [
+   75.71768707482993,
+   3.2792290249433105
+  ],
+  "cta": [
+   79.34691609977324,
+   4.723197278911565
+  ]
+ },
+ "shots": [
+  {
+   "kind": "logo-in",
+   "start": 0.0,
+   "end": 2.3000000000000003,
+   "dur": 2.6
+  },
+  {
+   "kind": "hook",
+   "start": 2.3,
+   "end": 8.225806451612904,
+   "dur": 6.226
+  },
+  {
+   "kind": "chapter",
+   "sid": "jan",
+   "start": 8.226,
+   "end": 9.67741935483871,
+   "dur": 1.752
+  },
+  {
+   "kind": "anime",
+   "start": 9.677,
+   "end": 14.516129032258064,
+   "dur": 5.139,
+   "anime": "Shangri-La Frontier"
+  },
+  {
+   "kind": "anime",
+   "start": 14.516,
+   "end": 17.41935483870968,
+   "dur": 3.203,
+   "anime": "Mashle"
+  },
+  {
+   "kind": "anime",
+   "start": 17.419,
+   "end": 22.741935483870968,
+   "dur": 5.623,
+   "anime": "Sakamoto Days"
+  },
+  {
+   "kind": "anime",
+   "start": 22.742,
+   "end": 28.548387096774196,
+   "dur": 6.106,
+   "anime": "Medaka Kuroiwa"
+  },
+  {
+   "kind": "anime",
+   "start": 28.548,
+   "end": 33.649319727891154,
+   "dur": 5.401,
+   "anime": "Marriage Toxin"
+  },
+  {
+   "kind": "chapter",
+   "sid": "ete",
+   "start": 33.649,
+   "end": 34.54931972789115,
+   "dur": 1.2
+  },
+  {
+   "kind": "anime",
+   "start": 34.549,
+   "end": 39.193548387096776,
+   "dur": 4.944,
+   "anime": "One Piece : God Valley"
+  },
+  {
+   "kind": "chapter",
+   "sid": "oct",
+   "start": 39.194,
+   "end": 40.093548387096774,
+   "dur": 1.2
+  },
+  {
+   "kind": "anime",
+   "start": 40.094,
+   "end": 44.516129032258064,
+   "dur": 4.723,
+   "anime": "Frieren"
+  },
+  {
+   "kind": "anime",
+   "start": 44.516,
+   "end": 48.87096774193549,
+   "dur": 4.655,
+   "anime": "Delicious in Dungeon"
+  },
+  {
+   "kind": "chapter",
+   "sid": "films",
+   "start": 48.871,
+   "end": 49.83870967741936,
+   "dur": 1.268
+  },
+  {
+   "kind": "anime",
+   "start": 49.839,
+   "end": 53.225806451612904,
+   "dur": 3.687,
+   "anime": "Solo Leveling"
+  },
+  {
+   "kind": "anime",
+   "start": 53.226,
+   "end": 56.612903225806456,
+   "dur": 3.687,
+   "anime": "The Eminence in Shadow"
+  },
+  {
+   "kind": "anime",
+   "start": 56.613,
+   "end": 60.483870967741936,
+   "dur": 4.171,
+   "anime": "Haikyu!!"
+  },
+  {
+   "kind": "anime",
+   "start": 60.484,
+   "end": 62.41935483870968,
+   "dur": 2.235,
+   "anime": "Demon Slayer : la Forteresse Infinie"
+  },
+  {
+   "kind": "chapter",
+   "sid": "tba",
+   "start": 62.419,
+   "end": 63.87096774193549,
+   "dur": 1.752
+  },
+  {
+   "kind": "anime",
+   "start": 63.871,
+   "end": 66.7741935483871,
+   "dur": 3.203,
+   "anime": "The Rising of the Shield Hero"
+  },
+  {
+   "kind": "anime",
+   "start": 66.774,
+   "end": 70.64516129032258,
+   "dur": 4.171,
+   "anime": "Alya Sometimes Hides Her Feelings in Russian"
+  },
+  {
+   "kind": "anime",
+   "start": 70.645,
+   "end": 75.48387096774194,
+   "dur": 5.139,
+   "anime": "The World's Finest Assassin"
+  },
+  {
+   "kind": "anime",
+   "start": 75.484,
+   "end": 79.19691609977323,
+   "dur": 4.013,
+   "anime": "Lord of Mysteries"
+  },
+  {
+   "kind": "cta",
+   "start": 79.197,
+   "end": 87.07011337868481,
+   "dur": 8.173
+  },
+  {
+   "kind": "logo-out",
+   "start": 87.07,
+   "end": 90.67,
+   "dur": 3.6
+  }
+ ]
+}

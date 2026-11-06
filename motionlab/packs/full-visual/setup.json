@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "format": "full-visual",
+  "directions": ".agents/skills/full-visual-customization/SKILL.md",
+  "page": {
+    "opens": "Une vidéo d’exemple terminée se lance : la voix off, les sous-titres mot à mot avec leur mot clé encadré, et les vraies choses dessinées dessous.",
+    "asks": "Garde le look et la voix maison, ou fais-les tiens : les sous-titres, le fond, la voix off, les mots, une référence à copier.",
+    "rule": "Le mouvement, les visuels et la méthode sont le format ; ce ne sont pas des questions de réglage. Un brouillon n’est pas une préférence enregistrée. Ne refais jamais le réglage pour une nouvelle vidéo.",
+    "writes": "Le skill full-visual-customization enregistre les choix dans workspace/library/full-visual/profile.json et workspace/library/full-visual.preferences.md, après un court rendu de test validé par le client."
+  },
+  "questions": [
+    {
+      "id": "reference",
+      "type": "text",
+      "ask": "Y a-t-il un créateur ou une vidéo dont tu veux reprendre le look ou le son ?",
+      "default": "aucun : le look maison",
+      "changes": "Lu par l’agent et reporté sur les champs sous-titres, fond et voix off ; ce que le moteur ne sait pas faire est dit, pas imité."
+    },
+    {
+      "id": "caption",
+      "type": "object",
+      "ask": "Garder ces sous-titres ou changer leur police, leur taille, leurs couleurs, le marqueur du mot clé ou leur position ?",
+      "default": "les sous-titres maison : Figtree 74 px, mot actif en blanc, mots déjà dits en gris, cadre de sélection bleu",
+      "changes": "reel.json theme: font, caption, marker"
+    },
+    {
+      "id": "ground",
+      "type": "choice",
+      "ask": "Fond sombre ou clair, avec ou sans la grille légère ?",
+      "options": [
+        "sombre avec grille",
+        "clair avec grille",
+        "mes propres couleurs"
+      ],
+      "default": "sombre avec grille",
+      "changes": "reel.json theme: grounds, gridPitch"
+    },
+    {
+      "id": "voice",
+      "type": "object",
+      "ask": "Quel service de voix, et quelle voix ?",
+      "default": {
+        "provider": "elevenlabs",
+        "voice": "la voix off maison, écoutée en premier"
+      },
+      "changes": "voice dans reel.json, ou un voice.json pour OpenAI ou Fish Audio ; la voix est choisie à l’oreille après de courts essais"
+    },
+    {
+      "id": "words",
+      "type": "choice",
+      "ask": "Le format écrit le script, ou tu apportes le tien ?",
+      "options": [
+        "écris-le",
+        "mon script, tel quel"
+      ],
+      "default": "écris-le",
+      "changes": "La source dont part l’étape 1 ; le mot clé en commentaire et la forme de la légende"
+    },
+    {
+      "id": "topics",
+      "type": "text",
+      "ask": "Sur quoi fais-tu tes vidéos d’habitude ? Tous les sujets marchent.",
+      "default": "tout ce que j’apporte",
+      "changes": "Les sujets et le point de vue lus avant la recherche ; jamais une limite à ce dont une vidéo peut parler"
+    }
+  ],
+  "example": "Fais le rendu d’environ neuf secondes d’une vidéo d’exemple avec le look choisi dans workspace/output/<date>-full-visual-look-test/look-test.mp4, à côté du look maison."
+}

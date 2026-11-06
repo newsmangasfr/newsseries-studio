@@ -1,0 +1,33 @@
+---
+name: measuring
+description: "Interne. Comment on lit quoi que ce soit sur une image : regarder l’image d’abord, nommer la forme, mesurer la bande nommée, redessiner les chiffres sur l’image et regarder à nouveau. Appelé par les skills de format chaque fois qu’une taille, un écart ou une position est nécessaire à partir d’un post du client, chaque fois qu’une version est comparée au post dont elle vient, et chaque fois qu’une lecture a l’air précise sans avoir été vue. Aussi : 'measure this frame', 'compare with the original post'."
+---
+
+# Measuring
+
+## Objectif
+
+Chaque taille, écart et position d’une version vient des propres posts du client, mesuré, et chaque chiffre qui arrive dans une étude, un jeu de props ou une vérification a été redessiné sur l’image et regardé. Rien n’est tapé à la main et rien n’est montré sans avoir été comparé à ce dont il vient.
+
+## Raisonnement
+
+L’œil ne peut pas juger un écart d’un pour cent de l’image, et un client le voit tout de suite, donc le travail doit être mesuré. Mais un instrument qui répond toujours est pire qu’un instrument qui refuse parfois. La lecture d’une image pour laquelle l’instrument n’a pas été conçu ressemble exactement à une vraie : une capitale de trois pixels de haut, une boîte de carte d’une ligne de haut, un bord de panneau au milieu d’une photo. Deux lectures de ce genre se comparent l’une à l’autre et tombent d’accord, donc la vérification passe en ne mesurant rien, et c’est le client qui s’en rend compte. C’est le même échec qu’un lecteur juste à la lumière du jour et faux sous une lampe : sûr de lui, précis, faux, et muet là-dessus.
+
+Donc l’instrument a deux moitiés, et la seconde n’est pas facultative. `measure.mjs` dit ce que contient une image et refuse ce qu’il ne sait pas lire. `see.mjs` dessine chaque chiffre qu’il affirme comme une ligne sur l’image elle-même, et une ligne qui ne tombe pas sur le bord qu’elle nomme est une lecture fausse, quel que soit son nombre de décimales. Entre les deux se trouve la seule chose qu’aucun des deux ne sait faire : regarder. L’image dit ce qu’elle contient ; les scripts rendent les chiffres exacts une fois que tu l’as vue. Un chiffre qui n’a pas été dessiné et regardé n’est pas encore une lecture, et la lecture d’une forme que l’instrument refuse n’est pas un chiffre du tout.
+
+## Le déroulé
+
+1. **Regarde.** `node scripts/see.mjs <file> --at <s>` écrit l’image avec une grille en vingtièmes et, dessus, chaque chiffre qu’affirme une lecture. Ouvre-la. Ajoute `--band y0,y1 --zoom 3` pour tout ce qui est petit.
+2. **Demande ce qu’est l’image, avant d’y mesurer quoi que ce soit.** `node scripts/measure.mjs read <file> --at <s>` nomme la forme et dit pourquoi : un panneau avec quelque chose dessiné dessus contre un bord, un letterbox avec des bandes nues aux deux bouts, une seule image d’un bord à l’autre, une image plate, ou incertain. Il liste aussi les zones et les blocs de texte, du plus grand au plus petit, et marque un bloc `mixed` quand la bande contient autre chose que du texte. Il n’invente jamais de zone : incertain est une réponse.
+3. **Nomme la bande toi-même, puis mesure-la.** `node scripts/measure.mjs band <file> --band <y0,y1> --x <x0,x1>` mesure exactement les lignes que tu as nommées : la couleur du fond, si l’encre est plus claire ou plus foncée que lui, chaque ligne de mots avec sa hauteur de capitale, sa ligne de base et son étendue, et le pas entre les lignes. Il lit aussi bien des mots blancs sur noir, des mots noirs sur blanc et un sous-titre sur une vidéo, parce qu’il ne suppose rien de la mise en page. C’est là qu’un chiffre devient exact, et la bande vient de ton œil, pas du script.
+4. **Dessine-la et regarde à nouveau.** `see.mjs --from <the json you just wrote>`. Chaque boîte doit épouser la chose qu’elle nomme. Ça attrape ce qu’aucun seuil n’attrape : une boîte tirée jusqu’au bord de l’image parce qu’une largeur manquait, une ligne qui a avalé le bord éclairé d’un écran, une capitale mesurée sur le rebord d’une table.
+5. **Une lecture de format ne vaut que pour le format qu’elle lit.** `measure.mjs panel` est la lecture à trois zones (le bord du panneau, la boîte de la carte, la ligne du bas, le sticker) et elle refuse toute image qui n’est pas ça : pas un panneau, ou un panneau d’un autre genre dont le bas ne contient aucune ligne de texte. Le refus porte la forme qu’il a vue et vaut échec partout où il tombe, jamais un repli sur une supposition. Un autre format se lit avec `read` et `band`, et ses chiffres vont dans sa propre étude.
+6. **Compare, ne regarde jamais en espérant.** Une version est mesurée par rapport au post dont elle vient aux mêmes secondes, en points de l’image (un point est un centième), et un écart que l’œil ne nommerait pas reste un échec. La vérification s’écrit dans le projet pour qu’aucune version ne puisse la sauter, et une vérification qui n’a pas pu tourner est un échec avec sa raison.
+
+## Exemples
+
+Le post à trois zones : `read` dit panneau, une zone plate de soixante points contre le haut avec quelque chose dessiné dessus ; `panel` donne alors le clip qui commence à 0,600, une capitale de 0,0211, des lignes espacées de 0,0328, et `see --panel` pose une ligne rouge exactement sur le bord du panneau et une boîte jaune exactement autour des deux lignes. Un sous-titre sur une vidéo, sur un autre compte : `read` dit plein, une seule image d’un bord à l’autre, et désigne un bloc de cinq lignes ; l’œil nomme la bande où il se trouve, `band` renvoie deux lignes avec une capitale de 0,0156 et un pas de 0,0219, et le dessin montre les deux boîtes qui épousent leurs lignes. Un panneau sur un troisième compte dont le texte est au milieu et dont le bas est nu : `panel` le refuse, parce que la bande du bas fait un quart de point de haut, ce qui est une marque et pas une ligne.
+
+## Contre-exemples
+
+Prendre un chiffre d’une lecture dont l’image n’a jamais été ouverte. Lire une image avec la lecture propre à un format parce que le nom du format est sur le dossier. Se replier sur un rectangle deviné quand l’instrument a refusé, au lieu de s’arrêter et de regarder. Déduire la forme d’une image du lecteur qui a regroupé les posts plutôt que de l’image elle-même. Mesurer une bande choisie par le script plutôt que celle nommée par l’œil. Taper une taille, un écart ou un découpage dans les props alors que le post peut être mesuré pour ça. Juger à l’œil ce qu’un script peut mesurer, et juger par script ce que seul l’œil peut voir : la place d’un visage dans sa zone se lit sur la grille, pas par un détecteur sûr de lui à la lumière du jour et faux sous une lampe.

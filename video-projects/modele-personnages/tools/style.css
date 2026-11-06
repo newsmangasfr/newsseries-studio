@@ -1,0 +1,106 @@
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #12061f; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter", sans-serif; color: #ffffff; }
+      #ground { position: absolute; inset: 0; background: radial-gradient(circle at 50% 35%, #3a0f5c 0%, #12061f 70%); }
+      .shot { position: absolute; inset: 0; overflow: hidden; background: #12061f; }
+      img { display: block; }
+
+      /* fonds : l'image floutée, teintée rose/violet comme une salle de concert */
+      .blur-bg { position: absolute; inset: 0; overflow: hidden; }
+      .blur-bg img { position: absolute; left: 50%; top: 50%; width: 2200px; height: 2200px; margin: -1100px 0 0 -1100px; object-fit: cover; filter: blur(40px) brightness(0.55) saturate(1.5); }
+      .tint { position: absolute; inset: 0; background: linear-gradient(180deg, #8b3dff44 0%, #12061f22 40%, #ff3ea533 75%, #12061fee 100%); }
+      .card { position: absolute; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 90px #000c, 0 0 0 6px #ff3ea5, 0 0 70px #ff3ea599; }
+      .card img { width: 100%; height: 100%; object-fit: cover; }
+      .card.sq { left: 90px; top: 250px; width: 900px; height: 900px; border-radius: 40px; }
+      .beam { position: absolute; left: -540px; top: -200px; width: 2160px; height: 2400px; transform-origin: 50% 0; mix-blend-mode: screen; }
+
+      /* accroche */
+      .hk { position: absolute; left: 0; right: 0; top: 150px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .hk-k { font-weight: 900; font-size: 50px; letter-spacing: 10px; color: #ffffff; background: #ff3ea5; padding: 8px 28px; border-radius: 10px; }
+      .hk-s { font-weight: 900; font-size: 190px; line-height: 1; letter-spacing: -4px; color: #ffd23f; text-shadow: 0 0 50px #ffd23f88, 0 10px 0 #b3006b; }
+      .hk-s .l { display: inline-block; min-width: 0.25em; }
+      .hk-vf { display: flex; align-items: center; gap: 20px; font-weight: 900; font-size: 58px; background: #ffffff; color: #b3006b; padding: 12px 30px; border-radius: 16px; }
+      .flag { display: inline-flex; width: 78px; height: 52px; border-radius: 6px; overflow: hidden; }
+      .flag i { flex: 1; display: block; transform-origin: 50% 100%; }
+      .flag i:nth-child(1) { background: #0055a4; } .flag i:nth-child(2) { background: #ffffff; } .flag i:nth-child(3) { background: #ef4135; }
+
+      /* Crunchyroll, liste des saisons, épisode 1 */
+      .cr { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .cr-k { font-weight: 800; font-size: 44px; letter-spacing: 6px; color: #ffffff; }
+      .cr-n { font-weight: 900; font-size: 96px; color: #ffffff; background: #f47521; padding: 6px 44px; border-radius: 999px; box-shadow: 0 0 60px #f4752199; }
+      .ck { position: absolute; left: 140px; right: 140px; display: flex; flex-direction: column; gap: 26px; }
+      .ck-row { display: flex; align-items: center; gap: 24px; background: #12061fcc; border: 4px solid #ff3ea5; border-radius: 22px; padding: 16px 30px; }
+      .ck-s { flex: 1; font-weight: 900; font-size: 66px; }
+      .ck-vf { font-weight: 900; font-size: 44px; color: #12061f; background: #ffd23f; padding: 4px 18px; border-radius: 10px; }
+      .ck-ok { display: inline-flex; width: 76px; height: 76px; border-radius: 50%; background: #2bd96b; align-items: center; justify-content: center; font-weight: 900; font-size: 50px; }
+      .ep { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; display: flex; align-items: center; gap: 24px; font-weight: 900; font-size: 60px; background: #ffffff; color: #12061f; padding: 16px 40px; border-radius: 999px; }
+      .play { display: inline-flex; width: 84px; height: 84px; border-radius: 50%; background: #ff3ea5; color: #ffffff; align-items: center; justify-content: center; font-size: 40px; }
+      .kick { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; font-size: 50px; letter-spacing: 6px; line-height: 1.15; color: #ffffff; text-shadow: 0 4px 20px #000; }
+      .kick b { font-weight: 900; font-size: 80px; color: #ffd23f; letter-spacing: 0; }
+
+      /* fiches personnages */
+      .nm { position: absolute; left: 0; right: 0; top: 1190px; text-align: center; font-weight: 900; line-height: 1; letter-spacing: -2px; color: #ffffff; text-shadow: 0 0 40px #ff3ea5aa, 0 8px 0 #12061f; }
+      .nm .l { display: inline-block; }
+      .role { position: absolute; left: 0; right: 0; top: 1330px; margin: 0 auto; width: max-content; font-weight: 900; font-size: 46px; letter-spacing: 3px; color: #12061f; padding: 8px 28px; border-radius: 12px; }
+      .spark { position: absolute; font-size: 90px; color: #ffffff; text-shadow: 0 0 30px currentColor; }
+      .spark.s1 { left: 40px; top: 190px; } .spark.s2 { right: 40px; top: 1060px; } .spark.s3 { right: 70px; top: 200px; font-size: 60px; }
+      .trio { position: absolute; right: 60px; top: 960px; display: flex; gap: -20px; }
+      .bub { width: 190px; height: 190px; border-radius: 50%; overflow: hidden; border: 7px solid; margin-left: -30px; box-shadow: 0 10px 30px #000a; }
+      .bub img { width: 100%; height: 100%; object-fit: cover; }
+
+      /* les jumeaux */
+      .twk { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-weight: 900; font-size: 76px; letter-spacing: 8px; color: #ffffff; text-shadow: 0 0 40px #ff3ea5; }
+      .tw { position: absolute; left: 50px; right: 50px; top: 330px; display: flex; gap: 40px; justify-content: center; }
+      .twc { position: relative; width: 470px; height: 640px; border-radius: 30px; overflow: hidden; }
+      .twc img { width: 100%; height: 100%; object-fit: cover; }
+      .twn { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); font-weight: 900; font-size: 56px; color: #12061f; padding: 4px 26px; border-radius: 12px; }
+      .secret { position: absolute; left: 0; right: 0; top: 1030px; margin: 0 auto; width: max-content; font-weight: 900; font-size: 84px; color: #ffffff; background: #ff3ea5; padding: 10px 40px; border-radius: 16px; transform: rotate(-4deg); box-shadow: 0 0 60px #ff3ea5aa; }
+      .past { position: absolute; left: 0; right: 0; top: 1200px; text-align: center; font-weight: 800; font-size: 46px; letter-spacing: 3px; line-height: 1.25; color: #ffffff; text-shadow: 0 4px 20px #000; }
+      .past b { font-weight: 900; font-size: 68px; color: #ffd23f; }
+
+      /* saison finale, dernier acte */
+      .fin { position: absolute; left: 0; right: 0; top: 150px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+      .fin-k { font-weight: 900; font-size: 70px; letter-spacing: 12px; }
+      .fin-b { font-weight: 900; font-size: 200px; line-height: 1; letter-spacing: -6px; color: #ff3ea5; text-shadow: 0 0 60px #ff3ea5cc, 0 10px 0 #5a0f8a; }
+      .fin-s { font-weight: 900; font-size: 56px; letter-spacing: 6px; color: #12061f; background: #ffd23f; padding: 8px 30px; border-radius: 12px; }
+      .acte { position: absolute; left: 0; right: 0; top: 280px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+      .acte-k { font-weight: 900; font-size: 74px; letter-spacing: 12px; }
+      .acte-b { font-weight: 900; font-size: 230px; line-height: 1; color: #ffd23f; text-shadow: 0 0 60px #ffd23faa, 0 10px 0 #b3006b; }
+      .acte-s { font-weight: 800; font-size: 54px; letter-spacing: 8px; color: #ffb3dd; }
+      .burst { position: absolute; margin: -40px 0 0 -40px; font-size: 80px; color: #ffd23f; text-shadow: 0 0 30px #ffd23f; }
+
+      /* fin */
+      .ct { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 40px; padding-top: 170px; }
+      .ct-grid { display: grid; grid-template-columns: repeat(3, 290px); gap: 24px; }
+      .cell { width: 290px; height: 290px; border-radius: 50%; overflow: hidden; border: 8px solid; box-shadow: 0 10px 40px #000a; }
+      .cell img { width: 100%; height: 100%; object-fit: cover; }
+      .ct-q { font-weight: 900; font-size: 100px; color: #ffd23f; text-shadow: 0 0 40px #ffd23f66; }
+      .ct-btns { display: flex; gap: 40px; }
+      .btn { display: flex; align-items: center; gap: 18px; font-weight: 900; font-size: 84px; padding: 18px 50px; border-radius: 26px; }
+      .btn.vf { background: #ffffff; color: #12061f; }
+      .btn.vo { background: #ff3ea5; color: #ffffff; box-shadow: 0 0 50px #ff3ea588; }
+      .ct-c { font-weight: 800; font-size: 62px; }
+      .ct-c .arrow { display: inline-block; color: #ffd23f; }
+
+      #stars { position: absolute; inset: 0; z-index: 80; pointer-events: none; }
+      .star { position: absolute; color: #ffe6f5; text-shadow: 0 0 18px #ff3ea5; opacity: 0; }
+
+      /* sous-titres */
+      .cap { position: absolute; left: 0; right: 0; top: 1480px; height: 240px; display: flex; justify-content: center; align-items: center; z-index: 100; padding: 0 60px; }
+      .cap-in { font-weight: 900; font-size: 78px; line-height: 1.1; text-align: center; text-transform: uppercase; color: #ffffff; -webkit-text-stroke: 10px #12061f; paint-order: stroke fill; text-shadow: 0 8px 24px #000000aa; }
+      .cap-in .hl { color: #ff5fb8; }
+
+      #flash { position: absolute; inset: 0; background: #ffe6f5; opacity: 0; z-index: 90; pointer-events: none; }
+      #progress { position: absolute; left: 0; top: 0; width: 1080px; height: 14px; background: linear-gradient(90deg, #8b3dff, #ff3ea5, #ffd23f); transform-origin: 0 50%; z-index: 120; }
+      /* Logo NewsSeries (intro / outro) */
+      .lg-glow { position: absolute; left: 50%; top: 50%; width: 1500px; height: 1500px; margin: -850px 0 0 -750px; border-radius: 50%; background: radial-gradient(circle, #e3262688 0%, #e3262622 40%, #05070d00 70%); }
+      .lg-rays { position: absolute; left: 50%; top: 860px; width: 0; height: 0; }
+      .ray { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .ray-in { position: absolute; left: 330px; top: -9px; height: 18px; border-radius: 9px; background: linear-gradient(90deg, #fff6e6 0%, #fff6e600 100%); transform-origin: -330px 50%; }
+      .lg-ring { position: absolute; left: 50%; top: 860px; width: 500px; height: 500px; margin: -250px 0 0 -250px; border-radius: 50%; border: 14px solid #ffffff; opacity: 0; }
+      .lg-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 30px; padding: 420px 40px 0; }
+      .lg-logo { width: 880px; height: 880px; }
+      .lg-logo img { width: 880px; height: 880px; }
+      .lg-line { font-weight: 900; font-size: 64px; letter-spacing: 3px; text-align: center; color: #ffffff; text-shadow: 0 6px 30px #000c; }
+      .lg-site { font-weight: 900; font-size: 56px; color: #ffffff; background: #e32626; padding: 12px 34px; border-radius: 16px; }
+      #flash2 { position: absolute; inset: 0; background: #ffffff; opacity: 0; z-index: 91; pointer-events: none; }

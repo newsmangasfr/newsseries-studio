@@ -1,0 +1,28 @@
+{
+  "id": "02-studio",
+  "name": "Studio",
+  "tendency": "surtout sombre",
+  "theme": {
+    "font": {
+      "caption": "Figtree, sans-serif"
+    },
+    "marker": {
+      "style": "select",
+      "color": "#2E7AEA"
+    },
+    "grounds": {
+      "dark": {
+        "bg": "#0B0C0F",
+        "grid": "rgba(255,255,255,0.02)",
+        "ink": "#FFFFFF",
+        "spoken": "#6B6B6B",
+        "card": "#15161A",
+        "hairline": "#2A2A2E",
+        "dim": "#8C8C8C"
+      }
+    },
+    "atmosphere": {
+      "vignette": 0.55
+    }
+  }
+}

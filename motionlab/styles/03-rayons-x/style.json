@@ -1,0 +1,55 @@
+{
+  "id": "03-rayons-x",
+  "name": "Rayons X",
+  "tendency": "sombre",
+  "theme": {
+    "font": {
+      "caption": "Inter, sans-serif"
+    },
+    "caption": {
+      "size": 62,
+      "lineHeight": 70,
+      "case": "upper",
+      "spokenWeight": 700,
+      "upcoming": "#4A4A4A",
+      "top": 1480,
+      "bottom": 1480,
+      "wrap": 900
+    },
+    "marker": {
+      "style": "none"
+    },
+    "grounds": {
+      "dark": {
+        "bg": "#050505",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFFFFF",
+        "spoken": "#FFFFFF",
+        "card": "#111111",
+        "hairline": "#2A2A2A",
+        "dim": "#9A9A9A"
+      },
+      "light": {
+        "bg": "#050505",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFFFFF",
+        "spoken": "#FFFFFF",
+        "card": "#111111",
+        "hairline": "#2A2A2A",
+        "dim": "#9A9A9A"
+      }
+    },
+    "atmosphere": {
+      "vignette": 0.6
+    },
+    "hud": {
+      "kind": "label",
+      "left": "{scene}",
+      "right": "{n} / {total}",
+      "progress": "segments",
+      "color": "#FFFFFF",
+      "accent": "#E3262E",
+      "top": 150
+    }
+  }
+}

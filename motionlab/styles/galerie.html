@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MotionLab · Les styles</title>
+<style>
+:root{--bg:#0c0a09;--card:#17130f;--line:#2a221c;--ink:#fff;--mute:#a39589;--o:#ff7a1a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+header{max-width:1180px;margin:0 auto;padding:48px 20px 8px}
+h1{font-size:40px;letter-spacing:-.03em;margin:0 0 8px}header p{color:var(--mute);max-width:720px;margin:0 0 6px}
+.tip{margin:18px 0 0;padding:14px 16px;border-radius:14px;background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.35);max-width:760px}
+.tip b{color:var(--o)}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 64px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.card{display:flex;gap:16px;padding:16px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.phone{flex:0 0 132px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.phone video,.phone img{width:100%;height:100%;object-fit:cover;display:block}
+.empty{height:100%;display:grid;place-items:center;color:var(--mute);font-size:12px;text-align:center;padding:8px}
+.num{margin:0;color:var(--o);font-weight:700;font-size:13px;letter-spacing:.08em}
+h2{margin:2px 0 8px;font-size:22px;letter-spacing:-.02em}
+.look{margin:0 0 8px;font-size:14px}.use{margin:0 0 10px;font-size:13px;color:var(--mute)}
+.sw{display:flex;gap:6px;margin-bottom:10px}.sw i{width:22px;height:22px;border-radius:7px;border:1px solid rgba(255,255,255,.15)}
+.say{margin:0;font-size:13px;color:var(--mute)}.say b{color:var(--ink)}
+@media (max-width:420px){.card{flex-direction:column}.phone{flex-basis:auto;width:60%}}
+</style></head><body>
+<header>
+  <h1>Les styles</h1>
+  <p>Le look de tes vidéos : la police et les couleurs des sous-titres, le mot clé, les fonds. Choisis-en un et dis-le à ton agent. Tu pourras en changer quand tu veux.</p>
+  <p>Les images de chaque scène et leur mouvement restent la méthode MotionLab, quel que soit le style.</p>
+  <p class="tip"><b>Le meilleur conseil :</b> si aucun ne te va, dépose une vidéo dont tu adores le look dans <code>workspace/input/references/</code> et dis « copie ce style ». L’agent l’étudie et en fait ton style.</p>
+</header>
+<main>
+<article class="card">
+  <div class="phone"><video src="01-createur/apercu.mp4" poster="01-createur/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">01</p>
+    <h2>Créateur</h2>
+    <p class="look">Fond crème, texte noir aligné à gauche comme un titre, et le mot fort en serif italique rouge. Une petite ligne d’étiquette en haut (« // 01 hook »). Les scènes sont des cartes blanches avec une ombre douce.</p>
+    <p class="use">Business, apps, création de contenu, tout ce qui se raconte comme une histoire perso.</p>
+    <div class="sw"><i style="background:#121110"></i><i style="background:#F1EFEA"></i><i style="background:#888888"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 01 »</b></p>
+  </div>
+</article>
+<article class="card">
+  <div class="phone"><video src="02-studio/apercu.mp4" poster="02-studio/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">02</p>
+    <h2>Studio</h2>
+    <p class="look">Noir profond, mot actif blanc, mots dits en gris, mot clé dans un cadre bleu avec poignées. Les objets sont rendus de façon réaliste, avec une lumière dorée. C’est le look d’origine du format.</p>
+    <p class="use">Science, tech, « comment ça marche », tout sujet qui s’explique avec un objet du quotidien.</p>
+    <div class="sw"><i style="background:#0B0C0F"></i><i style="background:#FAFAFA"></i><i style="background:#2E7AEA"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 02 »</b></p>
+  </div>
+</article>
+<article class="card">
+  <div class="phone"><video src="03-rayons-x/apercu.mp4" poster="03-rayons-x/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">03</p>
+    <h2>Rayons X</h2>
+    <p class="look">Noir pur, objets et corps dessinés en blanc translucide comme une radio. Gros texte en capitales sous la scène : la phrase est déjà là en gris et chaque mot s’allume en blanc quand il est dit. En haut, une barre de progression rouge.</p>
+    <p class="use">Sport, santé, corps humain, mécanique, tout ce qui se montre de l’intérieur.</p>
+    <div class="sw"><i style="background:#050505"></i><i style="background:#050505"></i><i style="background:#888888"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 03 »</b></p>
+  </div>
+</article>
+<article class="card">
+  <div class="phone"><video src="04-neon/apercu.mp4" poster="04-neon/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">04</p>
+    <h2>Néon</h2>
+    <p class="look">Fond bleu-vert sombre avec un réseau de particules qui respire. Texte en capitales étroites (Oswald), mot fort en orange. Des pastilles et cartes d’interface qui brillent en turquoise.</p>
+    <p class="use">Gaming, astuces tech, tutos d’appli, tout ce qui doit avoir de l’énergie.</p>
+    <div class="sw"><i style="background:#0B1519"></i><i style="background:#0B1519"></i><i style="background:#888888"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 04 »</b></p>
+  </div>
+</article>
+<article class="card">
+  <div class="phone"><video src="05-etiquettes/apercu.mp4" poster="05-etiquettes/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">05</p>
+    <h2>Étiquettes</h2>
+    <p class="look">Ambiance ville de nuit, bleu nuit et lumières chaudes. Chaque mot apparaît sur sa propre étiquette en papier orange, le mot fort en jaune. Le titre de la scène est sur une bande de scotch en haut.</p>
+    <p class="use">Business, entrepreneuriat, histoires de boîtes, tout ce qui se raconte comme un petit film.</p>
+    <div class="sw"><i style="background:#141833"></i><i style="background:#141833"></i><i style="background:#888888"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 05 »</b></p>
+  </div>
+</article>
+<article class="card">
+  <div class="phone"><video src="06-argile/apercu.mp4" poster="06-argile/apercu.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="txt">
+    <p class="num">06</p>
+    <h2>Argile</h2>
+    <p class="look">Bleu nuit avec une grille visible, objets en argile beige comme des sculptures, texte blanc gras centré avec le mot fort en bleu. Des étiquettes mono dans des cadres bleus.</p>
+    <p class="use">Psychologie, productivité, santé mentale, tout ce qui touche au cerveau et aux habitudes.</p>
+    <div class="sw"><i style="background:#14161B"></i><i style="background:#ECE9E3"></i><i style="background:#888888"></i></div>
+    <p class="say">Dis à ton agent : <b>« style 06 »</b></p>
+  </div>
+</article></main>
+<script>
+document.querySelectorAll('video').forEach(v => {
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? v.play().catch(() => {}) : v.pause())).observe(v);
+});
+</script>
+</body></html>

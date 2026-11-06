@@ -1,0 +1,19 @@
+{
+  "name": "NewsSeries",
+  "url": "newsseries.fr",
+  "cta": "Toute l'actu anime & manga sur newsseries.fr",
+  "logo": "assets/logo.png",
+  "style": "kinetic-bold",
+  "colors": {
+    "ink": "#E32626",
+    "ink_dark": "#0B0B10",
+    "bg": "#120709",
+    "light": "#F6F1F1",
+    "accent": "#FFC83D",
+    "highlight": "#FFD23F"
+  },
+  "fonts": {
+    "display": { "family": "Inter", "file": "assets/Inter-ExtraBold.otf" },
+    "body": { "family": "Inter", "file": "assets/Inter-Bold.otf", "weights": "700 800" }
+  }
+}

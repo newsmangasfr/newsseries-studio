@@ -1,0 +1,50 @@
+{
+  "id": "01-createur",
+  "name": "Créateur",
+  "tendency": "surtout clair",
+  "theme": {
+    "font": {
+      "caption": "Geist, sans-serif",
+      "accent": "'Instrument Serif', serif"
+    },
+    "caption": {
+      "size": 64,
+      "lineHeight": 72,
+      "align": "left",
+      "wrap": 900
+    },
+    "marker": {
+      "style": "serif",
+      "color": "#E8442A"
+    },
+    "grounds": {
+      "light": {
+        "bg": "#F1EFEA",
+        "grid": "rgba(0,0,0,0)",
+        "ink": "#141414",
+        "spoken": "#141414",
+        "card": "#FFFFFF",
+        "hairline": "#E2DED6",
+        "dim": "#7A766F"
+      },
+      "dark": {
+        "bg": "#121110",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFFFFF",
+        "spoken": "#FFFFFF",
+        "card": "#1C1A18",
+        "hairline": "#2E2B28",
+        "dim": "#9A958E"
+      }
+    },
+    "hud": {
+      "kind": "label",
+      "left": "// {n} - {scene}",
+      "right": "{n}/{total}",
+      "progress": null,
+      "color": "#8C8880",
+      "accent": "#E8442A",
+      "top": 150
+    }
+  }
+}

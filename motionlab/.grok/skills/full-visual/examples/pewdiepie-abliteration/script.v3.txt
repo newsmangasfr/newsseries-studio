@@ -1,0 +1,27 @@
+[rushed] How did Pew-dee-pie make an uncensored AI that never says no.
+
+[quickly] This week, he announced Ajax, his own AI model that runs on your computer, and OpenAI banned him twice while he built it. [curious] And I wanted to understand how you create one.
+
+[emphasized] The method is called abliteration. [matter-of-fact] You take an open model, one whose weights anyone can download: the billions of numbers it calculates with. Ajax started from Qwen, Alibaba's open model.
+
+Computers only work with numbers, so Qwen turns your request into a list of four thousand ninety-six numbers. Think of those numbers as coordinates. On a normal map, two numbers give you a position: left-right and up-down. [impressed] Here, four thousand ninety-six numbers give your request a position on a map with four thousand ninety-six dimensions. [quickly] Nobody can picture that, so let's shrink it to three, like a 3D model.
+
+[matter-of-fact] On that map, similar requests land close together. Cooking questions end up in one area, coding questions in another, and requests the model refuses gather in their own corner.
+
+[impressed] And in twenty twenty-four, researchers found that refusing is just one direction on that map. [matter-of-fact] Turn the map so that direction points up, and the higher a request lands, the more likely the model says no.
+
+[curious] So how do you find that direction? [quickly] You send the model hundreds of requests it refuses, and hundreds of normal ones, and mark where each one lands. Then you find the middle of each group, and draw an arrow from one to the other. That arrow is the refusal direction.
+
+[matter-of-fact] Then you change the weights, because they decide where each request lands. You edit them so every request stays at the same height, like pressing the map flat. Everything else stays where it was, so the model keeps what it knows. It just can't climb to "no" anymore.
+
+[serious] But here's the catch. That arrow isn't perfectly clean, so flatten it too hard and you damage other skills too. In one study, math scores dropped by up to eighteen point eight points. That's what Pew-dee-pie calls brain damage.
+
+[quickly] That's why free tools like Heretic test the edit again and again, until they find the fewest refusals with the least damage.
+
+Obviously, you shouldn't do anything illegal, but this is just a teaching video.
+
+[curious] And here's the strange part: the model still knows your request is harmful, because "harmful" is a different direction, and it stays untouched. Like a smoke alarm with its siren unplugged.
+
+[matter-of-fact] So if your company runs an open model on its own servers, check the model's name, because over eight thousand models on Hugging Face have "abliterated" in theirs.
+
+And if you want more breakdowns like this, follow me, and share this video.

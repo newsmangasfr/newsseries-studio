@@ -1,0 +1,43 @@
+{
+  "id": "06-argile",
+  "name": "Argile",
+  "tendency": "sombre",
+  "theme": {
+    "font": {
+      "caption": "Inter, sans-serif"
+    },
+    "caption": {
+      "size": 66,
+      "lineHeight": 74,
+      "wrap": 820
+    },
+    "marker": {
+      "style": "color",
+      "color": "#4C86FF"
+    },
+    "grounds": {
+      "dark": {
+        "bg": "#14161B",
+        "grid": "rgba(255,255,255,0.045)",
+        "ink": "#FFFFFF",
+        "spoken": "#8E949C",
+        "card": "#1C1F26",
+        "hairline": "#2C313A",
+        "dim": "#8E949C"
+      },
+      "light": {
+        "bg": "#ECE9E3",
+        "grid": "rgba(0,0,0,0.05)",
+        "ink": "#121418",
+        "spoken": "#8A8780",
+        "card": "#FFFFFF",
+        "hairline": "#DAD6CE",
+        "dim": "#6E6A63"
+      }
+    },
+    "gridPitch": 60,
+    "atmosphere": {
+      "vignette": 0.4
+    }
+  }
+}

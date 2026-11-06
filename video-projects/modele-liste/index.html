@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #07070c; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter", sans-serif; color: #ffffff; }
+      #ground { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, #1a1830 0%, #07070c 70%); }
+      .shot { position: absolute; inset: 0; overflow: hidden; background: #07070c; }
+      img { display: block; }
+
+      /* Accroche */
+      .hook-bg { position: absolute; inset: 0; overflow: hidden; }
+      .hook-bg img { position: absolute; top: 0; left: -310px; width: 1700px; height: 2125px; filter: blur(3px) brightness(0.42) saturate(1.2); }
+      .hook-shade { position: absolute; inset: 0; background: radial-gradient(circle at 50% 46%, #07070c55 0%, #07070cee 75%); }
+      .hook-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 0 60px 260px; }
+      .hook-kicker { font-weight: 900; font-size: 92px; letter-spacing: 28px; text-indent: 28px; }
+      .hook-year { font-weight: 900; font-size: 380px; line-height: 0.95; letter-spacing: -14px; color: #ffc83d; text-shadow: 0 0 60px #ffc83d88, 0 12px 0 #a86f00; font-variant-numeric: tabular-nums; }
+      .hook-year .d { display: inline-block; }
+      .hook-sub { margin-top: 24px; font-weight: 800; font-size: 54px; text-align: center; background: #ffffff; color: #07070c; padding: 14px 30px; border-radius: 14px; }
+
+      /* Cartes de chapitre */
+      .ch-glow { position: absolute; inset: -200px; }
+      .ch-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 0 60px 300px; }
+      .ch-line { width: 260px; height: 14px; border-radius: 7px; }
+      .ch-big { font-weight: 900; font-size: 170px; line-height: 1; letter-spacing: -4px; text-align: center; }
+      .ch-small { font-weight: 900; font-size: 150px; line-height: 1; color: transparent; text-align: center; }
+
+      /* Plans anime */
+      .an-bg { position: absolute; inset: 0; overflow: hidden; }
+      .an-bg img { position: absolute; top: 0; left: 50%; height: 1920px; width: 6144px; margin-left: -3072px; object-fit: cover; filter: blur(34px) brightness(0.45) saturate(1.3); }
+      .an-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #07070c66 0%, #07070c22 35%, #07070ccc 100%); }
+      .an-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 34px; padding: 320px 40px 0; perspective: 1400px; }
+      .an-tag { font-weight: 900; font-size: 56px; letter-spacing: 12px; text-indent: 12px; border: 5px solid; border-radius: 999px; padding: 6px 34px; background: #07070caa; }
+      .an-card { width: 1000px; height: 312px; border-radius: 26px; overflow: hidden; }
+      .an-card img { width: 1000px; height: 312px; object-fit: cover; }
+      .an-title { margin-top: 20px; max-width: 980px; font-weight: 900; line-height: 1.02; letter-spacing: -2px; text-align: center; text-transform: uppercase; text-shadow: 0 6px 30px #000c; }
+      .an-title .tw { display: inline-block; }
+      .an-info { font-weight: 900; font-size: 46px; letter-spacing: 2px; color: #07070c; padding: 12px 30px; border-radius: 14px; }
+
+      /* Fin */
+      .cta-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 120px 40px 0; }
+      .cta-q { font-weight: 900; font-size: 84px; line-height: 1.05; text-align: center; max-width: 960px; color: #ffc83d; text-shadow: 0 0 40px #ffc83d66; }
+      .cta-grid { display: grid; grid-template-columns: repeat(2, 490px); gap: 12px; }
+      .cell { width: 490px; height: 153px; border-radius: 14px; overflow: hidden; }
+      .cell img { width: 490px; height: 153px; object-fit: cover; }
+      .cta-c { font-weight: 800; font-size: 58px; }
+      .cta-c .arrow { display: inline-block; color: #ffc83d; }
+      .cta-credit { font-weight: 600; font-size: 30px; color: #c8c8d4; }
+
+      /* Sous-titres */
+      .cap { position: absolute; left: 0; right: 0; top: 1470px; height: 240px; display: flex; justify-content: center; align-items: center; z-index: 100; padding: 0 60px; }
+      .cap-in { font-weight: 900; font-size: 76px; line-height: 1.1; text-align: center; text-transform: uppercase; color: #ffffff; -webkit-text-stroke: 10px #000000; paint-order: stroke fill; text-shadow: 0 8px 24px #000000aa; }
+      .cap-in .hl { color: #ffd23f; }
+
+      #flash { position: absolute; inset: 0; background: #ffffff; opacity: 0; z-index: 90; pointer-events: none; }
+
+      /* Logo NewsSeries (intro / outro) */
+      .lg-glow { position: absolute; left: 50%; top: 50%; width: 1500px; height: 1500px; margin: -850px 0 0 -750px; border-radius: 50%; background: radial-gradient(circle, #e3262688 0%, #e3262622 40%, #05070d00 70%); }
+      .lg-rays { position: absolute; left: 50%; top: 860px; width: 0; height: 0; }
+      .ray { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .ray-in { position: absolute; left: 330px; top: -9px; height: 18px; border-radius: 9px; background: linear-gradient(90deg, #fff6e6 0%, #fff6e600 100%); transform-origin: -330px 50%; }
+      .lg-ring { position: absolute; left: 50%; top: 860px; width: 500px; height: 500px; margin: -250px 0 0 -250px; border-radius: 50%; border: 14px solid #ffffff; opacity: 0; }
+      .lg-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 30px; padding: 420px 40px 0; }
+      .lg-logo { width: 880px; height: 880px; }
+      .lg-logo img { width: 880px; height: 880px; }
+      .lg-line { font-weight: 900; font-size: 64px; letter-spacing: 3px; text-align: center; color: #ffffff; text-shadow: 0 6px 30px #000c; }
+      .lg-site { font-weight: 900; font-size: 56px; color: #ffffff; background: #e32626; padding: 12px 34px; border-radius: 16px; }
+      #flash2 { position: absolute; inset: 0; background: #ffffff; opacity: 0; z-index: 91; pointer-events: none; }
+
+      /* Version pro : accroche chiffrée et barre de progression */
+      .hook-kicker .cnt { color: #ffc83d; display: inline-block; min-width: 1.2em; text-align: right; }
+      .hook-kicker { font-size: 110px; letter-spacing: 6px; text-indent: 0; }
+      .hook-one { font-weight: 900; font-size: 64px; letter-spacing: 8px; color: #ffffff; background: #e32626; padding: 10px 30px; border-radius: 12px; }
+      .hook-year { font-size: 330px; }
+      #progress { position: absolute; left: 0; top: 0; width: 1080px; height: 14px; background: linear-gradient(90deg, #e32626, #ffc83d); transform-origin: 0 50%; z-index: 120; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="90.67" data-width="1080" data-height="1920">
+      <div id="ground" class="clip" data-start="0" data-duration="90.67" data-track-index="0"></div>
+<div id="s00" class="clip shot" data-start="0.0" data-duration="2.6" data-track-index="1" style="z-index:10">
+  <div class="lg-glow"></div>
+  <div class="lg-rays"><div class="ray" style="transform: rotate(0.0deg)"><div class="ray-in" style="width:520px"></div></div><div class="ray" style="transform: rotate(27.0deg)"><div class="ray-in" style="width:657px"></div></div><div class="ray" style="transform: rotate(40.0deg)"><div class="ray-in" style="width:534px"></div></div><div class="ray" style="transform: rotate(67.0deg)"><div class="ray-in" style="width:671px"></div></div><div class="ray" style="transform: rotate(80.0deg)"><div class="ray-in" style="width:548px"></div></div><div class="ray" style="transform: rotate(107.0deg)"><div class="ray-in" style="width:685px"></div></div><div class="ray" style="transform: rotate(120.0deg)"><div class="ray-in" style="width:562px"></div></div><div class="ray" style="transform: rotate(147.0deg)"><div class="ray-in" style="width:699px"></div></div><div class="ray" style="transform: rotate(160.0deg)"><div class="ray-in" style="width:576px"></div></div><div class="ray" style="transform: rotate(187.0deg)"><div class="ray-in" style="width:713px"></div></div><div class="ray" style="transform: rotate(200.0deg)"><div class="ray-in" style="width:590px"></div></div><div class="ray" style="transform: rotate(227.0deg)"><div class="ray-in" style="width:727px"></div></div><div class="ray" style="transform: rotate(240.0deg)"><div class="ray-in" style="width:604px"></div></div><div class="ray" style="transform: rotate(267.0deg)"><div class="ray-in" style="width:741px"></div></div><div class="ray" style="transform: rotate(280.0deg)"><div class="ray-in" style="width:618px"></div></div><div class="ray" style="transform: rotate(307.0deg)"><div class="ray-in" style="width:755px"></div></div><div class="ray" style="transform: rotate(320.0deg)"><div class="ray-in" style="width:632px"></div></div><div class="ray" style="transform: rotate(347.0deg)"><div class="ray-in" style="width:769px"></div></div></div>
+  <div class="lg-ring"></div>
+  <div class="lg-content">
+    <div class="lg-logo"><img src="assets/brand/logo.png" alt="NewsSeries"></div>
+    <div class="lg-line">L'ACTU SÉRIES</div>
+  </div>
+</div>
+<div id="s01" class="clip shot" data-start="2.3" data-duration="6.226" data-track-index="2" style="z-index:11">
+  <div class="hook-bg"><img src="assets/source.jpg" alt=""></div>
+  <div class="hook-shade"></div>
+  <div class="hook-content">
+    <div class="hook-kicker"><span class="cnt">16</span> ANIMES</div>
+    <div class="hook-one">UNE SEULE ANNÉE</div>
+    <div class="hook-year"><span class="d">2</span><span class="d">0</span><span class="d">2</span><span class="d">7</span></div>
+    <div class="hook-sub">COMPLÈTEMENT FOLLE</div>
+  </div>
+</div>
+<div id="s02" class="clip shot" data-start="8.226" data-duration="1.752" data-track-index="1" style="z-index:12">
+  <div class="ch-glow" style="background: radial-gradient(circle at 50% 45%, #8fd3ff55 0%, #07070c00 60%)"></div>
+  <div class="ch-content">
+    <div class="ch-line" style="background:#8fd3ff"></div>
+    <div class="ch-big">JANVIER</div>
+    <div class="ch-small" style="-webkit-text-stroke: 4px #8fd3ff">2027</div>
+  </div>
+</div>
+<div id="s03" class="clip shot" data-start="9.677" data-duration="5.139" data-track-index="2" style="z-index:13">
+  <div class="an-bg"><img src="assets/panels-hd/01-shangri-la-frontier.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#8fd3ff; border-color:#8fd3ff">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #8fd3ffaa"><img src="assets/panels-hd/01-shangri-la-frontier.jpg" alt=""></div>
+    <div class="an-title" style="font-size:88px"><span class="tw">Shangri-La</span> <span class="tw">Frontier</span> </div>
+    <div class="an-info" style="background:#8fd3ff">SAISON 3 · JANVIER</div>
+  </div>
+</div>
+<div id="s04" class="clip shot" data-start="14.516" data-duration="3.203" data-track-index="1" style="z-index:14">
+  <div class="an-bg"><img src="assets/panels-hd/05-mashle.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#c9a7ff; border-color:#c9a7ff">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #c9a7ffaa"><img src="assets/panels-hd/05-mashle.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Mashle</span> </div>
+    <div class="an-info" style="background:#c9a7ff">SAISON 3 · JANVIER</div>
+  </div>
+</div>
+<div id="s05" class="clip shot" data-start="17.419" data-duration="5.623" data-track-index="2" style="z-index:15">
+  <div class="an-bg"><img src="assets/panels-hd/11-sakamoto-days.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#f5ecb0; border-color:#f5ecb0">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #f5ecb0aa"><img src="assets/panels-hd/11-sakamoto-days.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Sakamoto</span> <span class="tw">Days</span> </div>
+    <div class="an-info" style="background:#f5ecb0">SAISON 2 · JANVIER</div>
+  </div>
+</div>
+<div id="s06" class="clip shot" data-start="22.742" data-duration="6.106" data-track-index="1" style="z-index:16">
+  <div class="an-bg"><img src="assets/panels-hd/04-medaka-kuroiwa.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#6ec1ff; border-color:#6ec1ff">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #6ec1ffaa"><img src="assets/panels-hd/04-medaka-kuroiwa.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Medaka</span> <span class="tw">Kuroiwa</span> </div>
+    <div class="an-info" style="background:#6ec1ff">SAISON 2 · JANVIER</div>
+  </div>
+</div>
+<div id="s07" class="clip shot" data-start="28.548" data-duration="5.401" data-track-index="2" style="z-index:17">
+  <div class="an-bg"><img src="assets/panels-hd/06-marriage-toxin.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ff7a7a; border-color:#ff7a7a">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ff7a7aaa"><img src="assets/panels-hd/06-marriage-toxin.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Marriage</span> <span class="tw">Toxin</span> </div>
+    <div class="an-info" style="background:#ff7a7a">SAISON 2 · JANVIER</div>
+  </div>
+</div>
+<div id="s08" class="clip shot" data-start="33.649" data-duration="1.2" data-track-index="1" style="z-index:18">
+  <div class="ch-glow" style="background: radial-gradient(circle at 50% 45%, #ffd16655 0%, #07070c00 60%)"></div>
+  <div class="ch-content">
+    <div class="ch-line" style="background:#ffd166"></div>
+    <div class="ch-big">ÉTÉ</div>
+    <div class="ch-small" style="-webkit-text-stroke: 4px #ffd166">2027</div>
+  </div>
+</div>
+<div id="s09" class="clip shot" data-start="34.549" data-duration="4.944" data-track-index="2" style="z-index:19">
+  <div class="an-bg"><img src="assets/panels-hd/14-one-piece-god-valley.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffd166; border-color:#ffd166">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffd166aa"><img src="assets/panels-hd/14-one-piece-god-valley.jpg" alt=""></div>
+    <div class="an-title" style="font-size:88px"><span class="tw">One</span> <span class="tw">Piece</span> <span class="tw">:</span> <span class="tw">God</span> <span class="tw">Valley</span> </div>
+    <div class="an-info" style="background:#ffd166">FILM · ÉTÉ</div>
+  </div>
+</div>
+<div id="s10" class="clip shot" data-start="39.194" data-duration="1.2" data-track-index="1" style="z-index:20">
+  <div class="ch-glow" style="background: radial-gradient(circle at 50% 45%, #ffc53d55 0%, #07070c00 60%)"></div>
+  <div class="ch-content">
+    <div class="ch-line" style="background:#ffc53d"></div>
+    <div class="ch-big">OCTOBRE</div>
+    <div class="ch-small" style="-webkit-text-stroke: 4px #ffc53d">2027</div>
+  </div>
+</div>
+<div id="s11" class="clip shot" data-start="40.094" data-duration="4.723" data-track-index="2" style="z-index:21">
+  <div class="an-bg"><img src="assets/panels-hd/07-frieren.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffc53d; border-color:#ffc53d">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffc53daa"><img src="assets/panels-hd/07-frieren.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Frieren</span> </div>
+    <div class="an-info" style="background:#ffc53d">SAISON 3 · OCTOBRE</div>
+  </div>
+</div>
+<div id="s12" class="clip shot" data-start="44.516" data-duration="4.655" data-track-index="1" style="z-index:22">
+  <div class="an-bg"><img src="assets/panels-hd/09-delicious-in-dungeon.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffa46b; border-color:#ffa46b">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffa46baa"><img src="assets/panels-hd/09-delicious-in-dungeon.jpg" alt=""></div>
+    <div class="an-title" style="font-size:88px"><span class="tw">Delicious</span> <span class="tw">in</span> <span class="tw">Dungeon</span> </div>
+    <div class="an-info" style="background:#ffa46b">SAISON 2 · OCTOBRE</div>
+  </div>
+</div>
+<div id="s13" class="clip shot" data-start="48.871" data-duration="1.268" data-track-index="2" style="z-index:23">
+  <div class="ch-glow" style="background: radial-gradient(circle at 50% 45%, #ff5a4a55 0%, #07070c00 60%)"></div>
+  <div class="ch-content">
+    <div class="ch-line" style="background:#ff5a4a"></div>
+    <div class="ch-big">LES FILMS</div>
+    <div class="ch-small" style="-webkit-text-stroke: 4px #ff5a4a">2027</div>
+  </div>
+</div>
+<div id="s14" class="clip shot" data-start="49.839" data-duration="3.687" data-track-index="1" style="z-index:24">
+  <div class="an-bg"><img src="assets/panels-hd/10-solo-leveling.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#8fb3ff; border-color:#8fb3ff">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #8fb3ffaa"><img src="assets/panels-hd/10-solo-leveling.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Solo</span> <span class="tw">Leveling</span> </div>
+    <div class="an-info" style="background:#8fb3ff">FILM · ATTENDU</div>
+  </div>
+</div>
+<div id="s15" class="clip shot" data-start="53.226" data-duration="3.687" data-track-index="2" style="z-index:25">
+  <div class="an-bg"><img src="assets/panels-hd/13-eminence-in-shadow.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffb3c6; border-color:#ffb3c6">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffb3c6aa"><img src="assets/panels-hd/13-eminence-in-shadow.jpg" alt=""></div>
+    <div class="an-title" style="font-size:88px"><span class="tw">The</span> <span class="tw">Eminence</span> <span class="tw">in</span> <span class="tw">Shadow</span> </div>
+    <div class="an-info" style="background:#ffb3c6">FILM · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s16" class="clip shot" data-start="56.613" data-duration="4.171" data-track-index="1" style="z-index:26">
+  <div class="an-bg"><img src="assets/panels-hd/16-haikyu.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffb020; border-color:#ffb020">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffb020aa"><img src="assets/panels-hd/16-haikyu.jpg" alt=""></div>
+    <div class="an-title" style="font-size:104px"><span class="tw">Haikyu!!</span> </div>
+    <div class="an-info" style="background:#ffb020">FILM · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s17" class="clip shot" data-start="60.484" data-duration="2.235" data-track-index="2" style="z-index:27">
+  <div class="an-bg"><img src="assets/panels-hd/12-demon-slayer.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ff5a4a; border-color:#ff5a4a">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ff5a4aaa"><img src="assets/panels-hd/12-demon-slayer.jpg" alt=""></div>
+    <div class="an-title" style="font-size:70px"><span class="tw">Demon</span> <span class="tw">Slayer</span> <span class="tw">:</span> <span class="tw">la</span> <span class="tw">Forteresse</span> <span class="tw">Infinie</span> </div>
+    <div class="an-info" style="background:#ff5a4a">FILM 2 · RUMEUR</div>
+  </div>
+</div>
+<div id="s18" class="clip shot" data-start="62.419" data-duration="1.752" data-track-index="1" style="z-index:28">
+  <div class="ch-glow" style="background: radial-gradient(circle at 50% 45%, #7dff8a55 0%, #07070c00 60%)"></div>
+  <div class="ch-content">
+    <div class="ch-line" style="background:#7dff8a"></div>
+    <div class="ch-big">DATE</div>
+    <div class="ch-small" style="-webkit-text-stroke: 4px #7dff8a">À VENIR</div>
+  </div>
+</div>
+<div id="s19" class="clip shot" data-start="63.871" data-duration="3.203" data-track-index="2" style="z-index:29">
+  <div class="an-bg"><img src="assets/panels-hd/02-shield-hero.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#7dff8a; border-color:#7dff8a">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #7dff8aaa"><img src="assets/panels-hd/02-shield-hero.jpg" alt=""></div>
+    <div class="an-title" style="font-size:70px"><span class="tw">The</span> <span class="tw">Rising</span> <span class="tw">of</span> <span class="tw">the</span> <span class="tw">Shield</span> <span class="tw">Hero</span> </div>
+    <div class="an-info" style="background:#7dff8a">SAISON 5 · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s20" class="clip shot" data-start="66.774" data-duration="4.171" data-track-index="1" style="z-index:30">
+  <div class="an-bg"><img src="assets/panels-hd/03-alya.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#ffb8c8; border-color:#ffb8c8">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #ffb8c8aa"><img src="assets/panels-hd/03-alya.jpg" alt=""></div>
+    <div class="an-title" style="font-size:70px"><span class="tw">Alya</span> <span class="tw">Sometimes</span> <span class="tw">Hides</span> <span class="tw">Her</span> <span class="tw">Feelings</span> <span class="tw">in</span> <span class="tw">Russian</span> </div>
+    <div class="an-info" style="background:#ffb8c8">SAISON 2 · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s21" class="clip shot" data-start="70.645" data-duration="5.139" data-track-index="2" style="z-index:31">
+  <div class="an-bg"><img src="assets/panels-hd/08-worlds-finest-assassin.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#f3e7a6; border-color:#f3e7a6">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #f3e7a6aa"><img src="assets/panels-hd/08-worlds-finest-assassin.jpg" alt=""></div>
+    <div class="an-title" style="font-size:70px"><span class="tw">The</span> <span class="tw">World&#x27;s</span> <span class="tw">Finest</span> <span class="tw">Assassin</span> </div>
+    <div class="an-info" style="background:#f3e7a6">SAISON 2 · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s22" class="clip shot" data-start="75.484" data-duration="4.013" data-track-index="1" style="z-index:32">
+  <div class="an-bg"><img src="assets/panels-hd/15-lord-of-mysteries.jpg" alt=""></div>
+  <div class="an-shade"></div>
+  <div class="an-content">
+    <div class="an-tag" style="color:#b9e5d0; border-color:#b9e5d0">2027</div>
+    <div class="an-card" style="box-shadow: 0 30px 90px #000c, 0 0 0 4px #b9e5d0aa"><img src="assets/panels-hd/15-lord-of-mysteries.jpg" alt=""></div>
+    <div class="an-title" style="font-size:88px"><span class="tw">Lord</span> <span class="tw">of</span> <span class="tw">Mysteries</span> </div>
+    <div class="an-info" style="background:#b9e5d0">SAISON 2 · DATE À VENIR</div>
+  </div>
+</div>
+<div id="s23" class="clip shot" data-start="79.197" data-duration="8.173" data-track-index="2" style="z-index:33">
+  <div class="cta-content">
+    <div class="cta-q">LEQUEL TU ATTENDS LE PLUS ?</div>
+    <div class="cta-grid"><div class="cell"><img src="assets/panels-hd/01-shangri-la-frontier.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/02-shield-hero.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/03-alya.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/04-medaka-kuroiwa.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/05-mashle.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/06-marriage-toxin.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/07-frieren.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/08-worlds-finest-assassin.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/09-delicious-in-dungeon.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/10-solo-leveling.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/11-sakamoto-days.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/12-demon-slayer.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/13-eminence-in-shadow.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/14-one-piece-god-valley.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/15-lord-of-mysteries.jpg" alt=""></div><div class="cell"><img src="assets/panels-hd/16-haikyu.jpg" alt=""></div></div>
+    <div class="cta-c">Dis-le en commentaire <span class="arrow">↓</span></div>
+    <div class="cta-credit">Visuels : @animespiritnews</div>
+  </div>
+</div>
+<div id="s24" class="clip shot" data-start="87.07" data-duration="3.6" data-track-index="1" style="z-index:34">
+  <div class="lg-glow"></div>
+  <div class="lg-rays"><div class="ray" style="transform: rotate(0.0deg)"><div class="ray-in" style="width:520px"></div></div><div class="ray" style="transform: rotate(27.0deg)"><div class="ray-in" style="width:657px"></div></div><div class="ray" style="transform: rotate(40.0deg)"><div class="ray-in" style="width:534px"></div></div><div class="ray" style="transform: rotate(67.0deg)"><div class="ray-in" style="width:671px"></div></div><div class="ray" style="transform: rotate(80.0deg)"><div class="ray-in" style="width:548px"></div></div><div class="ray" style="transform: rotate(107.0deg)"><div class="ray-in" style="width:685px"></div></div><div class="ray" style="transform: rotate(120.0deg)"><div class="ray-in" style="width:562px"></div></div><div class="ray" style="transform: rotate(147.0deg)"><div class="ray-in" style="width:699px"></div></div><div class="ray" style="transform: rotate(160.0deg)"><div class="ray-in" style="width:576px"></div></div><div class="ray" style="transform: rotate(187.0deg)"><div class="ray-in" style="width:713px"></div></div><div class="ray" style="transform: rotate(200.0deg)"><div class="ray-in" style="width:590px"></div></div><div class="ray" style="transform: rotate(227.0deg)"><div class="ray-in" style="width:727px"></div></div><div class="ray" style="transform: rotate(240.0deg)"><div class="ray-in" style="width:604px"></div></div><div class="ray" style="transform: rotate(267.0deg)"><div class="ray-in" style="width:741px"></div></div><div class="ray" style="transform: rotate(280.0deg)"><div class="ray-in" style="width:618px"></div></div><div class="ray" style="transform: rotate(307.0deg)"><div class="ray-in" style="width:755px"></div></div><div class="ray" style="transform: rotate(320.0deg)"><div class="ray-in" style="width:632px"></div></div><div class="ray" style="transform: rotate(347.0deg)"><div class="ray-in" style="width:769px"></div></div></div>
+  <div class="lg-ring"></div>
+  <div class="lg-content">
+    <div class="lg-logo"><img src="assets/brand/logo.png" alt="NewsSeries"></div>
+    <div class="lg-line">ABONNE-TOI POUR PLUS D'ACTUS</div><div class="lg-site">newsseries.fr</div>
+  </div>
+</div>
+<div id="c000" class="clip cap" data-start="2.85" data-duration="0.657" data-track-index="20"><div class="cap-in"><span class="w">16</span> <span class="w">animes.</span></div></div>
+<div id="c001" class="clip cap" data-start="3.572" data-duration="1.051" data-track-index="21"><div class="cap-in"><span class="w">Une</span> <span class="w">seule</span> <span class="w">année.</span></div></div>
+<div id="c002" class="clip cap" data-start="4.688" data-duration="0.788" data-track-index="20"><div class="cap-in"><span class="w hl">2027</span> <span class="w">va</span> <span class="w">être</span></div></div>
+<div id="c003" class="clip cap" data-start="5.542" data-duration="1.247" data-track-index="21"><div class="cap-in"><span class="w">complètement</span> <span class="w">folle,</span></div></div>
+<div id="c004" class="clip cap" data-start="6.855" data-duration="1.181" data-track-index="20"><div class="cap-in"><span class="w">et</span> <span class="w">voici</span> <span class="w">pourquoi.</span></div></div>
+<div id="c005" class="clip cap" data-start="8.386" data-duration="1.027" data-track-index="21"><div class="cap-in"><span class="w">Janvier</span> <span class="w">frappe</span> <span class="w">fort.</span></div></div>
+<div id="c006" class="clip cap" data-start="9.763" data-duration="0.967" data-track-index="20"><div class="cap-in"><span class="w hl">Shangri-La</span> <span class="w hl">Frontier</span></div></div>
+<div id="c007" class="clip cap" data-start="10.781" data-duration="0.458" data-track-index="21"><div class="cap-in"><span class="w">saison</span> <span class="w">3:</span></div></div>
+<div id="c008" class="clip cap" data-start="11.29" data-duration="0.815" data-track-index="20"><div class="cap-in"><span class="w">Sunraku</span> <span class="w">repart</span> <span class="w">à</span></div></div>
+<div id="c009" class="clip cap" data-start="12.156" data-duration="0.763" data-track-index="21"><div class="cap-in"><span class="w">l&#x27;assaut</span> <span class="w">du</span> <span class="w">jeu</span></div></div>
+<div id="c010" class="clip cap" data-start="12.97" data-duration="0.865" data-track-index="20"><div class="cap-in"><span class="w">le</span> <span class="w">plus</span> <span class="w">difficile</span></div></div>
+<div id="c011" class="clip cap" data-start="13.886" data-duration="0.458" data-track-index="21"><div class="cap-in"><span class="w">du</span> <span class="w">monde.</span></div></div>
+<div id="c012" class="clip cap" data-start="14.694" data-duration="0.757" data-track-index="20"><div class="cap-in"><span class="w hl">Mashle</span> <span class="w">saison</span> <span class="w">3:</span></div></div>
+<div id="c013" class="clip cap" data-start="15.498" data-duration="0.899" data-track-index="21"><div class="cap-in"><span class="w">Mash</span> <span class="w">règle</span> <span class="w">toujours</span></div></div>
+<div id="c014" class="clip cap" data-start="16.444" data-duration="0.568" data-track-index="20"><div class="cap-in"><span class="w">tout</span> <span class="w">à</span> <span class="w">coups</span></div></div>
+<div id="c015" class="clip cap" data-start="17.059" data-duration="0.426" data-track-index="21"><div class="cap-in"><span class="w">de</span> <span class="w">poing.</span></div></div>
+<div id="c016" class="clip cap" data-start="17.835" data-duration="1.089" data-track-index="20"><div class="cap-in"><span class="w hl">Sakamoto</span> <span class="w hl">Days</span> <span class="w">saison</span></div></div>
+<div id="c017" class="clip cap" data-start="18.979" data-duration="0.163" data-track-index="21"><div class="cap-in"><span class="w">2:</span></div></div>
+<div id="c018" class="clip cap" data-start="19.142" data-duration="0.872" data-track-index="20"><div class="cap-in"><span class="w">l&#x27;ancien</span> <span class="w">tueur</span> <span class="w">à</span></div></div>
+<div id="c019" class="clip cap" data-start="20.068" data-duration="0.708" data-track-index="21"><div class="cap-in"><span class="w">gages</span> <span class="w">le</span> <span class="w">plus</span></div></div>
+<div id="c020" class="clip cap" data-start="20.831" data-duration="0.817" data-track-index="20"><div class="cap-in"><span class="w">redouté</span> <span class="w">protège</span></div></div>
+<div id="c021" class="clip cap" data-start="21.702" data-duration="0.98" data-track-index="21"><div class="cap-in"><span class="w">encore</span> <span class="w">sa</span> <span class="w">famille.</span></div></div>
+<div id="c022" class="clip cap" data-start="23.032" data-duration="1.243" data-track-index="20"><div class="cap-in"><span class="w hl">Medaka</span> <span class="w hl">Kuroiwa</span> <span class="w">saison</span></div></div>
+<div id="c023" class="clip cap" data-start="24.334" data-duration="0.178" data-track-index="21"><div class="cap-in"><span class="w">2:</span></div></div>
+<div id="c024" class="clip cap" data-start="24.512" data-duration="1.125" data-track-index="20"><div class="cap-in"><span class="w">Mona</span> <span class="w">tente</span> <span class="w">toujours</span></div></div>
+<div id="c025" class="clip cap" data-start="25.696" data-duration="0.769" data-track-index="21"><div class="cap-in"><span class="w">de</span> <span class="w">séduire</span> <span class="w">le</span></div></div>
+<div id="c026" class="clip cap" data-start="26.524" data-duration="0.888" data-track-index="20"><div class="cap-in"><span class="w">seul</span> <span class="w">garçon</span> <span class="w">qui</span></div></div>
+<div id="c027" class="clip cap" data-start="27.471" data-duration="0.711" data-track-index="21"><div class="cap-in"><span class="w">lui</span> <span class="w">résiste.</span></div></div>
+<div id="c028" class="clip cap" data-start="28.532" data-duration="1.06" data-track-index="20"><div class="cap-in"><span class="w">Et</span> <span class="w hl">Marriage</span> <span class="w hl">Toxin</span></div></div>
+<div id="c029" class="clip cap" data-start="29.655" data-duration="0.562" data-track-index="21"><div class="cap-in"><span class="w">saison</span> <span class="w">2:</span></div></div>
+<div id="c030" class="clip cap" data-start="30.279" data-duration="1.56" data-track-index="20"><div class="cap-in"><span class="w">un</span> <span class="w hl">assassin</span> <span class="w">empoisonneur,</span></div></div>
+<div id="c031" class="clip cap" data-start="31.902" data-duration="0.748" data-track-index="21"><div class="cap-in"><span class="w">qui</span> <span class="w">cherche…</span></div></div>
+<div id="c032" class="clip cap" data-start="32.713" data-duration="0.686" data-track-index="20"><div class="cap-in"><span class="w">une</span> <span class="w">épouse.</span></div></div>
+<div id="c033" class="clip cap" data-start="33.749" data-duration="0.438" data-track-index="21"><div class="cap-in"><span class="w">Cet</span> <span class="w">été,</span></div></div>
+<div id="c034" class="clip cap" data-start="34.241" data-duration="0.984" data-track-index="20"><div class="cap-in"><span class="w hl">One</span> <span class="w hl">Piece</span> <span class="w">débarque</span></div></div>
+<div id="c035" class="clip cap" data-start="35.28" data-duration="0.765" data-track-index="21"><div class="cap-in"><span class="w">au</span> <span class="w">cinéma</span> <span class="w">avec</span></div></div>
+<div id="c036" class="clip cap" data-start="36.1" data-duration="0.601" data-track-index="20"><div class="cap-in"><span class="w hl">God</span> <span class="w hl">Valley,</span></div></div>
+<div id="c037" class="clip cap" data-start="36.756" data-duration="0.71" data-track-index="21"><div class="cap-in"><span class="w">l&#x27;un</span> <span class="w">des</span> <span class="w">plus</span></div></div>
+<div id="c038" class="clip cap" data-start="37.521" data-duration="0.82" data-track-index="20"><div class="cap-in"><span class="w">grands</span> <span class="w">mystères</span></div></div>
+<div id="c039" class="clip cap" data-start="38.395" data-duration="0.656" data-track-index="21"><div class="cap-in"><span class="w">de</span> <span class="w">la</span> <span class="w">série.</span></div></div>
+<div id="c040" class="clip cap" data-start="39.401" data-duration="0.666" data-track-index="20"><div class="cap-in"><span class="w">En</span> <span class="w">octobre,</span></div></div>
+<div id="c041" class="clip cap" data-start="40.128" data-duration="1.028" data-track-index="21"><div class="cap-in"><span class="w hl">Frieren</span> <span class="w">saison</span> <span class="w">3:</span></div></div>
+<div id="c042" class="clip cap" data-start="41.217" data-duration="1.15" data-track-index="20"><div class="cap-in"><span class="w">l&#x27;elfe</span> <span class="w">mage</span> <span class="w">reprend</span></div></div>
+<div id="c043" class="clip cap" data-start="42.427" data-duration="0.787" data-track-index="21"><div class="cap-in"><span class="w">la</span> <span class="w">route</span> <span class="w">avec</span></div></div>
+<div id="c044" class="clip cap" data-start="43.274" data-duration="0.847" data-track-index="20"><div class="cap-in"><span class="w">Fern</span> <span class="w">et</span> <span class="w">Stark.</span></div></div>
+<div id="c045" class="clip cap" data-start="44.471" data-duration="0.82" data-track-index="21"><div class="cap-in"><span class="w">Et</span> <span class="w hl">Delicious</span> <span class="w">in</span></div></div>
+<div id="c046" class="clip cap" data-start="45.346" data-duration="0.928" data-track-index="20"><div class="cap-in"><span class="w hl">Dungeon</span> <span class="w">saison</span> <span class="w">2:</span></div></div>
+<div id="c047" class="clip cap" data-start="46.329" data-duration="1.202" data-track-index="21"><div class="cap-in"><span class="w">Laios</span> <span class="w">cuisine</span> <span class="w">toujours</span></div></div>
+<div id="c048" class="clip cap" data-start="47.586" data-duration="0.819" data-track-index="20"><div class="cap-in"><span class="w">les</span> <span class="w">monstres</span> <span class="w">du</span></div></div>
+<div id="c049" class="clip cap" data-start="48.46" data-duration="0.382" data-track-index="21"><div class="cap-in"><span class="w">donjon.</span></div></div>
+<div id="c050" class="clip cap" data-start="49.192" data-duration="0.615" data-track-index="20"><div class="cap-in"><span class="w">Côté</span> <span class="w">films,</span></div></div>
+<div id="c051" class="clip cap" data-start="49.863" data-duration="0.951" data-track-index="21"><div class="cap-in"><span class="w hl">Solo</span> <span class="w hl">Leveling</span> <span class="w">est</span></div></div>
+<div id="c052" class="clip cap" data-start="50.87" data-duration="0.448" data-track-index="20"><div class="cap-in"><span class="w">attendu:</span></div></div>
+<div id="c053" class="clip cap" data-start="51.374" data-duration="0.839" data-track-index="21"><div class="cap-in"><span class="w">Sung</span> <span class="w">Jinwoo</span> <span class="w">sur</span></div></div>
+<div id="c054" class="clip cap" data-start="52.269" data-duration="0.671" data-track-index="20"><div class="cap-in"><span class="w">grand</span> <span class="w">écran.</span></div></div>
+<div id="c055" class="clip cap" data-start="53.29" data-duration="0.849" data-track-index="21"><div class="cap-in"><span class="w">The</span> <span class="w hl">Eminence</span> <span class="w">in</span></div></div>
+<div id="c056" class="clip cap" data-start="54.195" data-duration="0.396" data-track-index="20"><div class="cap-in"><span class="w hl">Shadow:</span></div></div>
+<div id="c057" class="clip cap" data-start="54.648" data-duration="0.566" data-track-index="21"><div class="cap-in"><span class="w">Cid</span> <span class="w">et</span> <span class="w">son</span></div></div>
+<div id="c058" class="clip cap" data-start="55.271" data-duration="0.905" data-track-index="20"><div class="cap-in"><span class="w hl">Shadow</span> <span class="w">Garden</span> <span class="w">au</span></div></div>
+<div id="c059" class="clip cap" data-start="56.233" data-duration="0.396" data-track-index="21"><div class="cap-in"><span class="w">cinéma.</span></div></div>
+<div id="c060" class="clip cap" data-start="56.979" data-duration="0.846" data-track-index="20"><div class="cap-in"><span class="w">Haikyu</span> <span class="w">revient</span> <span class="w">aussi</span></div></div>
+<div id="c061" class="clip cap" data-start="57.868" data-duration="0.35" data-track-index="21"><div class="cap-in"><span class="w">en</span> <span class="w">film.</span></div></div>
+<div id="c062" class="clip cap" data-start="58.556" data-duration="0.582" data-track-index="20"><div class="cap-in"><span class="w">Et</span> <span class="w">la</span> <span class="w">rumeur</span></div></div>
+<div id="c063" class="clip cap" data-start="59.186" data-duration="0.63" data-track-index="21"><div class="cap-in"><span class="w">parle</span> <span class="w">déjà</span> <span class="w">du</span></div></div>
+<div id="c064" class="clip cap" data-start="59.865" data-duration="0.921" data-track-index="20"><div class="cap-in"><span class="w">deuxième</span> <span class="w">film</span> <span class="w hl">Demon</span></div></div>
+<div id="c065" class="clip cap" data-start="60.834" data-duration="0.35" data-track-index="21"><div class="cap-in"><span class="w hl">Slayer:</span></div></div>
+<div id="c066" class="clip cap" data-start="61.222" data-duration="1.066" data-track-index="20"><div class="cap-in"><span class="w">la</span> <span class="w">Forteresse</span> <span class="w">Infinie.</span></div></div>
+<div id="c067" class="clip cap" data-start="62.638" data-duration="0.744" data-track-index="21"><div class="cap-in"><span class="w">Sans</span> <span class="w">date</span> <span class="w">pour</span></div></div>
+<div id="c068" class="clip cap" data-start="63.436" data-duration="0.531" data-track-index="20"><div class="cap-in"><span class="w">l&#x27;instant:</span></div></div>
+<div id="c069" class="clip cap" data-start="64.02" data-duration="0.957" data-track-index="21"><div class="cap-in"><span class="w hl">Shield</span> <span class="w hl">Hero</span> <span class="w">saison</span></div></div>
+<div id="c070" class="clip cap" data-start="65.03" data-duration="0.159" data-track-index="20"><div class="cap-in"><span class="w">5,</span></div></div>
+<div id="c071" class="clip cap" data-start="65.189" data-duration="0.798" data-track-index="21"><div class="cap-in"><span class="w">Naofumi</span> <span class="w">reprend</span></div></div>
+<div id="c072" class="clip cap" data-start="66.04" data-duration="0.691" data-track-index="20"><div class="cap-in"><span class="w">son</span> <span class="w">bouclier.</span></div></div>
+<div id="c073" class="clip cap" data-start="67.081" data-duration="0.787" data-track-index="21"><div class="cap-in"><span class="w hl">Alya</span> <span class="w">saison</span> <span class="w">2,</span></div></div>
+<div id="c074" class="clip cap" data-start="67.924" data-duration="1.012" data-track-index="20"><div class="cap-in"><span class="w">qui</span> <span class="w">cache</span> <span class="w">toujours</span></div></div>
+<div id="c075" class="clip cap" data-start="68.993" data-duration="0.956" data-track-index="21"><div class="cap-in"><span class="w">ses</span> <span class="w">sentiments</span> <span class="w">en</span></div></div>
+<div id="c076" class="clip cap" data-start="70.005" data-duration="0.35" data-track-index="20"><div class="cap-in"><span class="w">russe.</span></div></div>
+<div id="c077" class="clip cap" data-start="70.692" data-duration="1.328" data-track-index="21"><div class="cap-in"><span class="w hl">World&#x27;s</span> <span class="w hl">Finest</span> <span class="w hl">Assassin</span></div></div>
+<div id="c078" class="clip cap" data-start="72.078" data-duration="0.519" data-track-index="20"><div class="cap-in"><span class="w">saison</span> <span class="w">2:</span></div></div>
+<div id="c079" class="clip cap" data-start="72.655" data-duration="1.212" data-track-index="21"><div class="cap-in"><span class="w">le</span> <span class="w">meilleur</span> <span class="w hl">assassin,</span></div></div>
+<div id="c080" class="clip cap" data-start="73.925" data-duration="1.443" data-track-index="20"><div class="cap-in"><span class="w">réincarné</span> <span class="w">en</span> <span class="w">aristocrate.</span></div></div>
+<div id="c081" class="clip cap" data-start="75.718" data-duration="0.512" data-track-index="21"><div class="cap-in"><span class="w">Et</span> <span class="w hl">Lord</span> <span class="w">of</span></div></div>
+<div id="c082" class="clip cap" data-start="76.281" data-duration="0.82" data-track-index="20"><div class="cap-in"><span class="w hl">Mysteries</span> <span class="w">saison</span></div></div>
+<div id="c083" class="clip cap" data-start="77.152" data-duration="0.154" data-track-index="21"><div class="cap-in"><span class="w">2,</span></div></div>
+<div id="c084" class="clip cap" data-start="77.306" data-duration="0.974" data-track-index="20"><div class="cap-in"><span class="w">pour</span> <span class="w">replonger</span> <span class="w">dans</span></div></div>
+<div id="c085" class="clip cap" data-start="78.331" data-duration="0.666" data-track-index="21"><div class="cap-in"><span class="w">ses</span> <span class="w">mystères.</span></div></div>
+      <div id="flash" class="clip" data-start="0" data-duration="90.67" data-track-index="40"></div>
+      <div id="progress" class="clip" data-start="0" data-duration="90.67" data-track-index="42"></div>
+      <div id="flash2" class="clip" data-start="0" data-duration="90.67" data-track-index="41"></div>
+      <audio id="mix" data-start="0" data-duration="90.67" data-track-index="50" src="audio/mix.wav" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.from("#s00 .lg-logo", { scale: 3.2, rotation: -14, opacity: 0, duration: 0.5, ease: "expo.in" }, 0.0);
+      tl.fromTo("#s00 .lg-glow", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "expo.out", immediateRender: false }, 0.5);
+      tl.to("#s00 .lg-glow", { scale: 1.12, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 2 }, 1.0);
+      tl.from("#s00 .ray-in", { scaleX: 0, opacity: 0, duration: 0.45, ease: "expo.out", stagger: 0.012 }, 0.5);
+      tl.to("#s00 .lg-rays", { rotation: 25, duration: 2.6, ease: "none" }, 0.0);
+      tl.fromTo("#s00 .lg-ring", { scale: 0.2, opacity: 1 }, { scale: 3, opacity: 0, duration: 0.7, ease: "power2.out", immediateRender: false }, 0.5);
+      tl.fromTo("#s00 .lg-logo", { x: 0 }, { x: 14, duration: 0.04, ease: "none", yoyo: true, repeat: 5 }, 0.5);
+      tl.fromTo("#flash2", { opacity: 0.8 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, 0.5);
+      tl.to("#s00 .lg-logo img", { scale: 1.04, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0.8);
+      tl.from("#s00 .lg-line, #s00 .lg-site", { y: 60, opacity: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.15 }, 0.85);
+      tl.from("#s01", { scale: 1.6, opacity: 0, duration: 0.3, ease: "power3.out" }, 2.3);
+      tl.fromTo("#s01 .hook-bg img", { y: 0, scale: 1.08 }, { y: -260, scale: 1.0, duration: 6.226, ease: "none" }, 2.3);
+      tl.from("#s01 .hook-kicker", { scale: 2.2, opacity: 0, duration: 0.35, ease: "expo.out" }, 2.4);
+      (function () { var o = { v: 0 }, el = document.querySelector("#s01 .cnt"); tl.fromTo(o, { v: 0 }, { v: 16, duration: 0.9, ease: "power2.out", onUpdate: function () { el.textContent = Math.round(o.v); } }, 2.4499999999999997); })();
+      tl.from("#s01 .hook-one", { x: -500, opacity: 0, duration: 0.4, ease: "power4.out" }, 3.4721656763971414);
+      tl.from("#s01 .hook-year .d", { scale: 2.6, opacity: 0, duration: 0.4, ease: "back.out(2)", stagger: 0.07 }, 4.538239903556359);
+      tl.from("#s01 .hook-sub", { y: 50, opacity: 0, duration: 0.45, ease: "back.out(1.8)" }, 5.995176956858693);
+      tl.fromTo("#s01 .hook-year", { scale: 1 }, { scale: 1.06, duration: 0.24, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, 6.395176956858693);
+      tl.from("#s02", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 8.226);
+      tl.from("#s02 .ch-line", { scaleX: 0, duration: 0.5, ease: "expo.out" }, 8.326);
+      tl.from("#s02 .ch-big", { y: 120, opacity: 0, duration: 0.5, ease: "power4.out" }, 8.346);
+      tl.from("#s02 .ch-small", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(1.8)" }, 8.476);
+      tl.fromTo("#s02 .ch-glow", { scale: 0.8 }, { scale: 1.2, duration: 1.752, ease: "sine.out" }, 8.226);
+      tl.from("#s03", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 9.677);
+      tl.fromTo("#s03 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 5.139, ease: "none" }, 9.677);
+      tl.from("#s03 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 9.777);
+      tl.from("#s03 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 9.757);
+      tl.fromTo("#s03 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 5.139, ease: "sine.inOut" }, 9.677);
+      tl.from("#s03 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 9.876999999999999);
+      tl.from("#s03 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 10.027);
+      tl.from("#s04", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 14.516);
+      tl.fromTo("#s04 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 3.203, ease: "none" }, 14.516);
+      tl.from("#s04 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 14.616);
+      tl.from("#s04 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 14.596);
+      tl.fromTo("#s04 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 3.203, ease: "sine.inOut" }, 14.516);
+      tl.from("#s04 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 14.716);
+      tl.from("#s04 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 14.866);
+      tl.from("#s05", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 17.419);
+      tl.fromTo("#s05 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 5.623, ease: "none" }, 17.419);
+      tl.from("#s05 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 17.519000000000002);
+      tl.from("#s05 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 17.499);
+      tl.fromTo("#s05 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 5.623, ease: "sine.inOut" }, 17.419);
+      tl.from("#s05 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 17.619);
+      tl.from("#s05 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 17.769000000000002);
+      tl.from("#s06", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 22.742);
+      tl.fromTo("#s06 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 6.106, ease: "none" }, 22.742);
+      tl.from("#s06 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 22.842000000000002);
+      tl.from("#s06 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 22.822);
+      tl.fromTo("#s06 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 6.106, ease: "sine.inOut" }, 22.742);
+      tl.from("#s06 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 22.942);
+      tl.from("#s06 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 23.092000000000002);
+      tl.from("#s07", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 28.548);
+      tl.fromTo("#s07 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 5.401, ease: "none" }, 28.548);
+      tl.from("#s07 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 28.648);
+      tl.from("#s07 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 28.627999999999997);
+      tl.fromTo("#s07 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 5.401, ease: "sine.inOut" }, 28.548);
+      tl.from("#s07 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 28.747999999999998);
+      tl.from("#s07 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 28.898);
+      tl.from("#s08", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 33.649);
+      tl.from("#s08 .ch-line", { scaleX: 0, duration: 0.5, ease: "expo.out" }, 33.749);
+      tl.from("#s08 .ch-big", { y: 120, opacity: 0, duration: 0.5, ease: "power4.out" }, 33.769);
+      tl.from("#s08 .ch-small", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(1.8)" }, 33.899);
+      tl.fromTo("#s08 .ch-glow", { scale: 0.8 }, { scale: 1.2, duration: 1.2, ease: "sine.out" }, 33.649);
+      tl.from("#s09", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 34.549);
+      tl.fromTo("#s09 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.944, ease: "none" }, 34.549);
+      tl.from("#s09 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 34.649);
+      tl.from("#s09 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 34.629);
+      tl.fromTo("#s09 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.944, ease: "sine.inOut" }, 34.549);
+      tl.from("#s09 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 34.749);
+      tl.from("#s09 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 34.899);
+      tl.from("#s10", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 39.194);
+      tl.from("#s10 .ch-line", { scaleX: 0, duration: 0.5, ease: "expo.out" }, 39.294000000000004);
+      tl.from("#s10 .ch-big", { y: 120, opacity: 0, duration: 0.5, ease: "power4.out" }, 39.314);
+      tl.from("#s10 .ch-small", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(1.8)" }, 39.444);
+      tl.fromTo("#s10 .ch-glow", { scale: 0.8 }, { scale: 1.2, duration: 1.2, ease: "sine.out" }, 39.194);
+      tl.from("#s11", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 40.094);
+      tl.fromTo("#s11 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.723, ease: "none" }, 40.094);
+      tl.from("#s11 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 40.194);
+      tl.from("#s11 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 40.174);
+      tl.fromTo("#s11 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.723, ease: "sine.inOut" }, 40.094);
+      tl.from("#s11 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 40.294000000000004);
+      tl.from("#s11 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 40.444);
+      tl.from("#s12", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 44.516);
+      tl.fromTo("#s12 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.655, ease: "none" }, 44.516);
+      tl.from("#s12 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 44.616);
+      tl.from("#s12 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 44.596);
+      tl.fromTo("#s12 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.655, ease: "sine.inOut" }, 44.516);
+      tl.from("#s12 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 44.716);
+      tl.from("#s12 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 44.866);
+      tl.from("#s13", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 48.871);
+      tl.from("#s13 .ch-line", { scaleX: 0, duration: 0.5, ease: "expo.out" }, 48.971000000000004);
+      tl.from("#s13 .ch-big", { y: 120, opacity: 0, duration: 0.5, ease: "power4.out" }, 48.991);
+      tl.from("#s13 .ch-small", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(1.8)" }, 49.121);
+      tl.fromTo("#s13 .ch-glow", { scale: 0.8 }, { scale: 1.2, duration: 1.268, ease: "sine.out" }, 48.871);
+      tl.from("#s14", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 49.839);
+      tl.fromTo("#s14 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 3.687, ease: "none" }, 49.839);
+      tl.from("#s14 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 49.939);
+      tl.from("#s14 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 49.919);
+      tl.fromTo("#s14 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 3.687, ease: "sine.inOut" }, 49.839);
+      tl.from("#s14 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 50.039);
+      tl.from("#s14 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 50.189);
+      tl.from("#s15", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 53.226);
+      tl.fromTo("#s15 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 3.687, ease: "none" }, 53.226);
+      tl.from("#s15 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 53.326);
+      tl.from("#s15 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 53.306);
+      tl.fromTo("#s15 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 3.687, ease: "sine.inOut" }, 53.226);
+      tl.from("#s15 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 53.426);
+      tl.from("#s15 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 53.576);
+      tl.from("#s16", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 56.613);
+      tl.fromTo("#s16 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.171, ease: "none" }, 56.613);
+      tl.from("#s16 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 56.713);
+      tl.from("#s16 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 56.693);
+      tl.fromTo("#s16 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.171, ease: "sine.inOut" }, 56.613);
+      tl.from("#s16 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 56.813);
+      tl.from("#s16 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 56.963);
+      tl.from("#s17", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 60.484);
+      tl.fromTo("#s17 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 2.235, ease: "none" }, 60.484);
+      tl.from("#s17 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 60.584);
+      tl.from("#s17 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 60.564);
+      tl.fromTo("#s17 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 2.235, ease: "sine.inOut" }, 60.484);
+      tl.from("#s17 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 60.684000000000005);
+      tl.from("#s17 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 60.834);
+      tl.from("#s18", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 62.419);
+      tl.from("#s18 .ch-line", { scaleX: 0, duration: 0.5, ease: "expo.out" }, 62.519);
+      tl.from("#s18 .ch-big", { y: 120, opacity: 0, duration: 0.5, ease: "power4.out" }, 62.538999999999994);
+      tl.from("#s18 .ch-small", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(1.8)" }, 62.669);
+      tl.fromTo("#s18 .ch-glow", { scale: 0.8 }, { scale: 1.2, duration: 1.752, ease: "sine.out" }, 62.419);
+      tl.from("#s19", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 63.871);
+      tl.fromTo("#s19 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 3.203, ease: "none" }, 63.871);
+      tl.from("#s19 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 63.971000000000004);
+      tl.from("#s19 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 63.951);
+      tl.fromTo("#s19 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 3.203, ease: "sine.inOut" }, 63.871);
+      tl.from("#s19 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 64.071);
+      tl.from("#s19 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 64.221);
+      tl.from("#s20", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 66.774);
+      tl.fromTo("#s20 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.171, ease: "none" }, 66.774);
+      tl.from("#s20 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 66.874);
+      tl.from("#s20 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 66.854);
+      tl.fromTo("#s20 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.171, ease: "sine.inOut" }, 66.774);
+      tl.from("#s20 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 66.974);
+      tl.from("#s20 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 67.124);
+      tl.from("#s21", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 70.645);
+      tl.fromTo("#s21 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 5.139, ease: "none" }, 70.645);
+      tl.from("#s21 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 70.74499999999999);
+      tl.from("#s21 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 70.725);
+      tl.fromTo("#s21 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 5.139, ease: "sine.inOut" }, 70.645);
+      tl.from("#s21 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 70.845);
+      tl.from("#s21 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 70.99499999999999);
+      tl.from("#s22", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 75.484);
+      tl.fromTo("#s22 .an-bg img", { scale: 1.5 }, { scale: 1.25, duration: 4.013, ease: "none" }, 75.484);
+      tl.from("#s22 .an-tag", { y: -40, opacity: 0, duration: 0.4, ease: "power3.out" }, 75.58399999999999);
+      tl.from("#s22 .an-card", { y: 140, rotationX: 35, scale: 0.85, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, 75.564);
+      tl.fromTo("#s22 .an-card img", { scale: 1.0 }, { scale: 1.08, duration: 4.013, ease: "sine.inOut" }, 75.484);
+      tl.from("#s22 .an-title .tw", { y: 60, opacity: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 75.684);
+      tl.from("#s22 .an-info", { scale: 0.5, opacity: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }, 75.83399999999999);
+      tl.from("#s23", { xPercent: 100, duration: 0.3, ease: "power4.out" }, 79.197);
+      tl.from("#s23 .cta-q", { y: -80, opacity: 0, duration: 0.6, ease: "expo.out" }, 79.34700000000001);
+      tl.from("#s23 .cell", { scale: 0.4, opacity: 0, duration: 0.45, ease: "back.out(1.7)", stagger: { each: 0.05, from: "center" } }, 79.397);
+      tl.from("#s23 .cta-c", { y: 60, opacity: 0, duration: 0.5, ease: "power3.out" }, 80.397);
+      tl.to("#s23 .arrow", { y: 18, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 13 }, 80.797);
+      tl.from("#s23 .cta-credit", { opacity: 0, duration: 0.6, ease: "sine.out" }, 80.997);
+      tl.from("#s24", { yPercent: -100, duration: 0.3, ease: "power4.out" }, 87.07);
+      tl.from("#s24 .lg-logo", { y: -1300, rotation: 10, duration: 0.75, ease: "bounce.out" }, 87.07);
+      tl.fromTo("#s24 .lg-glow", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "expo.out", immediateRender: false }, 87.82);
+      tl.to("#s24 .lg-glow", { scale: 1.12, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 4 }, 88.32);
+      tl.from("#s24 .ray-in", { scaleX: 0, opacity: 0, duration: 0.45, ease: "expo.out", stagger: 0.012 }, 87.82);
+      tl.to("#s24 .lg-rays", { rotation: 25, duration: 3.6, ease: "none" }, 87.07);
+      tl.fromTo("#s24 .lg-ring", { scale: 0.2, opacity: 1 }, { scale: 3, opacity: 0, duration: 0.7, ease: "power2.out", immediateRender: false }, 87.82);
+      tl.fromTo("#s24 .lg-logo", { x: 0 }, { x: 14, duration: 0.04, ease: "none", yoyo: true, repeat: 5 }, 87.82);
+      tl.fromTo("#flash2", { opacity: 0.8 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, 87.82);
+      tl.to("#s24 .lg-logo img", { scale: 1.04, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 4 }, 88.11999999999999);
+      tl.from("#s24 .lg-line, #s24 .lg-site", { y: 60, opacity: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.15 }, 88.16999999999999);
+      tl.to("#s24 .lg-content, #s24 .lg-rays, #s24 .lg-glow", { opacity: 0, duration: 0.6, ease: "power2.in" }, 90.07);
+      tl.fromTo("#s03 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 10.161);
+      tl.fromTo("#s03 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 11.129);
+      tl.fromTo("#s03 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 12.097);
+      tl.fromTo("#s03 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 13.065);
+      tl.fromTo("#s03 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 14.032);
+      tl.fromTo("#s04 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 15.0);
+      tl.fromTo("#s04 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 15.968);
+      tl.fromTo("#s04 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 16.935);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 17.903);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 18.871);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 19.839);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 20.806);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 21.774);
+      tl.fromTo("#s05 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 22.742);
+      tl.fromTo("#s06 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 23.71);
+      tl.fromTo("#s06 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 24.677);
+      tl.fromTo("#s06 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 25.645);
+      tl.fromTo("#s06 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 26.613);
+      tl.fromTo("#s06 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 27.581);
+      tl.fromTo("#s07 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 29.032);
+      tl.fromTo("#s07 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 30.0);
+      tl.fromTo("#s07 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 30.968);
+      tl.fromTo("#s07 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 31.935);
+      tl.fromTo("#s07 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 32.903);
+      tl.fromTo("#s09 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 35.323);
+      tl.fromTo("#s09 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 36.29);
+      tl.fromTo("#s09 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 37.258);
+      tl.fromTo("#s09 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 38.226);
+      tl.fromTo("#s11 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 40.645);
+      tl.fromTo("#s11 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 41.613);
+      tl.fromTo("#s11 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 42.581);
+      tl.fromTo("#s11 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 43.548);
+      tl.fromTo("#s11 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 44.516);
+      tl.fromTo("#s12 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 45.0);
+      tl.fromTo("#s12 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 45.968);
+      tl.fromTo("#s12 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 46.935);
+      tl.fromTo("#s12 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 47.903);
+      tl.fromTo("#s12 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 48.871);
+      tl.fromTo("#s14 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 50.806);
+      tl.fromTo("#s14 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 51.774);
+      tl.fromTo("#s14 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 52.742);
+      tl.fromTo("#s15 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 54.194);
+      tl.fromTo("#s15 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 55.161);
+      tl.fromTo("#s15 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 56.129);
+      tl.fromTo("#s16 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 57.581);
+      tl.fromTo("#s16 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 58.548);
+      tl.fromTo("#s16 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 59.516);
+      tl.fromTo("#s16 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 60.484);
+      tl.fromTo("#s17 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 61.452);
+      tl.fromTo("#s19 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 64.839);
+      tl.fromTo("#s19 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 65.806);
+      tl.fromTo("#s20 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 67.258);
+      tl.fromTo("#s20 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 68.226);
+      tl.fromTo("#s20 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 69.194);
+      tl.fromTo("#s20 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 70.161);
+      tl.fromTo("#s21 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 71.129);
+      tl.fromTo("#s21 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 72.097);
+      tl.fromTo("#s21 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 73.065);
+      tl.fromTo("#s21 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 74.032);
+      tl.fromTo("#s21 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 75.0);
+      tl.fromTo("#s22 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 76.452);
+      tl.fromTo("#s22 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 77.419);
+      tl.fromTo("#s22 .an-card", { scale: 1.035 }, { scale: 1, duration: 0.22, ease: "power2.out", immediateRender: false }, 78.387);
+      tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: 90.67, ease: "none" }, 0);
+      [2.3,8.226,9.677,14.516,17.419,22.742,28.548,33.649,34.549,39.194,40.094,44.516,48.871,49.839,53.226,56.613,60.484,62.419,63.871,66.774,70.645,75.484,79.197,87.07].forEach(function (ft) { tl.fromTo("#flash", { opacity: 0.55 }, { opacity: 0, duration: 0.25, ease: "power2.out", immediateRender: false }, ft); });
+      tl.from("#c000 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 2.85);
+      tl.from("#c001 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 3.572);
+      tl.from("#c002 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 4.688);
+      tl.from("#c003 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 5.542);
+      tl.from("#c004 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 6.855);
+      tl.from("#c005 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 8.386);
+      tl.from("#c006 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 9.763);
+      tl.from("#c007 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 10.781);
+      tl.from("#c008 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 11.29);
+      tl.from("#c009 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 12.156);
+      tl.from("#c010 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 12.97);
+      tl.from("#c011 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 13.886);
+      tl.from("#c012 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 14.694);
+      tl.from("#c013 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 15.498);
+      tl.from("#c014 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 16.444);
+      tl.from("#c015 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 17.059);
+      tl.from("#c016 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 17.835);
+      tl.from("#c017 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 18.979);
+      tl.from("#c018 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 19.142);
+      tl.from("#c019 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 20.068);
+      tl.from("#c020 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 20.831);
+      tl.from("#c021 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 21.702);
+      tl.from("#c022 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 23.032);
+      tl.from("#c023 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 24.334);
+      tl.from("#c024 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 24.512);
+      tl.from("#c025 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 25.696);
+      tl.from("#c026 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 26.524);
+      tl.from("#c027 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 27.471);
+      tl.from("#c028 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 28.532);
+      tl.from("#c029 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 29.655);
+      tl.from("#c030 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 30.279);
+      tl.from("#c031 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 31.902);
+      tl.from("#c032 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 32.713);
+      tl.from("#c033 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 33.749);
+      tl.from("#c034 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 34.241);
+      tl.from("#c035 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 35.28);
+      tl.from("#c036 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 36.1);
+      tl.from("#c037 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 36.756);
+      tl.from("#c038 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 37.521);
+      tl.from("#c039 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 38.395);
+      tl.from("#c040 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 39.401);
+      tl.from("#c041 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 40.128);
+      tl.from("#c042 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 41.217);
+      tl.from("#c043 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 42.427);
+      tl.from("#c044 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 43.274);
+      tl.from("#c045 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 44.471);
+      tl.from("#c046 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 45.346);
+      tl.from("#c047 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 46.329);
+      tl.from("#c048 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 47.586);
+      tl.from("#c049 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 48.46);
+      tl.from("#c050 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 49.192);
+      tl.from("#c051 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 49.863);
+      tl.from("#c052 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 50.87);
+      tl.from("#c053 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 51.374);
+      tl.from("#c054 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 52.269);
+      tl.from("#c055 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 53.29);
+      tl.from("#c056 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 54.195);
+      tl.from("#c057 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 54.648);
+      tl.from("#c058 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 55.271);
+      tl.from("#c059 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 56.233);
+      tl.from("#c060 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 56.979);
+      tl.from("#c061 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 57.868);
+      tl.from("#c062 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 58.556);
+      tl.from("#c063 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 59.186);
+      tl.from("#c064 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 59.865);
+      tl.from("#c065 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 60.834);
+      tl.from("#c066 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 61.222);
+      tl.from("#c067 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 62.638);
+      tl.from("#c068 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 63.436);
+      tl.from("#c069 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 64.02);
+      tl.from("#c070 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 65.03);
+      tl.from("#c071 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 65.189);
+      tl.from("#c072 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 66.04);
+      tl.from("#c073 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 67.081);
+      tl.from("#c074 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 67.924);
+      tl.from("#c075 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 68.993);
+      tl.from("#c076 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 70.005);
+      tl.from("#c077 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 70.692);
+      tl.from("#c078 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 72.078);
+      tl.from("#c079 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 72.655);
+      tl.from("#c080 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 73.925);
+      tl.from("#c081 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 75.718);
+      tl.from("#c082 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 76.281);
+      tl.from("#c083 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 77.152);
+      tl.from("#c084 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 77.306);
+      tl.from("#c085 .cap-in", { scale: 0.75, y: 20, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 78.331);
+      tl.to({}, { duration: 90.67 }, 0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

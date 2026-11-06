@@ -1,0 +1,36 @@
+<header class="top">
+  <h1>Tes clés</h1>
+  <p class="lede">Enregistrées en privé dans ce dossier.</p>
+</header>
+<main class="plain">
+<form id="f"></form>
+</main>
+<script>
+const fields = __FIELDS__;
+const f = document.getElementById("f");
+const esc = (x) => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const host = (u) => String(u).replace(/^https?:\/\//, "").replace(/\/$/, "");
+for (const k of fields) {
+  const steps = (k.steps ?? []).map((s, i) => `<li class="ask${i === 0 ? " first" : ""}">
+      <div class="n">${i + 1}</div>
+      <div><h3>${esc(s.do)}</h3>${s.detail?`<p>${esc(s.detail)}</p>`:''}<a class="out" href="${esc(s.link)}" target="_blank" rel="noreferrer noopener"><span>${esc(host(s.link))}</span></a></div>
+    </li>`).join("");
+  f.insertAdjacentHTML("beforeend", `
+    <h2>${esc(k.title ?? k.name)}</h2>
+    <p class="dek">${esc(k.what ?? "Un format que tu as installé a besoin de cette clé.")}</p>
+    ${k.found ? `<p class="note">Tu en as déjà une dans <code>${esc(k.found)}</code>. Colle celle-là.</p>` : ""}
+    ${steps ? `<ol class="asks steps">${steps}</ol>` : ""}
+    <div class="field">
+      <label for="i-${esc(k.name)}">${esc(k.name)}${k.present ? ' <span class="chip ok">enregistrée</span>' : ""}</label>
+      <input id="i-${esc(k.name)}" name="${esc(k.name)}" type="password" autocomplete="off" spellcheck="false" placeholder="${k.present ? "laisse vide pour la garder" : "colle-la ici"}">
+    </div>`);
+}
+f.insertAdjacentHTML("beforeend", `<button class="go" type="submit">Enregistrer et fermer</button>`);
+f.onsubmit = async (e) => {
+  e.preventDefault();
+  const values = Object.fromEntries(new FormData(f));
+  const r = await fetch("/", { method: "POST", headers:{'Content-Type':'application/json'}, body: JSON.stringify(values) });
+  if (r.ok) f.outerHTML = '<div class="saved">Enregistré. Ferme cet onglet et retourne à l’agent.</div>';
+  else {let error=document.getElementById('key-error');if(!error){error=document.createElement('p');error.id='key-error';error.setAttribute('role','alert');f.append(error);}error.textContent='La clé n’a pas pu être enregistrée. Vérifie-la et réessaie.';}
+};
+</script>

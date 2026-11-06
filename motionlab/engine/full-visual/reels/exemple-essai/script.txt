@@ -1,0 +1,17 @@
+Ton téléphone chauffe quand tu le charges, alors qu'il ne fait rien. Alors d'où vient cette chaleur ?
+
+En fait, ce n'est pas l'écran ni tes applis, c'est la batterie elle-même.
+
+Imagine, tu branches ton téléphone le soir, sous ton oreiller, dans sa coque.
+
+Dans la batterie, les ions lithium traversent l'électrolyte du côté positif vers le côté négatif, et à chaque passage, la résistance interne transforme une partie de l'énergie en chaleur.
+
+Plus tu charges vite, plus le courant est fort, et plus ça chauffe.
+
+Mais la chaleur abîme la batterie, alors ton iPhone se protège, et s'il a trop chaud, il bloque la charge à 80 %.
+
+C'est aussi pour ça qu'Apple conseille d'enlever la coque si ton téléphone chauffe en charge.
+
+Donc ton téléphone ne fait pas rien, il déplace des ions toute la nuit.
+
+Envoie ça à quelqu'un qui charge son téléphone sous l'oreiller.

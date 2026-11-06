@@ -1,0 +1,69 @@
+{
+  "id": "04-neon",
+  "name": "Néon",
+  "tendency": "sombre",
+  "theme": {
+    "font": {
+      "caption": "Oswald, sans-serif"
+    },
+    "caption": {
+      "size": 68,
+      "lineHeight": 76,
+      "case": "upper",
+      "spokenWeight": 700,
+      "wrap": 880
+    },
+    "marker": {
+      "style": "color",
+      "color": "#FF9F1C"
+    },
+    "grounds": {
+      "dark": {
+        "bg": "#0B1519",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFFFFF",
+        "spoken": "#8FA6AC",
+        "card": "#122228",
+        "hairline": "#1E3A42",
+        "dim": "#8FA6AC"
+      },
+      "light": {
+        "bg": "#0B1519",
+        "grid": "rgba(255,255,255,0)",
+        "ink": "#FFFFFF",
+        "spoken": "#8FA6AC",
+        "card": "#122228",
+        "hairline": "#1E3A42",
+        "dim": "#8FA6AC"
+      }
+    },
+    "atmosphere": {
+      "gradient": {
+        "dark": [
+          "#12232A",
+          "#060C0E"
+        ],
+        "light": [
+          "#12232A",
+          "#060C0E"
+        ]
+      },
+      "glow": {
+        "color": "rgba(43,217,201,0.10)",
+        "x": 540,
+        "y": 1500,
+        "r": 760
+      },
+      "particles": {
+        "color": "#2BD9C9",
+        "count": 44,
+        "link": 230,
+        "speed": 0.6
+      },
+      "vignette": 0.45
+    },
+    "roles": {
+      "brand": "#2BD9C9"
+    }
+  }
+}

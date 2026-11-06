@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "__FONT__";
+          src: url("assets/fonts/__FONT_FILE__");
+          font-weight: 300 700;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+        #root .cap {
+          position: absolute;
+          left: 60px;
+          right: 60px;
+          top: var(--cap-top, 1220px);
+          text-align: center;
+          font-family: "__FONT__", sans-serif;
+          font-weight: 700;
+          font-size: __SIZE__px;
+          line-height: 1.1;
+          color: __TEXT__;
+          -webkit-text-stroke: __STROKE__px __INK__;
+          paint-order: stroke fill;
+          text-shadow: __SHADOW__;
+          opacity: 0;
+          overflow: visible;
+        }
+        #root .w {
+          display: inline-block;
+          margin: 0 8px;
+          padding: 0 10px;
+          border-radius: 12px;
+        }
+      </style>
+      <div id="root" data-composition-id="captions" data-width="__W__" data-height="__H__">
+__MARKUP__
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // Word-by-word caption groups: [start, end] of each word in clip seconds.
+        const groups = __DATA__;
+        const mode = "__MODE__";
+        // In a box the outline would swallow the dark text, so the active word drops it.
+        const on = mode === "box" ? { backgroundColor: "__HIGHLIGHT__", color: "__INK__", webkitTextStrokeWidth: "0px" } : { color: "__HIGHLIGHT__" };
+        const off = mode === "box" ? { backgroundColor: "rgba(0,0,0,0)", color: "__TEXT__", webkitTextStrokeWidth: "__STROKE__px" } : { color: "__TEXT__" };
+        groups.forEach((g, gi) => {
+          const el = "#" + g.id;
+          const start = g.w[0][0] - 0.06;
+          const next = groups[gi + 1] ? groups[gi + 1].w[0][0] - 0.08 : Infinity;
+          const end = Math.min(g.w[g.w.length - 1][1] + 0.25, next);
+          tl.fromTo(el, { opacity: 0, scale: 0.9, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.14, ease: "power2.out" }, start);
+          if (mode !== "none") {
+            g.w.forEach(([a, b], wi) => {
+              const w = `${el}w${wi}`;
+              tl.to(w, { ...on, scale: __POP__, duration: 0.07, ease: "power2.out" }, a);
+              tl.to(w, { ...off, scale: 1, duration: 0.1, ease: "power2.out" }, Math.max(a + 0.08, Math.min(b, end - 0.12)));
+            });
+          }
+          tl.to(el, { opacity: 0, duration: 0.1, ease: "power2.in" }, end - 0.1);
+          tl.set(el, { opacity: 0, visibility: "hidden" }, end);
+        });
+        window.__timelines["captions"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

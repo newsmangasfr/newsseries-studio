@@ -1,0 +1,23 @@
+[curious] Every key on your iPhone keyboard is smaller than your thumb and you still hit the right letter almost every time.
+
+[curious] So how is that possible?
+
+[emphasized] Because the keys you see are not the keys you touch, and the ones you touch change size while you type.
+
+[matter-of-fact] Under every letter there's an invisible zone, and that zone is what actually catches your tap.
+
+[quickly] Imagine you're texting a friend and you've just typed T, I, M. Your iPhone already has a guess about what comes next, because "time" is a word and "tim W" is not.
+
+[impressed] So before your thumb even comes down, the invisible zone around the E gets bigger, and the zones around it get squeezed.
+
+[matter-of-fact] On the screen, nothing moves. Every key looks exactly the same size. But if your thumb lands a little off, halfway between the E and the W, the iPhone gives it to the E.
+
+[quickly] Then you type the next letter and every zone changes again, for every single letter you type.
+
+[matter-of-fact] Apple built this into the very first iPhone, because a comfortable button needed forty-four pixels and the whole screen was only three hundred and twenty pixels wide. Ken Kocienda, the engineer who made that keyboard, tells the story in his book, and Apple later patented it.
+
+[curious] And it comes with a second trick. Your thumb hides the key you're pressing, which is why the letter pops up above your finger, so you can see what you actually hit.
+
+[emphasized] So you're not that accurate with your thumbs. Your keyboard is quietly moving the target to where your thumb was about to land.
+
+[friendly] Follow me, and send this to the friend who blames autocorrect for everything.

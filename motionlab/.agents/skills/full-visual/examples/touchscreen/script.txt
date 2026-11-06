@@ -1,0 +1,24 @@
+Your phone screen reacts to the lightest brush of your finger and ignores a pen pressed as hard as you can.
+
+So what is it actually feeling?
+
+It isn't really feeling pressure, it's measuring the electricity in your body.
+
+Imagine it's winter and you're trying to answer a call with your gloves on.
+
+Under the glass of your phone there's a grid of wires you can't see, rows going one way and columns going the other. Everywhere a row crosses a column, the phone holds a tiny electric charge, and it checks every one of those crossings over and over.
+
+Your body is mostly salty water, so it conducts electricity. When your bare fingertip gets close to the glass, it pulls a little of that charge away from the crossings right under it.
+
+The phone sees a small dip at those exact crossings and says, that's a touch. And because it measures every crossing separately, it can follow two fingers at once, which is how you pinch to zoom.
+
+But your glove doesn't conduct anything. So your finger is right there, pressing on the glass, and the charge never moves. For the phone, nobody touched it.
+
+That's also why your screen goes crazy in the rain. Water conducts too, so every drop looks like a finger.
+
+And it's why touchscreen gloves work. They have a thread in the fingertips that conducts, and it carries your body's electricity to the glass.
+
+So your screen never felt your finger. It felt a tiny bit of charge go missing, and your finger was just the thing that took it.
+
+Follow me, and send this to someone whose phone never works with wet hands.
+

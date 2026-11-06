@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a0a; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter", sans-serif; color: #f2efe6; }
+      #ground { position: absolute; inset: 0; background: #0a0a0a; }
+      .vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .ov { position: absolute; inset: 0; overflow: hidden; }
+      img { display: block; }
+      .rough { filter: url(#rough); }
+
+      /* typo « grunge » : lettres capitales serrées, contour noir, légèrement de travers */
+      .big { font-weight: 900; line-height: 0.9; letter-spacing: -4px; text-transform: uppercase; color: #f2efe6; -webkit-text-stroke: 6px #0a0a0a; paint-order: stroke fill; text-shadow: 8px 8px 0 #0a0a0a; white-space: nowrap; }
+      .big .l { display: inline-block; }
+      .big .l:nth-child(odd) { transform: translateY(6px) rotate(-2deg); }
+      .big .l:nth-child(3n) { transform: translateY(-5px) rotate(2deg); }
+      .tape { display: inline-block; transform: rotate(-2deg); transform-origin: 0 50%; }
+      .tape span { display: inline-block; font-weight: 900; font-size: 50px; letter-spacing: 2px; padding: 8px 26px; box-shadow: 6px 6px 0 #0a0a0a; }
+      .tape.white span { background: #f2efe6; color: #0a0a0a; }
+      .tape.red span { background: #d7182a; color: #f2efe6; }
+      .tape.corner { position: absolute; left: 40px; top: 120px; }
+
+      /* accroche */
+      .splat-bg { position: absolute; left: 50%; top: 820px; width: 1400px; height: 1400px; margin: -700px 0 0 -700px; mix-blend-mode: multiply; }
+      .splat-bg img { width: 1400px; height: 1400px; opacity: 0; }
+      .hk { position: absolute; left: 0; right: 0; top: 330px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .hk-1 { font-size: 165px; }
+      .hk-2 { font-size: 330px; color: #d7182a; }
+      .hk-t { margin-top: 24px; }
+      .hk-t span { font-size: 66px; }
+      .hk-jp { margin-top: 20px; font-family: "IPAGothic", sans-serif; font-size: 80px; letter-spacing: 20px; color: #f2efe6; text-shadow: 0 0 30px #d7182a; }
+
+      .fs { position: absolute; left: 0; right: 0; top: 320px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+      .fs-1, .fs-2 { font-size: 230px; }
+      .fs-y { font-weight: 900; font-size: 260px; line-height: 0.9; color: #d7182a; -webkit-text-stroke: 6px #0a0a0a; paint-order: stroke fill; text-shadow: 10px 10px 0 #0a0a0a; }
+      .spot { position: absolute; left: 50%; top: -200px; width: 1400px; height: 2000px; margin-left: -700px; background: radial-gradient(ellipse at 50% 70%, #d7182a66 0%, #d7182a00 55%); mix-blend-mode: screen; }
+      .stg { position: absolute; left: 0; right: 0; top: 420px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .stg-1 { font-size: 170px; color: #d7182a; }
+      .stg-2 { font-size: 250px; }
+
+      .stamp { position: absolute; left: 0; right: 0; top: 1120px; margin: 0 auto; width: max-content; font-weight: 900; font-size: 92px; line-height: 1.05; text-align: center; color: #d7182a; border: 12px solid #d7182a; padding: 14px 34px; transform: rotate(-8deg); background: #f2efe6dd; }
+
+      .rz { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .rz-1 { font-size: 260px; color: #d7182a; }
+      .rz-b { position: absolute; left: 0; right: 0; top: 1300px; display: flex; justify-content: center; }
+
+      .cross { position: absolute; left: 540px; top: 1180px; width: 0; height: 0; }
+      .ch { position: absolute; background: #d7182a; }
+      .ch.h { left: -330px; top: -5px; width: 660px; height: 10px; }
+      .ch.v { left: -5px; top: -330px; width: 10px; height: 660px; }
+      .ring { position: absolute; left: -230px; top: -230px; width: 460px; height: 460px; border-radius: 50%; border: 12px dashed #d7182a; }
+      .ring.r2 { left: -140px; top: -140px; width: 280px; height: 280px; border: 8px solid #f2efe6; }
+      .heart { position: absolute; left: 0; right: 0; top: 1100px; text-align: center; font-size: 150px; color: #d7182a; text-shadow: 0 0 40px #d7182a; line-height: 1; }
+      .cr-t { position: absolute; left: 0; right: 0; top: 200px; display: flex; justify-content: center; }
+      .cr-t .tape span { font-size: 54px; }
+
+      .pin { position: absolute; display: flex; align-items: center; gap: 16px; }
+      .dot { width: 40px; height: 40px; border-radius: 50%; background: #d7182a; box-shadow: 0 0 0 8px #d7182a55, 0 0 30px #d7182a; }
+      .tu-t { position: absolute; left: 0; right: 0; top: 220px; display: flex; justify-content: center; }
+      .tu-1 { font-size: 220px; color: #d7182a; }
+
+      .nc { position: absolute; left: 0; right: 0; top: 260px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+      .nc-cross { position: relative; width: 420px; height: 420px; }
+      .nc-cross .ch.h { left: 0; top: 205px; width: 420px; }
+      .nc-cross .ch.v { left: 205px; top: 0; height: 420px; }
+      .nc-cross .ring { left: 50px; top: 50px; width: 320px; height: 320px; }
+      .nc-tag { font-weight: 900; font-size: 44px; letter-spacing: 8px; color: #d7182a; background: #0a0a0acc; padding: 6px 20px; }
+      .nc-name { font-size: 170px; }
+      .nc-name.long { font-size: 128px; }
+
+      .mp { position: absolute; left: 0; right: 0; top: 640px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+      .mp-1 { font-size: 220px; color: #d7182a; }
+
+      .cb { position: absolute; left: 0; right: 0; display: flex; justify-content: center; opacity: 0; }
+      .cb0 { top: 280px; } .cb1 { top: 620px; } .cb2 { top: 960px; }
+      .cb-w { font-size: 140px; }
+      .cb-w.red { color: #d7182a; }
+
+      .ct { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 50px; padding-bottom: 260px; }
+      .ct-q { font-size: 150px; color: #f2efe6; }
+      .ct-btns { display: flex; gap: 40px; }
+      .btn { font-weight: 900; font-size: 84px; padding: 16px 46px; box-shadow: 8px 8px 0 #0a0a0a; }
+      .btn.yes { background: #d7182a; color: #f2efe6; transform: rotate(-3deg); }
+      .btn.no { background: #f2efe6; color: #0a0a0a; transform: rotate(2deg); }
+      .ct-c { font-weight: 900; font-size: 62px; text-shadow: 4px 4px 0 #0a0a0a; }
+      .ct-c .arrow { display: inline-block; color: #d7182a; }
+
+      /* logo NewsSeries façon tronçonneuse */
+      .lg-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 42%, #2a0508 0%, #0a0a0a 65%); }
+      .lg-splat { position: absolute; left: 50%; top: 800px; width: 1400px; height: 1400px; margin: -700px 0 0 -700px; }
+      .lg-splat img { width: 1400px; height: 1400px; opacity: 0; }
+      .saw { position: absolute; left: 540px; top: 800px; width: 0; height: 0; }
+      .saw-ring { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .tooth { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .tooth::before { content: ""; position: absolute; left: -26px; top: -520px; width: 0; height: 0; border-left: 26px solid transparent; border-right: 26px solid transparent; border-bottom: 64px solid #c9c9c9; filter: drop-shadow(0 0 6px #0008); }
+      .link { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .link::before { content: ""; position: absolute; left: -24px; top: -462px; width: 48px; height: 26px; border-radius: 8px; background: #6e6e6e; border: 4px solid #2b2b2b; }
+      .lg-slash { position: absolute; left: -100px; width: 1300px; height: 26px; background: #d7182a; transform-origin: 0 50%; box-shadow: 0 0 30px #d7182a; }
+      .lg-slash.a { top: 560px; transform: rotate(-18deg); }
+      .lg-slash.b { top: 1060px; transform: rotate(-18deg); }
+      .lg-slash.a, .lg-slash.b { scale: 1; }
+      .lg-logo { position: absolute; left: 540px; top: 800px; width: 820px; height: 820px; margin: -410px 0 0 -410px; }
+      .lg-logo img { width: 820px; height: 820px; }
+      .lg-lines { position: absolute; left: 0; right: 0; top: 1380px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+      .lg-lines .tape span { font-size: 58px; }
+
+      /* sous-titres */
+      .cap { position: absolute; left: 0; right: 0; top: 1500px; height: 240px; display: flex; justify-content: center; align-items: center; z-index: 100; padding: 0 60px; }
+      .cap-in { font-weight: 900; font-size: 80px; line-height: 1.05; text-align: center; text-transform: uppercase; color: #f2efe6; -webkit-text-stroke: 12px #0a0a0a; paint-order: stroke fill; text-shadow: 6px 6px 0 #0a0a0a; }
+      .cap-in .hl { color: #ff2a3d; }
+
+      #grainwrap { position: absolute; inset: -60px; z-index: 85; pointer-events: none; mix-blend-mode: overlay; opacity: 0.22; overflow: hidden; }
+      #grain { width: 1200px; height: 2040px; }
+      #vignette { position: absolute; inset: 0; z-index: 86; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, #0000 55%, #000a 100%); }
+      #slashwrap { position: absolute; inset: 0; z-index: 89; pointer-events: none; overflow: hidden; }
+      #slash { position: absolute; left: -300px; top: 760px; width: 1680px; height: 180px; background: linear-gradient(90deg, #d7182a00, #d7182a 30%, #ff2a3d 50%, #d7182a 70%, #d7182a00); transform: rotate(-24deg); opacity: 0; }
+      #flash { position: absolute; inset: 0; background: #ffffff; opacity: 0; z-index: 90; pointer-events: none; }
+      #flash2 { position: absolute; inset: 0; background: #ffffff; opacity: 0; z-index: 91; pointer-events: none; }
+      #progress { position: absolute; left: 0; top: 0; width: 1080px; height: 14px; background: #d7182a; transform-origin: 0 50%; z-index: 120; }
+      @font-face { font-family: "IPAGothic"; src: local("IPAGothic"); }
+
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" /><feDisplacementMap in="SourceGraphic" scale="9" /></filter></svg>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="71.497" data-width="1080" data-height="1920">
+      <div id="ground" class="clip" data-start="0" data-duration="71.497" data-track-index="0"></div>
+<div id="s00" class="clip ov" data-start="0.0" data-duration="2.8" data-track-index="3" style="z-index:13">
+  <div class="lg-bg"></div>
+  <div class="lg-splat"><img src="assets/brand/splat.png" alt=""></div>
+  <div class="saw"><div class="saw-ring"><div class="tooth" style="transform: rotate(0deg)"></div><div class="tooth" style="transform: rotate(9deg)"></div><div class="tooth" style="transform: rotate(18deg)"></div><div class="tooth" style="transform: rotate(27deg)"></div><div class="tooth" style="transform: rotate(36deg)"></div><div class="tooth" style="transform: rotate(45deg)"></div><div class="tooth" style="transform: rotate(54deg)"></div><div class="tooth" style="transform: rotate(63deg)"></div><div class="tooth" style="transform: rotate(72deg)"></div><div class="tooth" style="transform: rotate(81deg)"></div><div class="tooth" style="transform: rotate(90deg)"></div><div class="tooth" style="transform: rotate(99deg)"></div><div class="tooth" style="transform: rotate(108deg)"></div><div class="tooth" style="transform: rotate(117deg)"></div><div class="tooth" style="transform: rotate(126deg)"></div><div class="tooth" style="transform: rotate(135deg)"></div><div class="tooth" style="transform: rotate(144deg)"></div><div class="tooth" style="transform: rotate(153deg)"></div><div class="tooth" style="transform: rotate(162deg)"></div><div class="tooth" style="transform: rotate(171deg)"></div><div class="tooth" style="transform: rotate(180deg)"></div><div class="tooth" style="transform: rotate(189deg)"></div><div class="tooth" style="transform: rotate(198deg)"></div><div class="tooth" style="transform: rotate(207deg)"></div><div class="tooth" style="transform: rotate(216deg)"></div><div class="tooth" style="transform: rotate(225deg)"></div><div class="tooth" style="transform: rotate(234deg)"></div><div class="tooth" style="transform: rotate(243deg)"></div><div class="tooth" style="transform: rotate(252deg)"></div><div class="tooth" style="transform: rotate(261deg)"></div><div class="tooth" style="transform: rotate(270deg)"></div><div class="tooth" style="transform: rotate(279deg)"></div><div class="tooth" style="transform: rotate(288deg)"></div><div class="tooth" style="transform: rotate(297deg)"></div><div class="tooth" style="transform: rotate(306deg)"></div><div class="tooth" style="transform: rotate(315deg)"></div><div class="tooth" style="transform: rotate(324deg)"></div><div class="tooth" style="transform: rotate(333deg)"></div><div class="tooth" style="transform: rotate(342deg)"></div><div class="tooth" style="transform: rotate(351deg)"></div><div class="link" style="transform: rotate(4.5deg)"></div><div class="link" style="transform: rotate(13.5deg)"></div><div class="link" style="transform: rotate(22.5deg)"></div><div class="link" style="transform: rotate(31.5deg)"></div><div class="link" style="transform: rotate(40.5deg)"></div><div class="link" style="transform: rotate(49.5deg)"></div><div class="link" style="transform: rotate(58.5deg)"></div><div class="link" style="transform: rotate(67.5deg)"></div><div class="link" style="transform: rotate(76.5deg)"></div><div class="link" style="transform: rotate(85.5deg)"></div><div class="link" style="transform: rotate(94.5deg)"></div><div class="link" style="transform: rotate(103.5deg)"></div><div class="link" style="transform: rotate(112.5deg)"></div><div class="link" style="transform: rotate(121.5deg)"></div><div class="link" style="transform: rotate(130.5deg)"></div><div class="link" style="transform: rotate(139.5deg)"></div><div class="link" style="transform: rotate(148.5deg)"></div><div class="link" style="transform: rotate(157.5deg)"></div><div class="link" style="transform: rotate(166.5deg)"></div><div class="link" style="transform: rotate(175.5deg)"></div><div class="link" style="transform: rotate(184.5deg)"></div><div class="link" style="transform: rotate(193.5deg)"></div><div class="link" style="transform: rotate(202.5deg)"></div><div class="link" style="transform: rotate(211.5deg)"></div><div class="link" style="transform: rotate(220.5deg)"></div><div class="link" style="transform: rotate(229.5deg)"></div><div class="link" style="transform: rotate(238.5deg)"></div><div class="link" style="transform: rotate(247.5deg)"></div><div class="link" style="transform: rotate(256.5deg)"></div><div class="link" style="transform: rotate(265.5deg)"></div><div class="link" style="transform: rotate(274.5deg)"></div><div class="link" style="transform: rotate(283.5deg)"></div><div class="link" style="transform: rotate(292.5deg)"></div><div class="link" style="transform: rotate(301.5deg)"></div><div class="link" style="transform: rotate(310.5deg)"></div><div class="link" style="transform: rotate(319.5deg)"></div><div class="link" style="transform: rotate(328.5deg)"></div><div class="link" style="transform: rotate(337.5deg)"></div><div class="link" style="transform: rotate(346.5deg)"></div><div class="link" style="transform: rotate(355.5deg)"></div></div></div>
+  <div class="lg-slash a"></div><div class="lg-slash b"></div>
+  <div class="lg-logo"><img src="assets/brand/logo.png" alt="NewsSeries"></div>
+  <div class="lg-lines"><div class="tape white lg-t" style=""><span>L&#x27;ACTU ANIME &amp; MANGA</span></div></div>
+</div>
+<video id="v01" class="clip vid" data-start="2.8" data-duration="5.426" data-track-index="2" src="assets/clips/hook.mp4" muted playsinline style="z-index:14"></video>
+<div id="s01" class="clip ov" data-start="2.8" data-duration="5.426" data-track-index="4" style="z-index:15">
+  <div class="splat-bg"><img src="assets/brand/splat.png" alt=""></div>
+  <div class="hk"><div class="big rough hk-1"><span class=l>C</span><span class=l>H</span><span class=l>A</span><span class=l>I</span><span class=l>N</span><span class=l>S</span><span class=l>A</span><span class=l>W</span></div><div class="big rough hk-2"><span class=l>M</span><span class=l>A</span><span class=l>N</span></div><div class="tape red hk-t" style=""><span>L&#x27;ARC DES ASSASSINS</span></div><div class="hk-jp">刺客篇</div></div>
+</div>
+<video id="v02" class="clip vid" data-start="8.226" data-duration="3.871" data-track-index="1" src="assets/clips/festa.mp4" muted playsinline style="z-index:16"></video>
+<div id="s02" class="clip ov" data-start="8.226" data-duration="3.871" data-track-index="3" style="z-index:17">
+  <div class="fs"><div class="tape red" style=""><span>NOUVELLES INFOS</span></div><div class="big rough fs-1"><span class=l>J</span><span class=l>U</span><span class=l>M</span><span class=l>P</span></div><div class="big rough fs-2"><span class=l>F</span><span class=l>E</span><span class=l>S</span><span class=l>T</span><span class=l>A</span></div><div class="fs-y rough">2027</div></div>
+</div>
+<video id="v03" class="clip vid" data-start="12.097" data-duration="3.871" data-track-index="2" src="assets/clips/stage.mp4" muted playsinline style="z-index:18"></video>
+<div id="s03" class="clip ov" data-start="12.097" data-duration="3.871" data-track-index="4" style="z-index:19">
+  <div class="spot"></div><div class="stg"><div class="tape white" style=""><span>RENDEZ-VOUS SUR LA</span></div><div class="big rough stg-1"><span class=l>R</span><span class=l>E</span><span class=l>D</span><span class=l> </span><span class=l>S</span><span class=l>U</span><span class=l>P</span><span class=l>E</span><span class=l>R</span></div><div class="big rough stg-2"><span class=l>S</span><span class=l>T</span><span class=l>A</span><span class=l>G</span><span class=l>E</span></div></div>
+</div>
+<video id="v04" class="clip vid" data-start="15.968" data-duration="5.322" data-track-index="1" src="assets/clips/teaser.mp4" muted playsinline style="z-index:20"></video>
+<div id="s04" class="clip ov" data-start="15.968" data-duration="5.322" data-track-index="3" style="z-index:21">
+  <div class="tape white corner" style=""><span>TEASER OFFICIEL</span></div>
+</div>
+<video id="v05" class="clip vid" data-start="21.29" data-duration="2.904" data-track-index="2" src="assets/clips/toile.mp4" muted playsinline style="z-index:22"></video>
+<div id="s05" class="clip ov" data-start="21.29" data-duration="2.904" data-track-index="4" style="z-index:23">
+  <div class="tape red corner" style=""><span>DENJI</span></div>
+</div>
+<video id="v06" class="clip vid" data-start="24.194" data-duration="4.622" data-track-index="1" src="assets/clips/titre.mp4" muted playsinline style="z-index:24"></video>
+<div id="s06" class="clip ov" data-start="24.194" data-duration="4.622" data-track-index="3" style="z-index:25">
+  <div class="stamp rough">PRODUCTION<br>CONFIRMÉE</div>
+</div>
+<video id="v07" class="clip vid" data-start="28.816" data-duration="3.119" data-track-index="2" src="assets/clips/reze.mp4" muted playsinline style="z-index:26"></video>
+<div id="s07" class="clip ov" data-start="28.816" data-duration="3.119" data-track-index="4" style="z-index:27">
+  <div class="rz"><div class="tape white" style=""><span>APRÈS LE FILM</span></div><div class="big rough rz-1"><span class=l>R</span><span class=l>E</span><span class=l>Z</span><span class=l>E</span></div></div><div class="rz-b"><div class="tape red" style=""><span>LA SUITE DIRECTE</span></div></div>
+</div>
+<video id="v08" class="clip vid" data-start="31.935" data-duration="4.586" data-track-index="1" src="assets/clips/coeur.mp4" muted playsinline style="z-index:28"></video>
+<div id="s08" class="clip ov" data-start="31.935" data-duration="4.586" data-track-index="3" style="z-index:29">
+  <div class="cross"><div class="ch h"></div><div class="ch v"></div><div class="ring"></div><div class="ring r2"></div></div>
+  <div class="heart">❤</div><div class="cr-t"><div class="tape red" style=""><span>CIBLE : SON CŒUR</span></div></div>
+</div>
+<video id="v09" class="clip vid" data-start="36.521" data-duration="3.64" data-track-index="2" src="assets/clips/tueurs.mp4" muted playsinline style="z-index:30"></video>
+<div id="s09" class="clip ov" data-start="36.521" data-duration="3.64" data-track-index="4" style="z-index:31">
+  <div class="pin" style="left:140px; top:520px"><div class="dot"></div><div class="tape white" style=""><span>ALLEMAGNE</span></div></div><div class="pin" style="left:600px; top:760px"><div class="dot"></div><div class="tape red" style=""><span>CHINE</span></div></div><div class="pin" style="left:110px; top:1010px"><div class="dot"></div><div class="tape white" style=""><span>ÉTATS-UNIS</span></div></div><div class="pin" style="left:640px; top:1220px"><div class="dot"></div><div class="tape red" style=""><span>URSS</span></div></div><div class="tu-t"><div class="big rough tu-1"><span class=l>T</span><span class=l>U</span><span class=l>E</span><span class=l>U</span><span class=l>R</span><span class=l>S</span></div></div>
+</div>
+<video id="v10" class="clip vid" data-start="40.161" data-duration="3.871" data-track-index="1" src="assets/clips/quanxi.mp4" muted playsinline style="z-index:32"></video>
+<div id="s10" class="clip ov" data-start="40.161" data-duration="3.871" data-track-index="3" style="z-index:33">
+  <div class="nc">
+    <div class="nc-cross"><div class="ch h"></div><div class="ch v"></div><div class="ring"></div></div>
+    <div class="nc-tag">CIBLE · CHINE</div>
+    <div class="big rough nc-name"><span class=l>Q</span><span class=l>U</span><span class=l>A</span><span class=l>N</span><span class=l>X</span><span class=l>I</span></div>
+    <div class="tape white" style=""><span>1RE CHASSEUSE DE DÉMONS</span></div>
+  </div>
+</div>
+<video id="v11" class="clip vid" data-start="44.032" data-duration="3.871" data-track-index="2" src="assets/clips/santa.mp4" muted playsinline style="z-index:34"></video>
+<div id="s11" class="clip ov" data-start="44.032" data-duration="3.871" data-track-index="4" style="z-index:35">
+  <div class="nc">
+    <div class="nc-cross"><div class="ch h"></div><div class="ch v"></div><div class="ring"></div></div>
+    <div class="nc-tag">CIBLE · ALLEMAGNE</div>
+    <div class="big rough nc-name long"><span class=l>S</span><span class=l>A</span><span class=l>N</span><span class=l>T</span><span class=l>A</span><span class=l> </span><span class=l>C</span><span class=l>L</span><span class=l>A</span><span class=l>U</span><span class=l>S</span></div>
+    <div class="tape white" style=""><span>L&#x27;ASSASSIN ALLEMAND</span></div>
+  </div>
+</div>
+<video id="v12" class="clip vid" data-start="47.903" data-duration="4.607" data-track-index="1" src="assets/clips/kishibe.mp4" muted playsinline style="z-index:36"></video>
+<div id="s12" class="clip ov" data-start="47.903" data-duration="4.607" data-track-index="3" style="z-index:37">
+  <div class="nc">
+    <div class="nc-cross"><div class="ch h"></div><div class="ch v"></div><div class="ring"></div></div>
+    <div class="nc-tag">CIBLE · ALLIÉ</div>
+    <div class="big rough nc-name"><span class=l>K</span><span class=l>I</span><span class=l>S</span><span class=l>H</span><span class=l>I</span><span class=l>B</span><span class=l>E</span></div>
+    <div class="tape white" style=""><span>L&#x27;ENTRAÎNEUR</span></div>
+  </div>
+</div>
+<video id="v13" class="clip vid" data-start="52.51" data-duration="2.651" data-track-index="2" src="assets/clips/mappa.mp4" muted playsinline style="z-index:38"></video>
+<div id="s13" class="clip ov" data-start="52.51" data-duration="2.651" data-track-index="4" style="z-index:39">
+  <div class="mp"><div class="tape red" style=""><span>STUDIO</span></div><div class="big rough mp-1"><span class=l>M</span><span class=l>A</span><span class=l>P</span><span class=l>P</span><span class=l>A</span></div><div class="tape white" style=""><span>TOUJOURS AUX COMMANDES</span></div></div>
+</div>
+<video id="v14" class="clip vid" data-start="55.161" data-duration="5.323" data-track-index="1" src="assets/clips/combats.mp4" muted playsinline style="z-index:40"></video>
+<div id="s14" class="clip ov" data-start="55.161" data-duration="5.323" data-track-index="3" style="z-index:41">
+  <div class="cb cb0"><div class="big rough cb-w white"><span class=l>C</span><span class=l>O</span><span class=l>M</span><span class=l>B</span><span class=l>A</span><span class=l>T</span><span class=l>S</span></div></div><div class="cb cb1"><div class="big rough cb-w red"><span class=l>T</span><span class=l>R</span><span class=l>A</span><span class=l>H</span><span class=l>I</span><span class=l>S</span><span class=l>O</span><span class=l>N</span><span class=l>S</span></div></div><div class="cb cb2"><div class="big rough cb-w white"><span class=l>H</span><span class=l>U</span><span class=l>M</span><span class=l>O</span><span class=l>U</span><span class=l>R</span><span class=l> </span><span class=l>F</span><span class=l>O</span><span class=l>U</span></div></div>
+</div>
+<video id="v15" class="clip vid" data-start="60.484" data-duration="7.413" data-track-index="2" src="assets/clips/cta.mp4" muted playsinline style="z-index:42"></video>
+<div id="s15" class="clip ov" data-start="60.484" data-duration="7.413" data-track-index="4" style="z-index:43">
+  <div class="ct"><div class="big rough ct-q"><span class=l>T</span><span class=l>U</span><span class=l> </span><span class=l>A</span><span class=l>S</span><span class=l> </span><span class=l>H</span><span class=l>Â</span><span class=l>T</span><span class=l>E</span><span class=l> </span><span class=l>?</span></div>
+    <div class="ct-btns"><div class="btn yes rough">OUI 🔥</div><div class="btn no rough">GRAVE 🪚</div></div>
+    <div class="ct-c">Dis-le en commentaire <span class="arrow">↓</span></div>
+    <div class="tape white" style=""><span>JUMP FESTA 2027 · RED SUPER STAGE</span></div></div>
+</div>
+<div id="s16" class="clip ov" data-start="67.897" data-duration="3.6" data-track-index="3" style="z-index:45">
+  <div class="lg-bg"></div>
+  <div class="lg-splat"><img src="assets/brand/splat.png" alt=""></div>
+  <div class="saw"><div class="saw-ring"><div class="tooth" style="transform: rotate(0deg)"></div><div class="tooth" style="transform: rotate(9deg)"></div><div class="tooth" style="transform: rotate(18deg)"></div><div class="tooth" style="transform: rotate(27deg)"></div><div class="tooth" style="transform: rotate(36deg)"></div><div class="tooth" style="transform: rotate(45deg)"></div><div class="tooth" style="transform: rotate(54deg)"></div><div class="tooth" style="transform: rotate(63deg)"></div><div class="tooth" style="transform: rotate(72deg)"></div><div class="tooth" style="transform: rotate(81deg)"></div><div class="tooth" style="transform: rotate(90deg)"></div><div class="tooth" style="transform: rotate(99deg)"></div><div class="tooth" style="transform: rotate(108deg)"></div><div class="tooth" style="transform: rotate(117deg)"></div><div class="tooth" style="transform: rotate(126deg)"></div><div class="tooth" style="transform: rotate(135deg)"></div><div class="tooth" style="transform: rotate(144deg)"></div><div class="tooth" style="transform: rotate(153deg)"></div><div class="tooth" style="transform: rotate(162deg)"></div><div class="tooth" style="transform: rotate(171deg)"></div><div class="tooth" style="transform: rotate(180deg)"></div><div class="tooth" style="transform: rotate(189deg)"></div><div class="tooth" style="transform: rotate(198deg)"></div><div class="tooth" style="transform: rotate(207deg)"></div><div class="tooth" style="transform: rotate(216deg)"></div><div class="tooth" style="transform: rotate(225deg)"></div><div class="tooth" style="transform: rotate(234deg)"></div><div class="tooth" style="transform: rotate(243deg)"></div><div class="tooth" style="transform: rotate(252deg)"></div><div class="tooth" style="transform: rotate(261deg)"></div><div class="tooth" style="transform: rotate(270deg)"></div><div class="tooth" style="transform: rotate(279deg)"></div><div class="tooth" style="transform: rotate(288deg)"></div><div class="tooth" style="transform: rotate(297deg)"></div><div class="tooth" style="transform: rotate(306deg)"></div><div class="tooth" style="transform: rotate(315deg)"></div><div class="tooth" style="transform: rotate(324deg)"></div><div class="tooth" style="transform: rotate(333deg)"></div><div class="tooth" style="transform: rotate(342deg)"></div><div class="tooth" style="transform: rotate(351deg)"></div><div class="link" style="transform: rotate(4.5deg)"></div><div class="link" style="transform: rotate(13.5deg)"></div><div class="link" style="transform: rotate(22.5deg)"></div><div class="link" style="transform: rotate(31.5deg)"></div><div class="link" style="transform: rotate(40.5deg)"></div><div class="link" style="transform: rotate(49.5deg)"></div><div class="link" style="transform: rotate(58.5deg)"></div><div class="link" style="transform: rotate(67.5deg)"></div><div class="link" style="transform: rotate(76.5deg)"></div><div class="link" style="transform: rotate(85.5deg)"></div><div class="link" style="transform: rotate(94.5deg)"></div><div class="link" style="transform: rotate(103.5deg)"></div><div class="link" style="transform: rotate(112.5deg)"></div><div class="link" style="transform: rotate(121.5deg)"></div><div class="link" style="transform: rotate(130.5deg)"></div><div class="link" style="transform: rotate(139.5deg)"></div><div class="link" style="transform: rotate(148.5deg)"></div><div class="link" style="transform: rotate(157.5deg)"></div><div class="link" style="transform: rotate(166.5deg)"></div><div class="link" style="transform: rotate(175.5deg)"></div><div class="link" style="transform: rotate(184.5deg)"></div><div class="link" style="transform: rotate(193.5deg)"></div><div class="link" style="transform: rotate(202.5deg)"></div><div class="link" style="transform: rotate(211.5deg)"></div><div class="link" style="transform: rotate(220.5deg)"></div><div class="link" style="transform: rotate(229.5deg)"></div><div class="link" style="transform: rotate(238.5deg)"></div><div class="link" style="transform: rotate(247.5deg)"></div><div class="link" style="transform: rotate(256.5deg)"></div><div class="link" style="transform: rotate(265.5deg)"></div><div class="link" style="transform: rotate(274.5deg)"></div><div class="link" style="transform: rotate(283.5deg)"></div><div class="link" style="transform: rotate(292.5deg)"></div><div class="link" style="transform: rotate(301.5deg)"></div><div class="link" style="transform: rotate(310.5deg)"></div><div class="link" style="transform: rotate(319.5deg)"></div><div class="link" style="transform: rotate(328.5deg)"></div><div class="link" style="transform: rotate(337.5deg)"></div><div class="link" style="transform: rotate(346.5deg)"></div><div class="link" style="transform: rotate(355.5deg)"></div></div></div>
+  <div class="lg-slash a"></div><div class="lg-slash b"></div>
+  <div class="lg-logo"><img src="assets/brand/logo.png" alt="NewsSeries"></div>
+  <div class="lg-lines"><div class="tape white lg-t" style=""><span>ABONNE-TOI POUR PLUS D&#x27;ACTUS</span></div><div class="tape red lg-t" style=""><span>newsseries.fr</span></div></div>
+</div>
+<div id="c000" class="clip cap" data-start="3.0" data-duration="1.166" data-track-index="20"><div class="cap-in"><span class="w hl">Chainsaw</span> <span class="w hl">Man</span> <span class="w">revient,</span></div></div>
+<div id="c001" class="clip cap" data-start="4.221" data-duration="0.444" data-track-index="21"><div class="cap-in"><span class="w">et</span> <span class="w">ça</span> <span class="w">va</span></div></div>
+<div id="c002" class="clip cap" data-start="4.721" data-duration="0.444" data-track-index="20"><div class="cap-in"><span class="w hl">saigner!</span></div></div>
+<div id="c003" class="clip cap" data-start="5.22" data-duration="1.055" data-track-index="21"><div class="cap-in"><span class="w">L&#x27;arc</span> <span class="w">des</span> <span class="w hl">Assassins</span></div></div>
+<div id="c004" class="clip cap" data-start="6.33" data-duration="0.999" data-track-index="20"><div class="cap-in"><span class="w">est</span> <span class="w">officiellement</span></div></div>
+<div id="c005" class="clip cap" data-start="7.385" data-duration="0.833" data-track-index="21"><div class="cap-in"><span class="w">en</span> <span class="w">préparation.</span></div></div>
+<div id="c006" class="clip cap" data-start="8.518" data-duration="0.799" data-track-index="20"><div class="cap-in"><span class="w">Et</span> <span class="w">de</span> <span class="w">nouvelles</span></div></div>
+<div id="c007" class="clip cap" data-start="9.371" data-duration="1.013" data-track-index="21"><div class="cap-in"><span class="w">informations</span> <span class="w">seront</span></div></div>
+<div id="c008" class="clip cap" data-start="10.437" data-duration="0.693" data-track-index="20"><div class="cap-in"><span class="w">révélées</span> <span class="w">à</span> <span class="w">la</span></div></div>
+<div id="c009" class="clip cap" data-start="11.184" data-duration="0.853" data-track-index="21"><div class="cap-in"><span class="w hl">Jump</span> <span class="w hl">Festa</span> <span class="w hl">2027.</span></div></div>
+<div id="c010" class="clip cap" data-start="12.337" data-duration="0.77" data-track-index="20"><div class="cap-in"><span class="w">Rendez-vous</span> <span class="w">sur</span></div></div>
+<div id="c011" class="clip cap" data-start="13.159" data-duration="0.616" data-track-index="21"><div class="cap-in"><span class="w">la</span> <span class="w hl">Red</span> <span class="w hl">Super</span></div></div>
+<div id="c012" class="clip cap" data-start="13.826" data-duration="0.35" data-track-index="20"><div class="cap-in"><span class="w hl">Stage,</span></div></div>
+<div id="c013" class="clip cap" data-start="14.186" data-duration="0.77" data-track-index="21"><div class="cap-in"><span class="w">la</span> <span class="w">grande</span> <span class="w">scène</span></div></div>
+<div id="c014" class="clip cap" data-start="15.008" data-duration="0.77" data-track-index="20"><div class="cap-in"><span class="w">de</span> <span class="w">l&#x27;événement.</span></div></div>
+<div id="c015" class="clip cap" data-start="16.078" data-duration="0.782" data-track-index="21"><div class="cap-in"><span class="w">Le</span> <span class="w hl">teaser</span> <span class="w">annonce</span></div></div>
+<div id="c016" class="clip cap" data-start="16.906" data-duration="0.506" data-track-index="20"><div class="cap-in"><span class="w">la</span> <span class="w">couleur:</span></div></div>
+<div id="c017" class="clip cap" data-start="17.458" data-duration="0.689" data-track-index="21"><div class="cap-in"><span class="w">des</span> <span class="w">silhouettes</span></div></div>
+<div id="c018" class="clip cap" data-start="18.193" data-duration="0.598" data-track-index="20"><div class="cap-in"><span class="w">inquiétantes,</span></div></div>
+<div id="c019" class="clip cap" data-start="18.837" data-duration="0.644" data-track-index="21"><div class="cap-in"><span class="w">dans</span> <span class="w">une</span> <span class="w">salle</span></div></div>
+<div id="c020" class="clip cap" data-start="19.527" data-duration="0.782" data-track-index="20"><div class="cap-in"><span class="w">de</span> <span class="w">cinéma</span> <span class="w">plongée</span></div></div>
+<div id="c021" class="clip cap" data-start="20.355" data-duration="0.597" data-track-index="21"><div class="cap-in"><span class="w">dans</span> <span class="w">le</span> <span class="w hl">noir.</span></div></div>
+<div id="c022" class="clip cap" data-start="21.252" data-duration="1.048" data-track-index="20"><div class="cap-in"><span class="w">Puis</span> <span class="w hl">Denji</span> <span class="w">apparaît,</span></div></div>
+<div id="c023" class="clip cap" data-start="22.353" data-duration="0.681" data-track-index="21"><div class="cap-in"><span class="w">pris</span> <span class="w">dans</span> <span class="w">une</span></div></div>
+<div id="c024" class="clip cap" data-start="23.086" data-duration="0.891" data-track-index="20"><div class="cap-in"><span class="w">toile</span> <span class="w hl">rouge</span> <span class="w hl">sang.</span></div></div>
+<div id="c025" class="clip cap" data-start="24.277" data-duration="0.639" data-track-index="21"><div class="cap-in"><span class="w">Et</span> <span class="w">le</span> <span class="w">titre</span></div></div>
+<div id="c026" class="clip cap" data-start="24.974" data-duration="0.35" data-track-index="20"><div class="cap-in"><span class="w">tombe:</span></div></div>
+<div id="c027" class="clip cap" data-start="25.381" data-duration="0.756" data-track-index="21"><div class="cap-in"><span class="w hl">Chainsaw</span> <span class="w hl">Man,</span></div></div>
+<div id="c028" class="clip cap" data-start="26.195" data-duration="1.163" data-track-index="20"><div class="cap-in"><span class="w">l&#x27;arc</span> <span class="w">des</span> <span class="w hl">Assassins.</span></div></div>
+<div id="c029" class="clip cap" data-start="27.416" data-duration="1.22" data-track-index="21"><div class="cap-in"><span class="w hl">Production</span> <span class="w hl">confirmée.</span></div></div>
+<div id="c030" class="clip cap" data-start="28.936" data-duration="0.669" data-track-index="20"><div class="cap-in"><span class="w">Après</span> <span class="w">le</span> <span class="w">film</span></div></div>
+<div id="c031" class="clip cap" data-start="29.656" data-duration="0.309" data-track-index="21"><div class="cap-in"><span class="w hl">Reze,</span></div></div>
+<div id="c032" class="clip cap" data-start="29.965" data-duration="0.719" data-track-index="20"><div class="cap-in"><span class="w">c&#x27;est</span> <span class="w">la</span> <span class="w">suite</span></div></div>
+<div id="c033" class="clip cap" data-start="30.736" data-duration="1.131" data-track-index="21"><div class="cap-in"><span class="w">directe</span> <span class="w">de</span> <span class="w">l&#x27;histoire.</span></div></div>
+<div id="c034" class="clip cap" data-start="32.167" data-duration="0.714" data-track-index="20"><div class="cap-in"><span class="w">Dans</span> <span class="w">cet</span> <span class="w">arc,</span></div></div>
+<div id="c035" class="clip cap" data-start="32.936" data-duration="0.824" data-track-index="21"><div class="cap-in"><span class="w">le</span> <span class="w">monde</span> <span class="w">entier</span></div></div>
+<div id="c036" class="clip cap" data-start="33.815" data-duration="0.769" data-track-index="20"><div class="cap-in"><span class="w">veut</span> <span class="w">une</span> <span class="w">seule</span></div></div>
+<div id="c037" class="clip cap" data-start="34.638" data-duration="0.35" data-track-index="21"><div class="cap-in"><span class="w">chose:</span></div></div>
+<div id="c038" class="clip cap" data-start="35.023" data-duration="0.549" data-track-index="20"><div class="cap-in"><span class="w">le</span> <span class="w hl">cœur</span> <span class="w">de</span></div></div>
+<div id="c039" class="clip cap" data-start="35.627" data-duration="0.714" data-track-index="21"><div class="cap-in"><span class="w hl">Chainsaw</span> <span class="w hl">Man.</span></div></div>
+<div id="c040" class="clip cap" data-start="36.641" data-duration="0.72" data-track-index="20"><div class="cap-in"><span class="w">Des</span> <span class="w">tueurs</span> <span class="w">venus</span></div></div>
+<div id="c041" class="clip cap" data-start="37.406" data-duration="0.764" data-track-index="21"><div class="cap-in"><span class="w">de</span> <span class="w">plusieurs</span> <span class="w">pays</span></div></div>
+<div id="c042" class="clip cap" data-start="38.215" data-duration="0.855" data-track-index="20"><div class="cap-in"><span class="w">débarquent</span> <span class="w">au</span> <span class="w hl">Japon</span></div></div>
+<div id="c043" class="clip cap" data-start="39.115" data-duration="0.81" data-track-index="21"><div class="cap-in"><span class="w">pour</span> <span class="w">s&#x27;en</span> <span class="w">emparer.</span></div></div>
+<div id="c044" class="clip cap" data-start="40.225" data-duration="0.608" data-track-index="20"><div class="cap-in"><span class="w">Parmi</span> <span class="w">eux,</span></div></div>
+<div id="c045" class="clip cap" data-start="40.894" data-duration="0.426" data-track-index="21"><div class="cap-in"><span class="w hl">Quanxi,</span></div></div>
+<div id="c046" class="clip cap" data-start="41.381" data-duration="1.034" data-track-index="20"><div class="cap-in"><span class="w">la</span> <span class="w">toute</span> <span class="w">première</span></div></div>
+<div id="c047" class="clip cap" data-start="42.476" data-duration="1.216" data-track-index="21"><div class="cap-in"><span class="w">chasseuse</span> <span class="w">de</span> <span class="w">démons.</span></div></div>
+<div id="c048" class="clip cap" data-start="43.992" data-duration="0.787" data-track-index="20"><div class="cap-in"><span class="w">Et</span> <span class="w hl">Santa</span> <span class="w hl">Claus,</span></div></div>
+<div id="c049" class="clip cap" data-start="44.831" data-duration="0.786" data-track-index="21"><div class="cap-in"><span class="w">l&#x27;assassin</span> <span class="w">venu</span></div></div>
+<div id="c050" class="clip cap" data-start="45.67" data-duration="0.628" data-track-index="20"><div class="cap-in"><span class="w hl">d&#x27;Allemagne,</span></div></div>
+<div id="c051" class="clip cap" data-start="46.351" data-duration="0.681" data-track-index="21"><div class="cap-in"><span class="w">l&#x27;un</span> <span class="w">des</span> <span class="w">plus</span></div></div>
+<div id="c052" class="clip cap" data-start="47.085" data-duration="0.524" data-track-index="20"><div class="cap-in"><span class="w">dangereux.</span></div></div>
+<div id="c053" class="clip cap" data-start="47.909" data-duration="0.703" data-track-index="21"><div class="cap-in"><span class="w">Pour</span> <span class="w">survivre,</span></div></div>
+<div id="c054" class="clip cap" data-start="48.662" data-duration="0.704" data-track-index="20"><div class="cap-in"><span class="w hl">Denji</span> <span class="w">et</span> <span class="w hl">Power</span></div></div>
+<div id="c055" class="clip cap" data-start="49.416" data-duration="0.854" data-track-index="21"><div class="cap-in"><span class="w">s&#x27;entraînent</span> <span class="w">avec</span></div></div>
+<div id="c056" class="clip cap" data-start="50.32" data-duration="0.402" data-track-index="20"><div class="cap-in"><span class="w hl">Kishibe,</span></div></div>
+<div id="c057" class="clip cap" data-start="50.773" data-duration="0.703" data-track-index="21"><div class="cap-in"><span class="w">le</span> <span class="w">chasseur</span> <span class="w">le</span></div></div>
+<div id="c058" class="clip cap" data-start="51.526" data-duration="0.804" data-track-index="20"><div class="cap-in"><span class="w">plus</span> <span class="w">redoutable.</span></div></div>
+<div id="c059" class="clip cap" data-start="52.63" data-duration="0.798" data-track-index="21"><div class="cap-in"><span class="w">Et</span> <span class="w">c&#x27;est</span> <span class="w">toujours</span></div></div>
+<div id="c060" class="clip cap" data-start="53.475" data-duration="0.703" data-track-index="20"><div class="cap-in"><span class="w">le</span> <span class="w">studio</span> <span class="w hl">MAPPA</span></div></div>
+<div id="c061" class="clip cap" data-start="54.225" data-duration="0.657" data-track-index="21"><div class="cap-in"><span class="w">aux</span> <span class="w">commandes.</span></div></div>
+<div id="c062" class="clip cap" data-start="55.182" data-duration="0.961" data-track-index="20"><div class="cap-in"><span class="w">Combats</span> <span class="w hl">sanglants,</span></div></div>
+<div id="c063" class="clip cap" data-start="56.197" data-duration="0.534" data-track-index="21"><div class="cap-in"><span class="w hl">trahisons,</span></div></div>
+<div id="c064" class="clip cap" data-start="56.784" data-duration="0.695" data-track-index="20"><div class="cap-in"><span class="w">et</span> <span class="w">cet</span> <span class="w">humour</span></div></div>
+<div id="c065" class="clip cap" data-start="57.532" data-duration="0.908" data-track-index="21"><div class="cap-in"><span class="w">complètement</span> <span class="w hl">fou:</span></div></div>
+<div id="c066" class="clip cap" data-start="58.494" data-duration="0.694" data-track-index="20"><div class="cap-in"><span class="w">tout</span> <span class="w">ce</span> <span class="w">qu&#x27;on</span></div></div>
+<div id="c067" class="clip cap" data-start="59.242" data-duration="0.961" data-track-index="21"><div class="cap-in"><span class="w">aime</span> <span class="w">chez</span> <span class="w hl">Chainsaw</span></div></div>
+<div id="c068" class="clip cap" data-start="60.256" data-duration="0.35" data-track-index="20"><div class="cap-in"><span class="w hl">Man.</span></div></div>
+      <div id="grainwrap" class="clip" data-start="0" data-duration="71.497" data-track-index="30"><img id="grain" src="assets/brand/grain.png" alt=""></div>
+      <div id="vignette" class="clip" data-start="0" data-duration="71.497" data-track-index="31"></div>
+      <div id="slashwrap" class="clip" data-start="0" data-duration="71.497" data-track-index="39"><div id="slash"></div></div>
+      <div id="flash" class="clip" data-start="0" data-duration="71.497" data-track-index="40"></div>
+      <div id="flash2" class="clip" data-start="0" data-duration="71.497" data-track-index="41"></div>
+      <div id="progress" class="clip" data-start="0" data-duration="71.497" data-track-index="42"></div>
+      <audio id="mix" data-start="0" data-duration="71.497" data-track-index="50" src="audio/mix.wav" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s00 .saw-ring", { rotation: 0 }, { rotation: 1120, duration: 2.8, ease: "none" }, 0.0);
+      tl.from("#s00 .saw", { scale: 0.2, opacity: 0, duration: 0.45, ease: "back.out(1.6)" }, 0.05);
+      tl.from("#s00 .lg-logo", { scale: 3.2, rotation: -16, opacity: 0, duration: 0.4, ease: "expo.in" }, 0.35);
+      tl.fromTo("#s00 .lg-splat img", { scale: 0.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "expo.out", immediateRender: false }, 0.75);
+      tl.fromTo("#s00 .lg-slash.a", { scaleX: 0 }, { scaleX: 1, duration: 0.18, ease: "power4.out", immediateRender: false }, 0.7);
+      tl.fromTo("#s00 .lg-slash.b", { scaleX: 0 }, { scaleX: 1, duration: 0.18, ease: "power4.out", immediateRender: false }, 0.83);
+      tl.fromTo("#s00 .lg-logo, #s00 .saw", { x: 0 }, { x: 16, duration: 0.035, ease: "none", yoyo: true, repeat: 9, immediateRender: false }, 0.75);
+      tl.fromTo("#flash2", { opacity: 0.85 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, 0.75);
+      tl.to("#s00 .lg-logo img", { scale: 1.04, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 3 }, 1.05);
+      tl.from("#s00 .lg-t", { scaleX: 0, duration: 0.35, ease: "power4.out", stagger: 0.2 }, 1.1);
+      tl.fromTo("#v01", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 2.8);
+      tl.from("#s01 .hk-1 .l", { y: -200, rotation: (i) => (i % 2 ? 12 : -12), opacity: 0, duration: 0.3, ease: "power4.out", stagger: 0.04 }, 2.9);
+      tl.from("#s01 .hk-2", { scale: 3, opacity: 0, duration: 0.3, ease: "expo.in" }, 3.2995570994355186);
+      tl.fromTo("#s01 .splat-bg img", { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 0.85, duration: 0.25, ease: "expo.out", immediateRender: false }, 4.6706966758334545);
+      tl.from("#s01 .hk-t", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 5.120253775268973);
+      tl.from("#s01 .hk-jp", { opacity: 0, scale: 1.4, duration: 0.5, ease: "power2.out" }, 5.775317219086217);
+      tl.fromTo("#v02", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 8.226);
+      tl.from("#s02 .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 8.326);
+      tl.from("#s02 .fs-1 .l, #s02 .fs-2 .l", { y: 150, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.04 }, 8.476);
+      tl.from("#s02 .fs-y", { scale: 2.6, opacity: 0, duration: 0.3, ease: "expo.in" }, 11.520175221603793);
+      tl.fromTo("#v03", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 12.097);
+      tl.from("#s03 .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 12.197);
+      tl.from("#s03 .stg-1", { x: -900, duration: 0.35, ease: "power4.out" }, 13.162636815920397);
+      tl.from("#s03 .stg-2", { x: 900, duration: 0.35, ease: "power4.out" }, 13.626245642535622);
+      tl.fromTo("#s03 .spot", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out", immediateRender: false }, 13.212636815920398);
+      tl.fromTo("#v04", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 15.968);
+      tl.from("#s04 .tape", { x: -500, duration: 0.4, ease: "power4.out" }, 16.168);
+      tl.fromTo("#v05", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 21.29);
+      tl.from("#s05 .tape", { x: -500, duration: 0.4, ease: "power4.out" }, 21.41438252223966);
+      tl.fromTo("#v06", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 24.194);
+      tl.from("#s06 .stamp", { scale: 3.2, rotation: -25, opacity: 0, duration: 0.3, ease: "expo.in" }, 27.11579229024943);
+      tl.fromTo("#s06", { x: 0 }, { x: 18, duration: 0.04, ease: "none", yoyo: true, repeat: 5, immediateRender: false }, 27.41579229024943);
+      tl.fromTo("#v07", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 28.816);
+      tl.from("#s07 .rz .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 28.916);
+      tl.from("#s07 .rz-1 .l", { y: -160, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.05 }, 29.50622269960616);
+      tl.from("#s07 .rz-b .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 30.327418546365912);
+      tl.fromTo("#v08", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 31.935);
+      tl.from("#s08 .cross", { scale: 2.5, rotation: 90, opacity: 0, duration: 0.5, ease: "power3.out" }, 33.00065013724788);
+      tl.to("#s08 .ring", { rotation: 180, duration: 4.586, ease: "none" }, 31.935);
+      tl.from("#s08 .heart", { scale: 0, duration: 0.3, ease: "back.out(3)" }, 35.087668277837444);
+      tl.to("#s08 .heart", { scale: 1.25, duration: 0.242, ease: "power2.out", yoyo: true, repeat: 5 }, 35.38766827783745);
+      tl.from("#s08 .cr-t .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 34.98766827783744);
+      tl.fromTo("#v09", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 36.521);
+      tl.from("#s09 .tu-1 .l", { y: -150, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.04 }, 36.6209452365421);
+      tl.from("#s09 .pin", { scale: 0, opacity: 0, duration: 0.3, ease: "back.out(3)", stagger: 0.28 }, 37.44064455005746);
+      tl.fromTo("#v10", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 40.161);
+      tl.from("#s10 .nc-cross", { scale: 2.2, rotation: -90, opacity: 0, duration: 0.45, ease: "power3.out" }, 40.211);
+      tl.to("#s10 .nc-cross .ring", { rotation: 120, duration: 3.871, ease: "none" }, 40.161);
+      tl.from("#s10 .nc-tag", { x: -400, duration: 0.35, ease: "power4.out" }, 40.311);
+      tl.from("#s10 .nc-name .l", { y: 140, opacity: 0, duration: 0.28, ease: "back.out(2.2)", stagger: 0.04 }, 40.74386879898158);
+      tl.from("#s10 .nc .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 41.193868798981576);
+      tl.fromTo("#v11", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 44.032);
+      tl.from("#s11 .nc-cross", { scale: 2.2, rotation: -90, opacity: 0, duration: 0.45, ease: "power3.out" }, 44.081999999999994);
+      tl.to("#s11 .nc-cross .ring", { rotation: 120, duration: 3.871, ease: "none" }, 44.032);
+      tl.from("#s11 .nc-tag", { x: -400, duration: 0.35, ease: "power4.out" }, 44.181999999999995);
+      tl.from("#s11 .nc-name .l", { y: 140, opacity: 0, duration: 0.28, ease: "back.out(2.2)", stagger: 0.04 }, 43.99965197673273);
+      tl.from("#s11 .nc .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 44.449651976732724);
+      tl.fromTo("#v12", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 47.903);
+      tl.from("#s12 .nc-cross", { scale: 2.2, rotation: -90, opacity: 0, duration: 0.45, ease: "power3.out" }, 47.952999999999996);
+      tl.to("#s12 .nc-cross .ring", { rotation: 120, duration: 4.607, ease: "none" }, 47.903);
+      tl.from("#s12 .nc-tag", { x: -400, duration: 0.35, ease: "power4.out" }, 48.053);
+      tl.from("#s12 .nc-name .l", { y: 140, opacity: 0, duration: 0.28, ease: "back.out(2.2)", stagger: 0.04 }, 50.17044114615544);
+      tl.from("#s12 .nc .tape", { scaleX: 0, duration: 0.35, ease: "power4.out" }, 50.620441146155436);
+      tl.fromTo("#v13", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 52.51);
+      tl.from("#s13 .mp .tape", { scaleX: 0, duration: 0.35, ease: "power4.out", stagger: 0.4 }, 53.46534438775511);
+      tl.from("#s13 .mp-1 .l", { y: 120, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.05 }, 53.79369425547998);
+      tl.fromTo("#v14", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 55.161);
+      tl.fromTo("#s14 .cb0", { scale: 2.4, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, duration: 0.22, ease: "expo.out", immediateRender: false }, 55.08183673469389);
+      tl.fromTo("#s14 .cb1", { scale: 2.4, opacity: 0, rotation: 6 }, { scale: 1, opacity: 1, duration: 0.22, ease: "expo.out", immediateRender: false }, 56.09676286676287);
+      tl.fromTo("#s14 .cb2", { scale: 2.4, opacity: 0, rotation: -4 }, { scale: 1, opacity: 1, duration: 0.22, ease: "expo.out", immediateRender: false }, 57.058271833986126);
+      tl.fromTo("#s14", { x: 0 }, { x: 14, duration: 0.05, ease: "none", yoyo: true, repeat: 7, immediateRender: false }, 55.18183673469389);
+      tl.fromTo("#v15", { scale: 1.12 }, { scale: 1.0, duration: 0.35, ease: "power3.out" }, 60.484);
+      tl.from("#s15 .ct-q .l", { y: -150, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.03 }, 60.584);
+      tl.from("#s15 .btn", { scale: 0.3, opacity: 0, duration: 0.4, ease: "back.out(2.2)", stagger: 0.15 }, 61.184000000000005);
+      tl.to("#s15 .btn", { scale: 1.07, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: 7, stagger: 0.25 }, 61.784);
+      tl.from("#s15 .ct-c", { y: 60, opacity: 0, duration: 0.45, ease: "power3.out" }, 62.94608513708515);
+      tl.to("#s15 .arrow", { y: 18, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 9 }, 63.44608513708515);
+      tl.from("#s15 .ct .tape", { scaleX: 0, duration: 0.4, ease: "power4.out" }, 65.26415646258505);
+      tl.fromTo("#s16 .saw-ring", { rotation: 0 }, { rotation: 1440, duration: 3.6, ease: "none" }, 67.897);
+      tl.from("#s16 .saw", { scale: 0.2, opacity: 0, duration: 0.45, ease: "back.out(1.6)" }, 67.947);
+      tl.from("#s16 .lg-logo", { scale: 3.2, rotation: -16, opacity: 0, duration: 0.4, ease: "expo.in" }, 68.097);
+      tl.fromTo("#s16 .lg-splat img", { scale: 0.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "expo.out", immediateRender: false }, 68.497);
+      tl.fromTo("#s16 .lg-slash.a", { scaleX: 0 }, { scaleX: 1, duration: 0.18, ease: "power4.out", immediateRender: false }, 68.447);
+      tl.fromTo("#s16 .lg-slash.b", { scaleX: 0 }, { scaleX: 1, duration: 0.18, ease: "power4.out", immediateRender: false }, 68.577);
+      tl.fromTo("#s16 .lg-logo, #s16 .saw", { x: 0 }, { x: 16, duration: 0.035, ease: "none", yoyo: true, repeat: 9, immediateRender: false }, 68.497);
+      tl.fromTo("#flash2", { opacity: 0.85 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, 68.497);
+      tl.to("#s16 .lg-logo img", { scale: 1.04, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 5 }, 68.797);
+      tl.from("#s16 .lg-t", { scaleX: 0, duration: 0.35, ease: "power4.out", stagger: 0.2 }, 68.847);
+      tl.to("#s16 .lg-logo, #s16 .saw, #s16 .lg-lines, #s16 .lg-splat", { opacity: 0, duration: 0.6, ease: "power2.in" }, 70.897);
+      [2.8,8.226,12.097,15.968,21.29,24.194,28.816,31.935,36.521,40.161,44.032,47.903,52.51,55.161,60.484,67.897].forEach(function (c, i) { var r = i % 2 ? 1 : -1; tl.fromTo("#slash", { xPercent: -130 * r, opacity: 1 }, { xPercent: 130 * r, opacity: 1, duration: 0.22, ease: "power3.inOut", immediateRender: false }, c - 0.11); tl.fromTo("#flash", { opacity: 0.5 }, { opacity: 0, duration: 0.2, ease: "power2.out", immediateRender: false }, c); });
+      tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: 71.497, ease: "none" }, 0);
+      (function () { var g = document.getElementById("grain"); for (var f = 0; f < 857; f++) { tl.set(g, { x: ((f * 37) % 60) - 30, y: ((f * 53) % 80) - 40 }, f / 12); } })();
+      tl.from("#c000 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 3.0);
+      tl.from("#c001 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 4.221);
+      tl.from("#c002 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 4.721);
+      tl.from("#c003 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 5.22);
+      tl.from("#c004 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 6.33);
+      tl.from("#c005 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 7.385);
+      tl.from("#c006 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 8.518);
+      tl.from("#c007 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 9.371);
+      tl.from("#c008 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 10.437);
+      tl.from("#c009 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 11.184);
+      tl.from("#c010 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 12.337);
+      tl.from("#c011 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 13.159);
+      tl.from("#c012 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 13.826);
+      tl.from("#c013 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 14.186);
+      tl.from("#c014 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 15.008);
+      tl.from("#c015 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 16.078);
+      tl.from("#c016 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 16.906);
+      tl.from("#c017 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 17.458);
+      tl.from("#c018 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 18.193);
+      tl.from("#c019 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 18.837);
+      tl.from("#c020 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 19.527);
+      tl.from("#c021 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 20.355);
+      tl.from("#c022 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 21.252);
+      tl.from("#c023 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 22.353);
+      tl.from("#c024 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 23.086);
+      tl.from("#c025 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 24.277);
+      tl.from("#c026 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 24.974);
+      tl.from("#c027 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 25.381);
+      tl.from("#c028 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 26.195);
+      tl.from("#c029 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 27.416);
+      tl.from("#c030 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 28.936);
+      tl.from("#c031 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 29.656);
+      tl.from("#c032 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 29.965);
+      tl.from("#c033 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 30.736);
+      tl.from("#c034 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 32.167);
+      tl.from("#c035 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 32.936);
+      tl.from("#c036 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 33.815);
+      tl.from("#c037 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 34.638);
+      tl.from("#c038 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 35.023);
+      tl.from("#c039 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 35.627);
+      tl.from("#c040 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 36.641);
+      tl.from("#c041 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 37.406);
+      tl.from("#c042 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 38.215);
+      tl.from("#c043 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 39.115);
+      tl.from("#c044 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 40.225);
+      tl.from("#c045 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 40.894);
+      tl.from("#c046 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 41.381);
+      tl.from("#c047 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 42.476);
+      tl.from("#c048 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 43.992);
+      tl.from("#c049 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 44.831);
+      tl.from("#c050 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 45.67);
+      tl.from("#c051 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 46.351);
+      tl.from("#c052 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 47.085);
+      tl.from("#c053 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 47.909);
+      tl.from("#c054 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 48.662);
+      tl.from("#c055 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 49.416);
+      tl.from("#c056 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 50.32);
+      tl.from("#c057 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 50.773);
+      tl.from("#c058 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 51.526);
+      tl.from("#c059 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 52.63);
+      tl.from("#c060 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 53.475);
+      tl.from("#c061 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 54.225);
+      tl.from("#c062 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 55.182);
+      tl.from("#c063 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 56.197);
+      tl.from("#c064 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 56.784);
+      tl.from("#c065 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 57.532);
+      tl.from("#c066 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 58.494);
+      tl.from("#c067 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 59.242);
+      tl.from("#c068 .cap-in", { scale: 0.7, rotation: -3, opacity: 0, duration: 0.14, ease: "back.out(2.5)" }, 60.256);
+      tl.to({}, { duration: 71.497 }, 0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

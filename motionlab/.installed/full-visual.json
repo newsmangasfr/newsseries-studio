@@ -1,0 +1,15 @@
+{
+  "name": "full-visual",
+  "version": "0.2.0",
+  "at": "2026-10-23T13:24:12.653Z",
+  "files": [
+    "engine/full-visual",
+    ".agents/skills/full-visual",
+    ".agents/skills/full-visual-script",
+    ".agents/skills/full-visual-customization",
+    ".agents/workflows/full-visual-reel.js",
+    "editor/full-visual",
+    "packs/full-visual/setup.json",
+    "packs/full-visual/SPEC.md"
+  ]
+}
