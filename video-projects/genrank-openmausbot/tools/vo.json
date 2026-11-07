@@ -1,0 +1,14 @@
+[
+ {"id":"hook","cap":"Un développeur vient de publier une alternative open source à Grok Bot !"},
+ {"id":"nom","cap":"Elle s'appelle OpenMausBot, et elle est entièrement gratuite.","tts":"Elle s'appelle Open Maus Bot, et elle est entièrement gratuite."},
+ {"id":"idee","cap":"L'idée : ta propre équipe de bots IA, directement dans une appli de chat.","tts":"L'idée : ta propre équipe de bots I A, directement dans une appli de chat."},
+ {"id":"liste","cap":"Chaque bot apparaît dans la barre latérale, comme un contact, avec son nom et sa personnalité."},
+ {"id":"modele","cap":"Et tu choisis le cerveau de chaque bot : Claude, GPT, Grok, ou même un modèle local."},
+ {"id":"ordi","cap":"Chaque bot a son propre ordinateur, avec un écran en direct pour le regarder travailler."},
+ {"id":"secu","cap":"Et avant toute action sensible, il te demande ton accord."},
+ {"id":"mcp","cap":"Il se connecte en un clic à tes applis : Gmail, GitHub, Notion."},
+ {"id":"lancer","cap":"Pour le lancer, une seule commande dans le terminal : npx openmausbot.","tts":"Pour le lancer, une seule commande dans le terminal : N P X, open maus bot."},
+ {"id":"installer","cap":"Il existe aussi un installateur pour Mac, Windows et Ubuntu."},
+ {"id":"indep","cap":"Un projet indépendant, non affilié à xAI, et ouvert aux contributions.","tts":"Un projet indépendant, non affilié à x A I, et ouvert aux contributions."},
+ {"id":"cta","cap":"Alors, tu l'essaies ? Abonne-toi pour plus d'actus IA sur GenRank.fr !","tts":"Alors, tu l'essaies ? Abonne-toi pour plus d'actus I A sur Gen Rank point F R !"}
+]

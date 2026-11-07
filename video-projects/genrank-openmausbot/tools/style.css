@@ -1,0 +1,100 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: @NIGHT@; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter", sans-serif; color: #fff; }
+#ground { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 30%, #0b1a4d 0%, @NAVY@ 55%, @NIGHT@ 100%); }
+#grid { position: absolute; left: 0; top: 0; width: 1080px; height: 2400px; opacity: 0.5;
+  background-image: linear-gradient(#1f8bff22 2px, transparent 2px), linear-gradient(90deg, #1f8bff22 2px, transparent 2px); background-size: 120px 120px; }
+#orb1 { position: absolute; left: -200px; top: 200px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, #1f8bff55 0%, #1f8bff00 65%); }
+#orb2 { position: absolute; left: 500px; top: 1100px; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, #19d3ff40 0%, #19d3ff00 65%); }
+.vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+.win { position: absolute; border-radius: 38px; overflow: hidden; object-fit: cover; background: #0b1230;
+  box-shadow: 0 0 0 4px #19d3ffa0, 0 0 80px #1f8bff80, 0 34px 70px #000c; }
+.win img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
+.ov { position: absolute; inset: 0; overflow: hidden; }
+.l { display: inline-block; }
+img { display: block; }
+
+/* intro et fin */
+.in-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 42%, #123a9c 0%, #071447 45%, @NIGHT@ 100%); }
+.in-rings { position: absolute; left: 540px; top: 790px; }
+.in-rings i { position: absolute; left: -300px; top: -300px; width: 600px; height: 600px; border-radius: 50%; border: 10px solid @CYAN@; opacity: 0; }
+.in-streaks i { position: absolute; left: 0; height: 10px; width: 520px; border-radius: 6px; background: linear-gradient(90deg, #19d3ff00, @CYAN@, #ffffff); opacity: 0; }
+.in-streaks i:nth-child(1) { top: 560px; } .in-streaks i:nth-child(2) { top: 760px; width: 380px; }
+.in-streaks i:nth-child(3) { top: 960px; width: 640px; } .in-streaks i:nth-child(4) { top: 1160px; width: 300px; }
+.in-logo { position: absolute; left: 90px; top: 420px; width: 900px; filter: drop-shadow(0 0 50px #1f8bffcc); }
+.in-logo img { width: 900px; }
+.in-kick { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; }
+.in-kick span { display: inline-block; background: linear-gradient(90deg, @BLUE@, @CYAN@); color: #fff; font-weight: 900; font-size: 74px; letter-spacing: 8px; padding: 14px 54px; border-radius: 70px; box-shadow: 0 0 50px #19d3ff90; }
+.in-site { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font-weight: 900; font-size: 104px; letter-spacing: -2px; color: #fff; text-shadow: 0 0 40px #19d3ffaa; }
+.in-sub { position: absolute; left: 0; right: 0; top: 1490px; text-align: center; }
+.in-sub span { display: inline-block; background: linear-gradient(90deg, @BLUE@, @CYAN@); color: #fff; font-weight: 900; font-size: 48px; letter-spacing: 2px; padding: 16px 38px; border-radius: 60px; box-shadow: 0 0 40px #19d3ff80; }
+
+/* barre du haut et pied de page */
+#brandbar { position: absolute; left: 50%; top: 50px; width: 520px; margin-left: -260px; padding: 18px 34px 12px; background: #050b22e6; border-radius: 40px; border: 2px solid #19d3ff70; box-shadow: 0 0 40px #1f8bff70, 0 14px 40px #0008; }
+#brandbar img { width: 452px; }
+#footer { position: absolute; left: 0; right: 0; top: 1826px; display: flex; justify-content: center; align-items: center; gap: 16px; font-weight: 800; font-size: 38px; color: #fff; text-shadow: 0 3px 10px #000a; }
+#footer b { color: @CYAN@; }
+#progress { position: absolute; left: 0; top: 0; width: 1080px; height: 14px; background: linear-gradient(90deg, @BLUE@, @CYAN@); transform-origin: 0 50%; z-index: 120; }
+#flash { position: absolute; inset: 0; background: #bfeaff; opacity: 0; pointer-events: none; }
+
+/* accroche */
+.hk-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #02061acc 15%, #02061a99 50%, #02061acc 85%); }
+.hk-top { position: absolute; left: 0; right: 0; top: 470px; text-align: center; }
+.hk-top span { display: inline-block; background: #fff; color: @NAVY@; font-weight: 900; font-size: 56px; letter-spacing: 4px; padding: 10px 34px; border-radius: 14px; transform: rotate(-2deg); box-shadow: 0 8px 0 @BLUE@; }
+.hk { position: absolute; left: 0; right: 0; top: 610px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.hk-1 { font-weight: 900; font-size: 124px; line-height: 1; letter-spacing: -3px; color: @CYAN@; text-shadow: 0 8px 0 @NAVY@, 0 0 60px #19d3ffaa; white-space: nowrap; }
+.hk-arrow svg { width: 110px; height: 140px; display: block; }
+.hk-2 { font-weight: 900; font-size: 190px; line-height: 1; letter-spacing: -4px; color: #fff; text-shadow: 0 8px 0 @NAVY@, 0 0 50px #1f8bffaa; white-space: nowrap; }
+.hk-tag { position: absolute; left: 0; right: 0; top: 1250px; text-align: center; }
+.hk-tag span { display: inline-block; background: #fff; color: @NAVY@; font-weight: 900; font-size: 60px; padding: 12px 36px; border-radius: 14px; transform: rotate(-3deg); box-shadow: 0 10px 0 @BLUE@; }
+
+/* nom du projet */
+.badge { position: absolute; left: 770px; top: 290px; width: 230px; height: 230px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, @CYAN@, @BLUE@); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 40px #000a, 0 0 50px #19d3ff90; border: 8px solid #fff; z-index: 3; }
+.badge span { font-weight: 900; font-size: 44px; color: #fff; transform: rotate(-12deg); }
+.name { position: absolute; left: 60px; right: 60px; top: 1160px; }
+.name-in { background: #050b22f2; border: 3px solid #19d3ff90; border-radius: 34px; padding: 30px 36px 32px; box-shadow: 0 0 60px #1f8bff70, 0 20px 50px #000a; border-bottom: 14px solid @CYAN@; }
+.nm { font-weight: 900; font-size: 106px; line-height: 1; letter-spacing: -2px; color: #fff; white-space: nowrap; }
+.name-sub { margin-top: 10px; font-weight: 800; font-size: 44px; color: @CYAN@; white-space: nowrap; }
+
+/* étiquette des points forts */
+.chk { position: absolute; left: 50px; right: 50px; top: 196px; height: 118px; display: flex; align-items: center; gap: 22px; background: #050b22f0; border: 4px solid @CYAN@; border-radius: 30px; padding: 0 28px 0 16px; box-shadow: 0 0 40px #19d3ff80, 0 14px 30px #0008; }
+.chk-ic { flex: none; width: 86px; height: 86px; border-radius: 50%; background: linear-gradient(135deg, @BLUE@, @CYAN@); display: flex; align-items: center; justify-content: center; }
+.chk-ic svg { width: 60px; height: 60px; }
+.chk-t { flex: 1; font-weight: 900; font-size: 48px; letter-spacing: -0.5px; color: #fff; white-space: nowrap; }
+.chk-n { flex: none; font-weight: 800; font-size: 40px; color: @CYAN@; }
+
+/* pastilles (modèles, applis, systèmes) */
+.chips { position: absolute; left: 50px; right: 50px; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+.chip { display: flex; align-items: center; gap: 16px; background: #050b22f0; border: 3px solid #19d3ff90; border-radius: 60px; padding: 14px 34px 14px 24px; font-weight: 900; font-size: 56px; color: #fff; box-shadow: 0 0 30px #1f8bff60; }
+.chip b { display: block; width: 34px; height: 34px; border-radius: 50%; box-shadow: 0 0 16px currentColor; }
+
+/* terminal */
+.term { position: absolute; left: 60px; right: 60px; top: 420px; border-radius: 34px; overflow: hidden; background: #070d24; box-shadow: 0 0 0 4px #19d3ffa0, 0 0 80px #1f8bff80, 0 34px 70px #000c; }
+.term-bar { display: flex; align-items: center; gap: 14px; padding: 22px 28px; background: #101a40; }
+.term-bar i { width: 26px; height: 26px; border-radius: 50%; background: #ff5f57; }
+.term-bar i:nth-child(2) { background: #febc2e; } .term-bar i:nth-child(3) { background: #28c840; }
+.term-bar span { margin-left: 16px; font-weight: 700; font-size: 34px; color: #8fa0d0; }
+.term-body { display: flex; align-items: center; padding: 100px 44px 110px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 72px; white-space: nowrap; }
+.prompt { color: @CYAN@; margin-right: 26px; }
+.cmd { color: #fff; }
+.cur { display: inline-block; width: 38px; height: 78px; margin-left: 8px; background: @CYAN@; }
+.enter { position: absolute; left: 50%; top: 1060px; margin-left: -190px; width: 380px; display: flex; align-items: center; justify-content: center; gap: 18px; background: linear-gradient(180deg, @CYAN@, @BLUE@); border-radius: 60px; padding: 20px 0; font-weight: 900; font-size: 54px; box-shadow: 0 10px 0 #0b4fb3, 0 0 50px #19d3ff90; }
+.enter svg { width: 60px; height: 60px; }
+
+/* appel à l'action */
+.cta { position: absolute; left: 60px; right: 60px; top: 1010px; background: #050b22f5; border: 3px solid #19d3ff90; border-radius: 40px; padding: 40px 40px 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; box-shadow: 0 0 60px #1f8bff80, 0 24px 60px #000a; border-bottom: 16px solid @CYAN@; }
+.cta-btn { display: flex; align-items: center; gap: 20px; background: linear-gradient(180deg, @CYAN@, @BLUE@); color: #fff; font-weight: 900; font-size: 58px; padding: 22px 54px 22px 38px; border-radius: 70px; box-shadow: 0 10px 0 #0b4fb3; white-space: nowrap; }
+.cta-btn svg { width: 66px; height: 66px; }
+.cta-site { font-weight: 900; font-size: 100px; letter-spacing: -2px; color: #fff; text-shadow: 0 0 30px #19d3ff90; }
+.cta-sub { font-weight: 800; font-size: 44px; letter-spacing: 3px; color: @CYAN@; }
+
+/* sous-titres */
+.cap { position: absolute; left: 40px; right: 40px; top: 1500px; height: 280px; display: flex; align-items: center; justify-content: center; }
+.cap-in { text-align: center; font-weight: 900; font-size: 84px; line-height: 1.08; letter-spacing: -1px; color: #fff; text-shadow: 0 6px 0 #000, 0 0 24px #000c; }
+.cap .hl { color: @CYAN@; }
+
+/* volet de transition */
+.wipe { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.wp { position: absolute; top: -200px; left: -300px; width: 1700px; height: 2400px; transform-origin: 50% 50%; }
+.wp.a { background: @CYAN@; }
+.wp.b { background: @BLUE@; }

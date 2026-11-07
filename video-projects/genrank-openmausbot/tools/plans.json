@@ -1,0 +1,335 @@
+{
+  "marque": {
+    "nom": "GenRank",
+    "site": "genrank.fr",
+    "kicker": "ACTU IA"
+  },
+  "couleurs": {
+    "bleu": "#1f8bff",
+    "cyan": "#19d3ff",
+    "marine": "#050b22",
+    "nuit": "#02061a"
+  },
+  "mots_cles": [
+    "grok",
+    "bot",
+    "bots",
+    "open",
+    "source",
+    "openmausbot",
+    "gratuite",
+    "équipe",
+    "ia",
+    "claude",
+    "gpt",
+    "local",
+    "cerveau",
+    "ordinateur",
+    "accord",
+    "sensible",
+    "gmail",
+    "github",
+    "notion",
+    "npx",
+    "openmausbot.",
+    "mac",
+    "windows",
+    "ubuntu",
+    "installateur",
+    "indépendant",
+    "xai",
+    "genrank.fr",
+    "abonne-toi",
+    "contact",
+    "personnalité",
+    "commande"
+  ],
+  "plans": {
+    "hook": {
+      "type": "hook",
+      "media": {
+        "kind": "video",
+        "mode": "plein",
+        "cx": 0.35,
+        "teinte": "sombre",
+        "extraits": [
+          [
+            16.0,
+            19.5
+          ]
+        ]
+      },
+      "l1": "OPEN SOURCE",
+      "l2": "GROK BOT",
+      "mot1": "open source",
+      "mot2": "Grok",
+      "tag": "100% GRATUIT",
+      "mot_tag": "Bot",
+      "tape": "NOUVEAU PROJET"
+    },
+    "nom": {
+      "type": "titre",
+      "media": {
+        "kind": "image",
+        "file": "app.jpg",
+        "steps": [
+          [
+            90,
+            0,
+            991
+          ],
+          [
+            330,
+            90,
+            700
+          ]
+        ]
+      },
+      "nom": "OPENMAUSBOT",
+      "sous": "l'alternative open source à Grok Bot",
+      "badge": "GRATUIT",
+      "mot_badge": "gratuite"
+    },
+    "idee": {
+      "type": "atout",
+      "label": "ÉQUIPE DE BOTS IA",
+      "media": {
+        "kind": "video",
+        "box": [
+          30,
+          0,
+          900,
+          720
+        ],
+        "extraits": [
+          [
+            15.5,
+            19.0
+          ]
+        ]
+      }
+    },
+    "liste": {
+      "type": "atout",
+      "label": "BOTS = CONTACTS",
+      "media": {
+        "kind": "image",
+        "file": "app.jpg",
+        "steps": [
+          [
+            90,
+            0,
+            991
+          ],
+          [
+            10,
+            70,
+            600
+          ]
+        ]
+      }
+    },
+    "modele": {
+      "type": "atout",
+      "label": "UN CERVEAU PAR BOT",
+      "media": {
+        "kind": "video",
+        "box": [
+          190,
+          0,
+          900,
+          720
+        ],
+        "extraits": [
+          [
+            37.0,
+            41.4
+          ]
+        ]
+      },
+      "chips": [
+        [
+          "Claude",
+          "Claude",
+          "#d97757"
+        ],
+        [
+          "GPT",
+          "GPT",
+          "#10a37f"
+        ],
+        [
+          "Grok",
+          "Grok",
+          "#ffffff"
+        ],
+        [
+          "Modèle local",
+          "local",
+          "#9aa7c7"
+        ]
+      ]
+    },
+    "ordi": {
+      "type": "atout",
+      "label": "SON PROPRE ORDINATEUR",
+      "media": {
+        "kind": "video",
+        "box": [
+          500,
+          10,
+          780,
+          624
+        ],
+        "extraits": [
+          [
+            18.0,
+            20.8
+          ]
+        ]
+      }
+    },
+    "secu": {
+      "type": "atout",
+      "label": "TON ACCORD D'ABORD",
+      "media": {
+        "kind": "video",
+        "box": [
+          0,
+          0,
+          900,
+          720
+        ],
+        "extraits": [
+          [
+            26.8,
+            29.4
+          ]
+        ]
+      }
+    },
+    "mcp": {
+      "type": "atout",
+      "label": "CONNEXION EN 1 CLIC",
+      "media": {
+        "kind": "video",
+        "box": [
+          190,
+          0,
+          900,
+          720
+        ],
+        "extraits": [
+          [
+            84.9,
+            87.0
+          ]
+        ]
+      },
+      "chips": [
+        [
+          "Gmail",
+          "Gmail",
+          "#ea4335"
+        ],
+        [
+          "GitHub",
+          "GitHub",
+          "#ffffff"
+        ],
+        [
+          "Notion",
+          "Notion",
+          "#e6e6e6"
+        ]
+      ]
+    },
+    "lancer": {
+      "type": "terminal",
+      "label": "UNE SEULE COMMANDE",
+      "commande": "npx openmausbot",
+      "mot": "commande"
+    },
+    "installer": {
+      "type": "atout",
+      "label": "MAC · WINDOWS · UBUNTU",
+      "ratio": 2.2,
+      "media": {
+        "kind": "image",
+        "file": "readme.jpg",
+        "steps": [
+          [
+            60,
+            1313,
+            1144
+          ],
+          [
+            232,
+            1465,
+            800
+          ]
+        ]
+      },
+      "chips": [
+        [
+          "macOS",
+          "Mac",
+          "#c8cee0"
+        ],
+        [
+          "Windows",
+          "Windows",
+          "#3aa0ff"
+        ],
+        [
+          "Ubuntu",
+          "Ubuntu",
+          "#e95420"
+        ]
+      ]
+    },
+    "indep": {
+      "type": "atout",
+      "label": "100% INDÉPENDANT",
+      "media": {
+        "kind": "image",
+        "file": "readme.jpg",
+        "steps": [
+          [
+            0,
+            0,
+            1264
+          ],
+          [
+            60,
+            590,
+            1144
+          ],
+          [
+            0,
+            822,
+            1264
+          ]
+        ]
+      }
+    },
+    "cta": {
+      "type": "cta",
+      "media": {
+        "kind": "video",
+        "box": [
+          190,
+          0,
+          900,
+          720
+        ],
+        "extraits": [
+          [
+            91.0,
+            94.0
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,478 @@
+{
+ "total": 59.462,
+ "lead": 2.9000000000000004,
+ "gap": 0.26,
+ "segments": [
+  "hook",
+  "nom",
+  "idee",
+  "liste",
+  "modele",
+  "ordi",
+  "secu",
+  "mcp",
+  "lancer",
+  "installer",
+  "indep",
+  "cta"
+ ],
+ "vo": {
+  "hook": 2.9,
+  "nom": 6.588,
+  "idee": 10.097,
+  "liste": 14.547,
+  "modele": 19.5,
+  "ordi": 24.935,
+  "secu": 29.419,
+  "mcp": 32.426,
+  "lancer": 36.766,
+  "installer": 42.15,
+  "indep": 45.821,
+  "cta": 50.261
+ },
+ "shots": [
+  {
+   "kind": "intro",
+   "start": 0.0,
+   "dur": 2.7
+  },
+  {
+   "kind": "hook",
+   "start": 2.7,
+   "dur": 3.768,
+   "clip": "assets/clips/hook.mp4",
+   "media": {
+    "kind": "video",
+    "mode": "plein",
+    "cx": 0.35,
+    "teinte": "sombre",
+    "extraits": [
+     [
+      16.0,
+      19.5
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "nom",
+   "start": 6.468,
+   "dur": 3.509
+  },
+  {
+   "kind": "idee",
+   "start": 9.977,
+   "dur": 4.45,
+   "clip": "assets/clips/idee.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     30,
+     0,
+     900,
+     720
+    ],
+    "extraits": [
+     [
+      15.5,
+      19.0
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "liste",
+   "start": 14.427,
+   "dur": 4.953
+  },
+  {
+   "kind": "modele",
+   "start": 19.38,
+   "dur": 5.435,
+   "clip": "assets/clips/modele.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     190,
+     0,
+     900,
+     720
+    ],
+    "extraits": [
+     [
+      37.0,
+      41.4
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "ordi",
+   "start": 24.815,
+   "dur": 4.484,
+   "clip": "assets/clips/ordi.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     500,
+     10,
+     780,
+     624
+    ],
+    "extraits": [
+     [
+      18.0,
+      20.8
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "secu",
+   "start": 29.299,
+   "dur": 3.007,
+   "clip": "assets/clips/secu.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     0,
+     0,
+     900,
+     720
+    ],
+    "extraits": [
+     [
+      26.8,
+      29.4
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "mcp",
+   "start": 32.306,
+   "dur": 4.34,
+   "clip": "assets/clips/mcp.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     190,
+     0,
+     900,
+     720
+    ],
+    "extraits": [
+     [
+      84.9,
+      87.0
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "lancer",
+   "start": 36.646,
+   "dur": 5.384
+  },
+  {
+   "kind": "installer",
+   "start": 42.03,
+   "dur": 3.671
+  },
+  {
+   "kind": "indep",
+   "start": 45.701,
+   "dur": 4.44
+  },
+  {
+   "kind": "cta",
+   "start": 50.141,
+   "dur": 5.921,
+   "clip": "assets/clips/cta.mp4",
+   "media": {
+    "kind": "video",
+    "box": [
+     190,
+     0,
+     900,
+     720
+    ],
+    "extraits": [
+     [
+      91.0,
+      94.0
+     ]
+    ],
+    "h": 768
+   }
+  },
+  {
+   "kind": "outro",
+   "start": 56.062,
+   "dur": 3.4
+  }
+ ],
+ "sfx": [
+  [
+   0.05,
+   "whoosh-big",
+   0.5
+  ],
+  [
+   0.3,
+   "hit",
+   0.4
+  ],
+  [
+   0.9,
+   "shimmer",
+   0.4
+  ],
+  [
+   1.05,
+   "pop-high",
+   0.5
+  ],
+  [
+   2.4,
+   "swish-02",
+   0.45
+  ],
+  [
+   2.8,
+   "swish-01",
+   0.4
+  ],
+  [
+   4.985,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   6.018,
+   "pop-high",
+   0.45
+  ],
+  [
+   6.052,
+   "stamp",
+   0.6
+  ],
+  [
+   6.588,
+   "whoosh-medium",
+   0.4
+  ],
+  [
+   7.068,
+   "shimmer",
+   0.35
+  ],
+  [
+   9.258,
+   "stamp",
+   0.5
+  ],
+  [
+   10.057,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   10.397,
+   "pop-mid",
+   0.5
+  ],
+  [
+   14.507,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   14.847,
+   "pop-mid",
+   0.5
+  ],
+  [
+   19.46,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   19.8,
+   "pop-mid",
+   0.5
+  ],
+  [
+   21.926,
+   "pop-mid",
+   0.5
+  ],
+  [
+   22.418,
+   "pop-mid",
+   0.5
+  ],
+  [
+   22.726,
+   "pop-mid",
+   0.5
+  ],
+  [
+   24.205,
+   "pop-mid",
+   0.5
+  ],
+  [
+   24.895,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   25.235,
+   "pop-mid",
+   0.5
+  ],
+  [
+   29.379,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   29.719,
+   "pop-mid",
+   0.5
+  ],
+  [
+   31.729,
+   "notif-up",
+   0.5
+  ],
+  [
+   32.386,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   32.726,
+   "pop-mid",
+   0.5
+  ],
+  [
+   34.981,
+   "pop-mid",
+   0.5
+  ],
+  [
+   35.435,
+   "pop-mid",
+   0.5
+  ],
+  [
+   35.953,
+   "pop-mid",
+   0.5
+  ],
+  [
+   36.726,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   38.669,
+   "typing-medium",
+   0.55
+  ],
+  [
+   40.419,
+   "pop-high",
+   0.5
+  ],
+  [
+   42.11,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   42.45,
+   "pop-mid",
+   0.5
+  ],
+  [
+   44.154,
+   "pop-mid",
+   0.5
+  ],
+  [
+   44.438,
+   "pop-mid",
+   0.5
+  ],
+  [
+   45.063,
+   "pop-mid",
+   0.5
+  ],
+  [
+   45.781,
+   "whoosh-light",
+   0.4
+  ],
+  [
+   46.121,
+   "pop-mid",
+   0.5
+  ],
+  [
+   50.241,
+   "whoosh-medium",
+   0.4
+  ],
+  [
+   51.77,
+   "pop-high",
+   0.5
+  ],
+  [
+   54.138,
+   "ding-01",
+   0.5
+  ],
+  [
+   55.762,
+   "swish-02",
+   0.45
+  ],
+  [
+   56.112,
+   "whoosh-big",
+   0.5
+  ],
+  [
+   56.362,
+   "hit",
+   0.4
+  ],
+  [
+   56.962,
+   "shimmer",
+   0.4
+  ],
+  [
+   57.262,
+   "chime",
+   0.45
+  ],
+  [
+   57.562,
+   "pop-high",
+   0.45
+  ]
+ ]
+}
