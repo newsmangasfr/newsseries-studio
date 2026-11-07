@@ -1,0 +1,33 @@
+{
+  "boutique": {
+    "nom": "AchatBoo",
+    "site": "achatboo.com",
+    "ville": "Ghollamallah",
+    "slogan": "ON VEND DE TOUT !",
+    "telephone": ""
+  },
+  "couleurs": { "orange": "#ff6a00", "orange2": "#ffa31a", "marine": "#111a33", "creme": "#fff7ef" },
+  "produit": {
+    "nom": ["CANAPÉ", "CONVERTIBLE"],
+    "sous_titre": "en velours côtelé",
+    "badge": "NOUVEAU",
+    "prix": "89 900",
+    "devise": "DA",
+    "ancien_prix": ""
+  },
+  "mots_cles": ["canapé", "lit", "convertible", "velours", "côtelé", "achatboo", "doux", "épais", "côtes", "moelleuse", "coussins",
+                "inclus", "secondes", "effort", "bonus", "coffre", "rangement", "couchage", "invités", "seulement", "89", "900",
+                "dinars", "achatboo.com", "ghollamallah", "vite"],
+  "plans": {
+    "hook":     { "type": "hook",  "cadre": "plein", "cx": 0.42, "extraits": [[30.7, 34.7]],
+                  "texte": ["DE CANAPÉ", "À LIT"], "mot1": "canapé", "mot2": "lit", "tag": "REGARDE ÇA", "mot_tag": "Regarde" },
+    "nom":      { "type": "titre", "cadre": "carre", "extraits": [[8.0, 12.9]] },
+    "tissu":    { "type": "atout", "cadre": "carre", "extraits": [[4.7, 7.4], [16.9, 18.7]], "label": "TISSU ÉPAIS ET DOUX" },
+    "confort":  { "type": "atout", "cadre": "carre", "extraits": [[13.3, 16.6], [20.8, 22.4]], "label": "COUSSINS INCLUS" },
+    "lit":      { "type": "atout", "cadre": "carre", "extraits": [[25.0, 29.0], [42.0, 43.4]], "label": "SE DÉPLIE EN LIT" },
+    "coffre":   { "type": "atout", "cadre": "carre", "extraits": [[34.85, 36.0], [36.1, 37.7], [38.65, 40.4]], "label": "COFFRE DE RANGEMENT" },
+    "couchage": { "type": "atout", "cadre": "carre", "extraits": [[43.5, 44.3], [44.4, 46.9], [47.0, 49.3]], "label": "GRAND COUCHAGE" },
+    "prix":     { "type": "prix",  "cadre": "carre", "extraits": [[9.0, 12.9]], "mot": "seulement" },
+    "cta":      { "type": "cta",   "cadre": "carre", "teinte": "sombre", "extraits": [[47.0, 49.3]] }
+  }
+}

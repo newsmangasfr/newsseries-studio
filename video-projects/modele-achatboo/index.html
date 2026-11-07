@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #111a33; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter", sans-serif; color: #fff; }
+#ground { position: absolute; inset: 0; background: #111a33; }
+.vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+.ov { position: absolute; inset: 0; overflow: hidden; }
+.l { display: inline-block; }
+img { display: block; }
+
+/* logo intro / fin */
+.lo-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 42%, #ffffff 0%, #fff7ef 60%, #ffe3c7 100%); }
+.lo-burst { position: absolute; left: 540px; top: 760px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px; border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, #ff6a0014 0deg 8deg, #ff6a0000 8deg 16deg); }
+.lo-ring { position: absolute; left: 540px; top: 700px; width: 600px; height: 600px; margin: -300px 0 0 -300px; border-radius: 50%; border: 18px solid #ff6a00; opacity: 0; }
+.lo-sac { position: absolute; left: 540px; top: 470px; width: 470px; margin-left: -235px; transform-origin: 50% 100%; }
+.lo-sac img { width: 470px; }
+.lo-lines { position: absolute; left: 90px; top: 640px; }
+.lo-lines i { display: block; width: 230px; height: 16px; border-radius: 8px; background: #ff6a00; margin-bottom: 34px; }
+.lo-lines i:nth-child(2) { width: 170px; margin-left: 50px; }
+.lo-mask { position: absolute; left: 60px; top: 1010px; width: 960px; overflow: hidden; }
+.lo-txt { width: 960px; }
+.lo-slogan { position: absolute; left: 0; right: 0; top: 1230px; text-align: center; }
+.lo-slogan span { display: inline-block; background: #111a33; color: #fff; font-weight: 900; font-size: 62px; letter-spacing: 3px; padding: 14px 40px; border-radius: 60px; box-shadow: 0 10px 0 #ff6a00; }
+.lo-site { position: absolute; left: 0; right: 0; top: 1420px; text-align: center; font-weight: 900; font-size: 84px; color: #ff6a00; }
+.lo-ville { position: absolute; left: 0; right: 0; top: 1550px; display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 800; font-size: 56px; color: #111a33; }
+.lo-ville svg { width: 64px; height: 64px; }
+
+/* bandeau logo et pied de page */
+#brandbar { position: absolute; left: 50%; top: 56px; width: 600px; margin-left: -300px; padding: 22px 34px; background: #fff; border-radius: 40px; box-shadow: 0 14px 40px #0006; }
+#brandbar img { width: 532px; }
+#footer { position: absolute; left: 0; right: 0; top: 1826px; display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 800; font-size: 38px; color: #fff; text-shadow: 0 3px 10px #000a; }
+#footer svg { width: 42px; height: 42px; }
+#footer b { color: #ff6a00; }
+#progress { position: absolute; left: 0; top: 0; width: 1080px; height: 14px; background: linear-gradient(90deg, #ffa31a, #ff6a00); transform-origin: 0 50%; z-index: 120; }
+
+/* accroche */
+.hk-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #0000 25%, #000a 50%, #0000 75%); }
+.hk { position: absolute; left: 0; right: 0; top: 560px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.hk-1 { font-weight: 900; font-size: 150px; line-height: 1; letter-spacing: -3px; color: #fff; text-shadow: 0 8px 0 #111a33, 0 0 40px #0008; white-space: nowrap; }
+.hk-arrow svg { width: 120px; height: 150px; display: block; }
+.hk-2 { font-weight: 900; font-size: 300px; line-height: 0.9; letter-spacing: -8px; color: #ff6a00; text-shadow: 0 12px 0 #111a33, 0 0 60px #0009; white-space: nowrap; }
+.hk-tag { position: absolute; left: 0; right: 0; top: 1240px; text-align: center; }
+.hk-tag span { display: inline-block; background: #fff; color: #111a33; font-weight: 900; font-size: 60px; padding: 12px 36px; border-radius: 14px; transform: rotate(-3deg); box-shadow: 0 10px 0 #ff6a00; }
+
+/* nom du produit */
+.badge { position: absolute; left: 790px; top: 300px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffa31a, #ff6a00); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px #0007; border: 8px solid #fff; }
+.badge span { font-weight: 900; font-size: 42px; color: #fff; transform: rotate(-12deg); }
+.name { position: absolute; left: 60px; right: 60px; top: 1110px; }
+.name-in { background: #fff; border-radius: 34px; padding: 30px 40px 34px; box-shadow: 0 20px 50px #0008; border-bottom: 14px solid #ff6a00; }
+.nm { font-weight: 900; font-size: 104px; line-height: 0.98; letter-spacing: -2px; color: #111a33; white-space: nowrap; }
+.name-sub { margin-top: 12px; font-weight: 800; font-size: 54px; color: #ff6a00; }
+
+/* atouts */
+.chk { position: absolute; left: 50px; right: 50px; top: 222px; height: 120px; display: flex; align-items: center; gap: 24px; background: #111a33; border: 5px solid #ff6a00; border-radius: 30px; padding: 0 30px 0 18px; box-shadow: 0 14px 30px #0008; }
+.chk-ic { flex: none; width: 88px; height: 88px; border-radius: 50%; background: #ff6a00; display: flex; align-items: center; justify-content: center; }
+.chk-ic svg { width: 62px; height: 62px; }
+.chk-t { flex: 1; font-weight: 900; font-size: 54px; letter-spacing: -0.5px; color: #fff; white-space: nowrap; }
+.chk-n { flex: none; font-weight: 800; font-size: 40px; color: #ffa31a; }
+
+/* prix */
+.px { position: absolute; left: 540px; top: 900px; width: 760px; height: 760px; margin: -380px 0 0 -380px; transform: rotate(-6deg); }
+.px-star { position: absolute; inset: 0; width: 760px; height: 760px; filter: drop-shadow(0 20px 30px #0009); }
+.px-in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.px-tag { background: #111a33; color: #fff; font-weight: 900; font-size: 52px; letter-spacing: 3px; padding: 8px 30px; border-radius: 12px; }
+.px-old { margin-top: 10px; font-weight: 800; font-size: 56px; color: #fff; opacity: 0.85; text-decoration: line-through; text-decoration-thickness: 6px; }
+.px-val { font-weight: 900; font-size: 148px; line-height: 1; letter-spacing: -5px; color: #fff; text-shadow: 0 8px 0 #b33f00; white-space: nowrap; margin-top: 8px; }
+.px-cur { font-weight: 900; font-size: 90px; line-height: 1; color: #111a33; }
+
+/* appel à l'action */
+.cta { position: absolute; left: 60px; right: 60px; top: 560px; background: #fff; border-radius: 40px; padding: 50px 40px 46px; display: flex; flex-direction: column; align-items: center; gap: 30px; box-shadow: 0 24px 60px #000a; border-bottom: 16px solid #ff6a00; }
+.cta-btn { display: flex; align-items: center; gap: 20px; background: linear-gradient(180deg, #ffa31a, #ff6a00); color: #fff; font-weight: 900; font-size: 54px; padding: 26px 40px; border-radius: 70px; box-shadow: 0 10px 0 #b33f00; white-space: nowrap; }
+.cta-btn svg { width: 66px; height: 66px; }
+.cta-site { font-weight: 900; font-size: 92px; letter-spacing: -2px; color: #111a33; }
+.cta-row { font-weight: 800; font-size: 56px; color: #111a33; }
+.cta-ville { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 56px; color: #111a33; }
+.cta-ville svg { width: 64px; height: 64px; }
+
+/* sous-titres */
+.cap { position: absolute; left: 40px; right: 40px; top: 1500px; height: 280px; display: flex; align-items: center; justify-content: center; }
+.cap-in { text-align: center; font-weight: 900; font-size: 84px; line-height: 1.08; letter-spacing: -1px; color: #fff; text-shadow: 0 6px 0 #000, 0 0 24px #000c; }
+.cap .hl { color: #ffa31a; }
+
+/* volet de transition */
+.wipe { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.wp { position: absolute; top: -200px; left: -300px; width: 1700px; height: 2400px; transform-origin: 50% 50%; }
+.wp.a { background: #ffa31a; }
+.wp.b { background: #ff6a00; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="40.407" data-width="1080" data-height="1920">
+      <div id="ground" class="clip" data-start="0" data-duration="40.407" data-track-index="0"></div>
+<div id="s00" class="clip ov" data-start="0.0" data-duration="2.6" data-track-index="3" style="z-index:13">
+  <div class="lo-bg"></div><div class="lo-burst"></div><div class="lo-ring"></div>
+  <div class="lo-lines"><i></i><i></i><i></i></div>
+  <div class="lo-sac"><img src="assets/brand/sac.png" alt=""></div>
+  <div class="lo-mask"><img class="lo-txt" src="assets/brand/texte.png" alt="AchatBoo"></div>
+  <div class="lo-slogan"><span>ON VEND DE TOUT !</span></div>
+</div>
+<video id="v01" class="clip vid" data-start="2.6" data-duration="3.019" data-track-index="2" src="assets/clips/hook.mp4" muted playsinline style="z-index:14"></video>
+<div id="s01" class="clip ov" data-start="2.6" data-duration="3.019" data-track-index="4" style="z-index:15">
+  <div class="hk-shade"></div><div class="hk"><div class="hk-1"><span class=l>D</span><span class=l>E</span><span class=l>&nbsp;</span><span class=l>C</span><span class=l>A</span><span class=l>N</span><span class=l>A</span><span class=l>P</span><span class=l>É</span></div>
+  <div class="hk-arrow"><svg viewBox="0 0 100 120"><path d="M50 5v90M15 62l35 38 35-38" fill="none" stroke="#ff6a00" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="hk-2"><span class=l>À</span><span class=l>&nbsp;</span><span class=l>L</span><span class=l>I</span><span class=l>T</span></div></div><div class="hk-tag"><span>REGARDE ÇA</span></div>
+</div>
+<video id="v02" class="clip vid" data-start="5.619" data-duration="4.206" data-track-index="1" src="assets/clips/nom.mp4" muted playsinline style="z-index:16"></video>
+<div id="s02" class="clip ov" data-start="5.619" data-duration="4.206" data-track-index="3" style="z-index:17">
+  <div class="badge"><span>NOUVEAU</span></div>
+  <div class="name"><div class="name-in"><div class="nm"><span class=l>C</span><span class=l>A</span><span class=l>N</span><span class=l>A</span><span class=l>P</span><span class=l>É</span></div><div class="nm"><span class=l>C</span><span class=l>O</span><span class=l>N</span><span class=l>V</span><span class=l>E</span><span class=l>R</span><span class=l>T</span><span class=l>I</span><span class=l>B</span><span class=l>L</span><span class=l>E</span></div><div class="name-sub">en velours côtelé</div></div></div>
+</div>
+<video id="v03" class="clip vid" data-start="9.825" data-duration="4.797" data-track-index="2" src="assets/clips/tissu.mp4" muted playsinline style="z-index:18"></video>
+<div id="s03" class="clip ov" data-start="9.825" data-duration="4.797" data-track-index="4" style="z-index:19">
+  <div class="chk"><div class="chk-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chk-t">TISSU ÉPAIS ET DOUX</div><div class="chk-n">1/5</div></div>
+</div>
+<video id="v04" class="clip vid" data-start="14.622" data-duration="3.021" data-track-index="1" src="assets/clips/confort.mp4" muted playsinline style="z-index:20"></video>
+<div id="s04" class="clip ov" data-start="14.622" data-duration="3.021" data-track-index="3" style="z-index:21">
+  <div class="chk"><div class="chk-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chk-t">COUSSINS INCLUS</div><div class="chk-n">2/5</div></div>
+</div>
+<video id="v05" class="clip vid" data-start="17.643" data-duration="3.977" data-track-index="2" src="assets/clips/lit.mp4" muted playsinline style="z-index:22"></video>
+<div id="s05" class="clip ov" data-start="17.643" data-duration="3.977" data-track-index="4" style="z-index:23">
+  <div class="chk"><div class="chk-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chk-t">SE DÉPLIE EN LIT</div><div class="chk-n">3/5</div></div>
+</div>
+<video id="v06" class="clip vid" data-start="21.62" data-duration="3.804" data-track-index="1" src="assets/clips/coffre.mp4" muted playsinline style="z-index:24"></video>
+<div id="s06" class="clip ov" data-start="21.62" data-duration="3.804" data-track-index="3" style="z-index:25">
+  <div class="chk"><div class="chk-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chk-t">COFFRE DE RANGEMENT</div><div class="chk-n">4/5</div></div>
+</div>
+<video id="v07" class="clip vid" data-start="25.424" data-duration="3.294" data-track-index="2" src="assets/clips/couchage.mp4" muted playsinline style="z-index:26"></video>
+<div id="s07" class="clip ov" data-start="25.424" data-duration="3.294" data-track-index="4" style="z-index:27">
+  <div class="chk"><div class="chk-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chk-t">GRAND COUCHAGE</div><div class="chk-n">5/5</div></div>
+</div>
+<video id="v08" class="clip vid" data-start="28.718" data-duration="3.792" data-track-index="1" src="assets/clips/prix.mp4" muted playsinline style="z-index:28"></video>
+<div id="s08" class="clip ov" data-start="28.718" data-duration="3.792" data-track-index="3" style="z-index:29">
+  <div class="px"><svg class="px-star" viewBox="0 0 1080 1080"><polygon points="870.0,540.0 817.9,603.4 837.3,683.2 762.8,717.7 745.8,798.0 663.7,796.8 613.4,861.7 540.0,825.0 466.6,861.7 416.3,796.8 334.2,798.0 317.2,717.7 242.7,683.2 262.1,603.4 210.0,540.0 262.1,476.6 242.7,396.8 317.2,362.3 334.2,282.0 416.3,283.2 466.6,218.3 540.0,255.0 613.4,218.3 663.7,283.2 745.8,282.0 762.8,362.3 837.3,396.8 817.9,476.6 " fill="#ff6a00"/></svg>
+  <div class="px-in"><div class="px-tag">PRIX CHOC</div><div class="px-val"><span class=l>8</span><span class=l>9</span><span class=l>&nbsp;</span><span class=l>9</span><span class=l>0</span><span class=l>0</span></div><div class="px-cur">DA</div></div></div>
+</div>
+<video id="v09" class="clip vid" data-start="32.51" data-duration="4.697" data-track-index="2" src="assets/clips/cta.mp4" muted playsinline style="z-index:30"></video>
+<div id="s09" class="clip ov" data-start="32.51" data-duration="4.697" data-track-index="4" style="z-index:31">
+  <div class="cta"><div class="cta-btn"><svg viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 10.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L20.5 8H7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.7" fill="#fff"/><circle cx="17" cy="19.5" r="1.7" fill="#fff"/></svg><span>COMMANDE MAINTENANT</span></div>
+  <div class="cta-site">achatboo.com</div><div class="cta-ville"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" fill="#ff6a00"/></svg><span>Ghollamallah</span></div></div>
+</div>
+<div id="s10" class="clip ov" data-start="37.207" data-duration="3.2" data-track-index="3" style="z-index:33">
+  <div class="lo-bg"></div><div class="lo-burst"></div><div class="lo-ring"></div>
+  <div class="lo-lines"><i></i><i></i><i></i></div>
+  <div class="lo-sac"><img src="assets/brand/sac.png" alt=""></div>
+  <div class="lo-mask"><img class="lo-txt" src="assets/brand/texte.png" alt="AchatBoo"></div>
+  <div class="lo-slogan"><span>ON VEND DE TOUT !</span></div><div class="lo-site">achatboo.com</div><div class="lo-ville"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" fill="#ff6a00"/></svg><span>Ghollamallah</span></div>
+</div>
+<div id="brandbar" class="clip" data-start="2.6" data-duration="34.607" data-track-index="6" style="z-index:80"><img src="assets/brand/logo.png" alt=""></div>
+<div id="footer" class="clip" data-start="2.6" data-duration="34.607" data-track-index="7" style="z-index:80"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" fill="#ff6a00"/></svg><span>Ghollamallah</span><b>·</b><span>achatboo.com</span></div>
+<div id="wipe0" class="clip wipe" data-start="2.25" data-duration="0.7" data-track-index="8" style="z-index:95"><div class="wp a"></div><div class="wp b"></div></div>
+<div id="wipe1" class="clip wipe" data-start="36.857" data-duration="0.7" data-track-index="9" style="z-index:95"><div class="wp a"></div><div class="wp b"></div></div>
+<div id="c000" class="clip cap" data-start="2.85" data-duration="0.599" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">Tu</span> <span class="w">cherches</span> <span class="w">un</span></div></div>
+<div id="c001" class="clip cap" data-start="3.492" data-duration="0.556" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w hl">canapé</span> <span class="w">qui</span> <span class="w">se</span></div></div>
+<div id="c002" class="clip cap" data-start="4.09" data-duration="0.813" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">transforme</span> <span class="w">en</span> <span class="w">lit ?</span></div></div>
+<div id="c003" class="clip cap" data-start="4.946" data-duration="0.513" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">Regarde</span> <span class="w">ça !</span></div></div>
+<div id="c004" class="clip cap" data-start="5.739" data-duration="0.818" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">Voici</span> <span class="w">le</span> <span class="w hl">canapé</span></div></div>
+<div id="c005" class="clip cap" data-start="6.611" data-duration="1.2" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w hl">convertible</span> <span class="w">en</span> <span class="w hl">velours</span></div></div>
+<div id="c006" class="clip cap" data-start="7.866" data-duration="0.4" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w hl">côtelé,</span></div></div>
+<div id="c007" class="clip cap" data-start="8.302" data-duration="1.363" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">disponible</span> <span class="w">chez</span> <span class="w hl">AchatBoo.</span></div></div>
+<div id="c008" class="clip cap" data-start="9.945" data-duration="0.821" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">Un</span> <span class="w">tissu</span> <span class="w hl">épais</span></div></div>
+<div id="c009" class="clip cap" data-start="10.825" data-duration="0.763" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">et</span> <span class="w">tout</span> <span class="w hl">doux,</span></div></div>
+<div id="c010" class="clip cap" data-start="11.646" data-duration="0.822" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">avec</span> <span class="w">de</span> <span class="w">larges</span></div></div>
+<div id="c011" class="clip cap" data-start="12.526" data-duration="0.4" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w hl">côtes,</span></div></div>
+<div id="c012" class="clip cap" data-start="12.937" data-duration="0.997" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">super</span> <span class="w">agréable</span> <span class="w">au</span></div></div>
+<div id="c013" class="clip cap" data-start="13.993" data-duration="0.47" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">toucher.</span></div></div>
+<div id="c014" class="clip cap" data-start="14.742" data-duration="1.212" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">L&#x27;assise</span> <span class="w">est</span> <span class="w hl">moelleuse,</span></div></div>
+<div id="c015" class="clip cap" data-start="16.007" data-duration="0.79" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">et</span> <span class="w">les</span> <span class="w hl">coussins</span></div></div>
+<div id="c016" class="clip cap" data-start="16.85" data-duration="0.632" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">sont</span> <span class="w hl">inclus.</span></div></div>
+<div id="c017" class="clip cap" data-start="17.763" data-duration="1.177" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">En</span> <span class="w">quelques</span> <span class="w hl">secondes,</span></div></div>
+<div id="c018" class="clip cap" data-start="18.996" data-duration="0.672" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">il</span> <span class="w">se</span> <span class="w">déplie</span></div></div>
+<div id="c019" class="clip cap" data-start="19.724" data-duration="0.672" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">en</span> <span class="w">vrai</span> <span class="w hl">lit,</span></div></div>
+<div id="c020" class="clip cap" data-start="20.452" data-duration="1.009" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">sans</span> <span class="w">aucun</span> <span class="w hl">effort.</span></div></div>
+<div id="c021" class="clip cap" data-start="21.74" data-duration="0.716" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">Et</span> <span class="w">en</span> <span class="w">bonus :</span></div></div>
+<div id="c022" class="clip cap" data-start="22.511" data-duration="0.826" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">un</span> <span class="w">grand</span> <span class="w hl">coffre</span></div></div>
+<div id="c023" class="clip cap" data-start="23.392" data-duration="0.715" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">de</span> <span class="w hl">rangement,</span></div></div>
+<div id="c024" class="clip cap" data-start="24.162" data-duration="1.101" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">caché</span> <span class="w">sous</span> <span class="w">l&#x27;assise.</span></div></div>
+<div id="c025" class="clip cap" data-start="25.544" data-duration="1.064" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">Un</span> <span class="w">grand</span> <span class="w hl">couchage,</span></div></div>
+<div id="c026" class="clip cap" data-start="26.667" data-duration="1.123" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">idéal</span> <span class="w">pour</span> <span class="w">recevoir</span></div></div>
+<div id="c027" class="clip cap" data-start="27.849" data-duration="0.709" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">tes</span> <span class="w hl">invités.</span></div></div>
+<div id="c028" class="clip cap" data-start="28.838" data-duration="0.92" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">Et</span> <span class="w">tout</span> <span class="w">ça,</span></div></div>
+<div id="c029" class="clip cap" data-start="29.841" data-duration="1.757" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">pour</span> <span class="w hl">seulement</span> <span class="w">89 900</span></div></div>
+<div id="c030" class="clip cap" data-start="31.681" data-duration="0.669" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">dinars !</span></div></div>
+<div id="c031" class="clip cap" data-start="32.63" data-duration="0.818" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">Commande-le</span> <span class="w hl">vite</span></div></div>
+<div id="c032" class="clip cap" data-start="33.499" data-duration="0.868" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">sur</span> <span class="w hl">AchatBoo.com,</span></div></div>
+<div id="c033" class="clip cap" data-start="34.418" data-duration="0.665" data-track-index="21" style="z-index:70"><div class="cap-in"><span class="w">ou</span> <span class="w">viens</span> <span class="w">nous</span></div></div>
+<div id="c034" class="clip cap" data-start="35.134" data-duration="1.073" data-track-index="20" style="z-index:70"><div class="cap-in"><span class="w">voir</span> <span class="w">à</span> <span class="w">Ghollamallah !</span></div></div>
+      <div id="progress" class="clip" data-start="0" data-duration="40.407" data-track-index="30"></div>
+      <audio id="mix" data-start="0" data-duration="40.407" data-track-index="50" src="audio/mix.wav" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s00 .lo-burst", { scale: 0 }, { scale: 1, duration: 0.5, ease: "expo.out" }, 0.05);
+      tl.fromTo("#s00 .lo-ring", { scale: 0.2, opacity: 1 }, { scale: 2.2, opacity: 0, duration: 0.8, ease: "power2.out" }, 0.55);
+      tl.from("#s00 .lo-sac", { y: -1300, rotation: -25, duration: 0.6, ease: "bounce.out" }, 0.05);
+      tl.from("#s00 .lo-lines i", { x: -700, opacity: 0, duration: 0.35, ease: "power3.out", stagger: 0.06 }, 0.5);
+      tl.to("#s00 .lo-lines i", { x: -60, opacity: 0, duration: 0.4, ease: "power2.in", stagger: 0.05 }, 1.0);
+      tl.from("#s00 .lo-txt", { x: -1000, duration: 0.5, ease: "power4.out" }, 0.7);
+      tl.from("#s00 .lo-slogan", { scaleX: 0, duration: 0.4, ease: "back.out(1.8)" }, 1.15);
+      tl.to("#s00 .lo-sac", { rotation: 6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3 }, 1.45);
+      tl.to("#s00 .lo-sac, #s00 .lo-mask, #s00 .lo-slogan", { scale: 1.12, duration: 0.5, ease: "power2.in" }, 2.1);
+      tl.fromTo("#v01", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 2.6);
+      tl.from("#s01 .hk-1 .l", { y: 160, opacity: 0, duration: 0.3, ease: "back.out(2.2)", stagger: 0.035 }, 3.242);
+      tl.from("#s01 .hk-arrow", { scaleY: 0, transformOrigin: "50% 0%", duration: 0.3, ease: "power3.out" }, 4.339);
+      tl.from("#s01 .hk-2", { scale: 3, opacity: 0, duration: 0.28, ease: "expo.in" }, 4.489);
+      tl.fromTo("#s01 .hk", { x: 0 }, { x: 14, duration: 0.04, ease: "none", yoyo: true, repeat: 5, immediateRender: false }, 4.769);
+      tl.from("#s01 .hk-tag", { scaleX: 0, duration: 0.35, ease: "back.out(1.8)" }, 4.846);
+      tl.fromTo("#v02", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 5.619);
+      tl.from("#s02 .name", { y: 260, opacity: 0, duration: 0.45, ease: "power4.out" }, 5.718999999999999);
+      tl.from("#s02 .nm .l", { y: 90, opacity: 0, duration: 0.3, ease: "back.out(2)", stagger: 0.03 }, 5.919);
+      tl.from("#s02 .name-sub", { opacity: 0, x: -60, duration: 0.4, ease: "power3.out" }, 7.329000000000001);
+      tl.from("#s02 .badge", { scale: 0, rotation: -200, duration: 0.5, ease: "back.out(1.7)" }, 6.169);
+      tl.to("#s02 .badge", { rotation: 10, duration: 3.106, ease: "none" }, 6.669);
+      tl.fromTo("#v03", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 9.825);
+      tl.from("#s03 .chk", { x: -1100, duration: 0.45, ease: "power4.out" }, 9.905);
+      tl.from("#s03 .chk-ic", { scale: 0, rotation: -90, duration: 0.35, ease: "back.out(2.5)" }, 10.225);
+      tl.from("#s03 .chk-n", { opacity: 0, y: 30, duration: 0.3, ease: "power2.out" }, 10.325);
+      tl.fromTo("#v04", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 14.622);
+      tl.from("#s04 .chk", { x: -1100, duration: 0.45, ease: "power4.out" }, 14.702);
+      tl.from("#s04 .chk-ic", { scale: 0, rotation: -90, duration: 0.35, ease: "back.out(2.5)" }, 15.022);
+      tl.from("#s04 .chk-n", { opacity: 0, y: 30, duration: 0.3, ease: "power2.out" }, 15.122);
+      tl.fromTo("#v05", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 17.643);
+      tl.from("#s05 .chk", { x: -1100, duration: 0.45, ease: "power4.out" }, 17.723);
+      tl.from("#s05 .chk-ic", { scale: 0, rotation: -90, duration: 0.35, ease: "back.out(2.5)" }, 18.043);
+      tl.from("#s05 .chk-n", { opacity: 0, y: 30, duration: 0.3, ease: "power2.out" }, 18.143);
+      tl.fromTo("#v06", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 21.62);
+      tl.from("#s06 .chk", { x: -1100, duration: 0.45, ease: "power4.out" }, 21.7);
+      tl.from("#s06 .chk-ic", { scale: 0, rotation: -90, duration: 0.35, ease: "back.out(2.5)" }, 22.02);
+      tl.from("#s06 .chk-n", { opacity: 0, y: 30, duration: 0.3, ease: "power2.out" }, 22.12);
+      tl.fromTo("#v07", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 25.424);
+      tl.from("#s07 .chk", { x: -1100, duration: 0.45, ease: "power4.out" }, 25.503999999999998);
+      tl.from("#s07 .chk-ic", { scale: 0, rotation: -90, duration: 0.35, ease: "back.out(2.5)" }, 25.823999999999998);
+      tl.from("#s07 .chk-n", { opacity: 0, y: 30, duration: 0.3, ease: "power2.out" }, 25.924);
+      tl.fromTo("#v08", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 28.718);
+      tl.from("#s08 .px", { scale: 3, rotation: -40, opacity: 0, duration: 0.32, ease: "expo.in" }, 29.96);
+      tl.from("#s08 .px-val .l", { y: -120, opacity: 0, duration: 0.25, ease: "back.out(2.5)", stagger: 0.05 }, 30.310000000000002);
+      tl.to("#s08 .px-star", { rotation: 25, duration: 3.792, ease: "none" }, 28.718);
+      tl.fromTo("#s08 .px", { x: 0 }, { x: 16, duration: 0.04, ease: "none", yoyo: true, repeat: 5, immediateRender: false }, 30.28);
+      tl.fromTo("#v09", { scale: 1.1 }, { scale: 1.0, duration: 0.45, ease: "power3.out" }, 32.51);
+      tl.from("#s09 .cta", { y: 400, opacity: 0, duration: 0.5, ease: "power4.out" }, 32.559999999999995);
+      tl.from("#s09 .cta-site", { scale: 0.4, opacity: 0, duration: 0.4, ease: "back.out(2)" }, 33.603);
+      tl.from("#s09 .cta-ville", { y: 60, opacity: 0, duration: 0.4, ease: "back.out(2)" }, 35.291);
+      tl.to("#s09 .cta-btn", { scale: 1.07, duration: 0.32, ease: "sine.inOut", yoyo: true, repeat: 11 }, 33.11);
+      tl.fromTo("#s10 .lo-burst", { scale: 0 }, { scale: 1, duration: 0.5, ease: "expo.out" }, 37.257);
+      tl.fromTo("#s10 .lo-ring", { scale: 0.2, opacity: 1 }, { scale: 2.2, opacity: 0, duration: 0.8, ease: "power2.out" }, 37.757);
+      tl.from("#s10 .lo-sac", { y: -1300, rotation: -25, duration: 0.6, ease: "bounce.out" }, 37.257);
+      tl.from("#s10 .lo-lines i", { x: -700, opacity: 0, duration: 0.35, ease: "power3.out", stagger: 0.06 }, 37.707);
+      tl.to("#s10 .lo-lines i", { x: -60, opacity: 0, duration: 0.4, ease: "power2.in", stagger: 0.05 }, 38.207);
+      tl.from("#s10 .lo-txt", { x: -1000, duration: 0.5, ease: "power4.out" }, 37.907000000000004);
+      tl.from("#s10 .lo-slogan", { scaleX: 0, duration: 0.4, ease: "back.out(1.8)" }, 38.357);
+      tl.to("#s10 .lo-sac", { rotation: 6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3 }, 38.657000000000004);
+      tl.from("#s10 .lo-site", { y: 80, opacity: 0, duration: 0.4, ease: "back.out(2)" }, 38.607);
+      tl.from("#s10 .lo-ville", { y: 80, opacity: 0, duration: 0.4, ease: "back.out(2)" }, 38.807);
+      tl.from("#brandbar", { y: -200, duration: 0.5, ease: "back.out(1.6)" }, 2.85);
+      tl.from("#footer", { y: 120, opacity: 0, duration: 0.5, ease: "power3.out" }, 3.0500000000000003);
+      tl.fromTo("#wipe0 .wp", { x: 1400 }, { x: 0, duration: 0.33, ease: "power3.in", stagger: 0.04 }, 2.25);
+      tl.to("#wipe0 .wp", { x: -1400, duration: 0.33, ease: "power3.out", stagger: 0.04 }, 2.6);
+      tl.fromTo("#wipe1 .wp", { x: 1400 }, { x: 0, duration: 0.33, ease: "power3.in", stagger: 0.04 }, 36.857);
+      tl.to("#wipe1 .wp", { x: -1400, duration: 0.33, ease: "power3.out", stagger: 0.04 }, 37.207);
+      tl.from("#c000 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 2.85);
+      tl.from("#c001 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 3.492);
+      tl.from("#c002 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 4.09);
+      tl.from("#c003 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 4.946);
+      tl.from("#c004 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 5.739);
+      tl.from("#c005 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 6.611);
+      tl.from("#c006 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 7.866);
+      tl.from("#c007 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 8.302);
+      tl.from("#c008 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 9.945);
+      tl.from("#c009 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 10.825);
+      tl.from("#c010 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 11.646);
+      tl.from("#c011 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 12.526);
+      tl.from("#c012 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 12.937);
+      tl.from("#c013 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 13.993);
+      tl.from("#c014 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 14.742);
+      tl.from("#c015 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 16.007);
+      tl.from("#c016 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 16.85);
+      tl.from("#c017 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 17.763);
+      tl.from("#c018 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 18.996);
+      tl.from("#c019 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 19.724);
+      tl.from("#c020 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 20.452);
+      tl.from("#c021 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 21.74);
+      tl.from("#c022 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 22.511);
+      tl.from("#c023 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 23.392);
+      tl.from("#c024 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 24.162);
+      tl.from("#c025 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 25.544);
+      tl.from("#c026 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 26.667);
+      tl.from("#c027 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 27.849);
+      tl.from("#c028 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 28.838);
+      tl.from("#c029 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 29.841);
+      tl.from("#c030 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 31.681);
+      tl.from("#c031 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 32.63);
+      tl.from("#c032 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 33.499);
+      tl.from("#c033 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 34.418);
+      tl.from("#c034 .cap-in", { scale: 0.75, y: 30, opacity: 0, duration: 0.16, ease: "back.out(2.5)" }, 35.134);
+      tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: 40.407, ease: "none" }, 0);
+      tl.to({}, { duration: 40.407 }, 0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

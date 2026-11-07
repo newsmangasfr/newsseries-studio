@@ -1,0 +1,11 @@
+[
+ {"id":"hook","cap":"Tu cherches un canapé qui se transforme en lit ? Regarde ça !"},
+ {"id":"nom","cap":"Voici le canapé convertible en velours côtelé, disponible chez AchatBoo.","tts":"Voici le canapé convertible en velours côtelé, disponible chez Achat Bou."},
+ {"id":"tissu","cap":"Un tissu épais et tout doux, avec de larges côtes, super agréable au toucher."},
+ {"id":"confort","cap":"L'assise est moelleuse, et les coussins sont inclus."},
+ {"id":"lit","cap":"En quelques secondes, il se déplie en vrai lit, sans aucun effort."},
+ {"id":"coffre","cap":"Et en bonus : un grand coffre de rangement, caché sous l'assise."},
+ {"id":"couchage","cap":"Un grand couchage, idéal pour recevoir tes invités."},
+ {"id":"prix","cap":"Et tout ça, pour seulement 89 900 dinars !","tts":"Et tout ça, pour seulement quatre-vingt-neuf mille neuf cents dinars !"},
+ {"id":"cta","cap":"Commande-le vite sur AchatBoo.com, ou viens nous voir à Ghollamallah !","tts":"Commande-le vite sur Achat Bou point com, ou viens nous voir à Gholamallah !"}
+]

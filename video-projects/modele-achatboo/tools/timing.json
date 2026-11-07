@@ -1,0 +1,382 @@
+{
+ "total": 40.407,
+ "lead": 2.85,
+ "gap": 0.28,
+ "segments": [
+  "hook",
+  "nom",
+  "tissu",
+  "confort",
+  "lit",
+  "coffre",
+  "couchage",
+  "prix",
+  "cta"
+ ],
+ "vo": {
+  "hook": 2.85,
+  "nom": 5.739,
+  "tissu": 9.945,
+  "confort": 14.742,
+  "lit": 17.763,
+  "coffre": 21.74,
+  "couchage": 25.544,
+  "prix": 28.838,
+  "cta": 32.63
+ },
+ "shots": [
+  {
+   "kind": "intro",
+   "start": 0.0,
+   "dur": 2.6
+  },
+  {
+   "kind": "hook",
+   "start": 2.6,
+   "dur": 3.019,
+   "clip": "assets/clips/hook.mp4",
+   "src": {
+    "extraits": [
+     [
+      30.7,
+      34.7
+     ]
+    ],
+    "cadre": "plein",
+    "cx": 0.42,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "nom",
+   "start": 5.619,
+   "dur": 4.206,
+   "clip": "assets/clips/nom.mp4",
+   "src": {
+    "extraits": [
+     [
+      8.0,
+      12.9
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "tissu",
+   "start": 9.825,
+   "dur": 4.797,
+   "clip": "assets/clips/tissu.mp4",
+   "src": {
+    "extraits": [
+     [
+      4.7,
+      7.4
+     ],
+     [
+      16.9,
+      18.7
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "confort",
+   "start": 14.622,
+   "dur": 3.021,
+   "clip": "assets/clips/confort.mp4",
+   "src": {
+    "extraits": [
+     [
+      13.3,
+      16.6
+     ],
+     [
+      20.8,
+      22.4
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "lit",
+   "start": 17.643,
+   "dur": 3.977,
+   "clip": "assets/clips/lit.mp4",
+   "src": {
+    "extraits": [
+     [
+      25.0,
+      29.0
+     ],
+     [
+      42.0,
+      43.4
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "coffre",
+   "start": 21.62,
+   "dur": 3.804,
+   "clip": "assets/clips/coffre.mp4",
+   "src": {
+    "extraits": [
+     [
+      34.85,
+      36.0
+     ],
+     [
+      36.1,
+      37.7
+     ],
+     [
+      38.65,
+      40.4
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "couchage",
+   "start": 25.424,
+   "dur": 3.294,
+   "clip": "assets/clips/couchage.mp4",
+   "src": {
+    "extraits": [
+     [
+      43.5,
+      44.3
+     ],
+     [
+      44.4,
+      46.9
+     ],
+     [
+      47.0,
+      49.3
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "prix",
+   "start": 28.718,
+   "dur": 3.792,
+   "clip": "assets/clips/prix.mp4",
+   "src": {
+    "extraits": [
+     [
+      9.0,
+      12.9
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": ""
+   }
+  },
+  {
+   "kind": "cta",
+   "start": 32.51,
+   "dur": 4.697,
+   "clip": "assets/clips/cta.mp4",
+   "src": {
+    "extraits": [
+     [
+      47.0,
+      49.3
+     ]
+    ],
+    "cadre": "carre",
+    "cx": 0.5,
+    "teinte": "sombre"
+   }
+  },
+  {
+   "kind": "outro",
+   "start": 37.207,
+   "dur": 3.2
+  }
+ ],
+ "sfx": [
+  [
+   0.05,
+   "whoosh-big",
+   0.45
+  ],
+  [
+   0.55,
+   "hit",
+   0.35
+  ],
+  [
+   0.7,
+   "whoosh-medium",
+   0.35
+  ],
+  [
+   1.15,
+   "pop-high",
+   0.5
+  ],
+  [
+   2.3,
+   "swish-02",
+   0.45
+  ],
+  [
+   3.292,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   4.769,
+   "stamp",
+   0.55
+  ],
+  [
+   4.846,
+   "swish-01",
+   0.4
+  ],
+  [
+   5.719,
+   "whoosh-medium",
+   0.35
+  ],
+  [
+   6.219,
+   "shimmer",
+   0.35
+  ],
+  [
+   9.905,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   10.245,
+   "pop-mid",
+   0.5
+  ],
+  [
+   14.702,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   15.042,
+   "pop-mid",
+   0.5
+  ],
+  [
+   17.723,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   18.063,
+   "pop-mid",
+   0.5
+  ],
+  [
+   21.7,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   22.04,
+   "pop-mid",
+   0.5
+  ],
+  [
+   25.504,
+   "whoosh-light",
+   0.35
+  ],
+  [
+   25.844,
+   "pop-mid",
+   0.5
+  ],
+  [
+   29.26,
+   "riser-1s",
+   0.35
+  ],
+  [
+   30.28,
+   "cash-register",
+   0.6
+  ],
+  [
+   30.28,
+   "hit-low",
+   0.4
+  ],
+  [
+   32.56,
+   "whoosh-medium",
+   0.35
+  ],
+  [
+   33.603,
+   "ding-01",
+   0.45
+  ],
+  [
+   35.291,
+   "pop-mid",
+   0.4
+  ],
+  [
+   36.907,
+   "swish-02",
+   0.45
+  ],
+  [
+   37.257,
+   "whoosh-big",
+   0.45
+  ],
+  [
+   37.757,
+   "hit",
+   0.35
+  ],
+  [
+   37.907,
+   "whoosh-medium",
+   0.35
+  ],
+  [
+   38.357,
+   "pop-high",
+   0.5
+  ],
+  [
+   38.657,
+   "chime",
+   0.4
+  ]
+ ]
+}
