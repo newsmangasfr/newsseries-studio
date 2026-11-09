@@ -57,6 +57,11 @@ puis on adapte le script, les visuels, les couleurs et les plans.
    Ensuite commit, push, et envoi de la vidéo au client avec un résumé des plans et de ce qui n'est pas vérifié.
 10. **Descriptions** : quand le client les demande, suivre `references/descriptions.md`.
 
+## Pour monter mieux
+
+Pour un sujet qui mérite plus qu'un modèle (gros événement, bande-annonce, mini-histoire), suivre le skill `studio-serie` :
+storyboard avant de monter, effets, passe de bruitages mesurée, contrôle qualité.
+
 ## Pièges déjà rencontrés
 
 - Le texte en dégradé (`background-clip: text`) disparaît s'il est posé sur le parent de lettres animées une par
