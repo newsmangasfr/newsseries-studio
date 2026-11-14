@@ -19,6 +19,16 @@ dans l'ordre et on saute celles dont le sujet n'a pas besoin.
 | 7 | **Montage** | `short-actu-serie` (étapes 5-7), `video-storytelling` (caméra, rythme), `hyperframes` | `renders/*.mp4` |
 | 8 | **Contrôle** | planche d'images, `ffprobe`, `ebur128` ; `short-drama-review` pour relire un storyboard | rapport |
 
+## Options 3D, motion et export
+
+| Besoin | Skill ou fiche |
+|---|---|
+| Timing, easing, 12 principes de Disney | `motion-design`, `motion-ai-kit` (ressorts CSS, audit de motion) |
+| Figure linéaire interactive à partir d'une idée ou d'un SVG | `hairline-create`, `hairline-adopt` |
+| Machine ou système en figure isométrique | `anatomy` |
+| Vue éclatée d'un objet et vidéo de révélation MP4 | `anatomy-reveal` |
+| Three.js, physique, post-traitement, particules, Tweakpane, Manim, Lottie, Openverse, WhisperX, FFmpeg, Blender | `bibliotheques-3d-fx-export` |
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes

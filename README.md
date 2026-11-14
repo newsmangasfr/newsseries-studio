@@ -19,3 +19,8 @@ Real-ESRGAN, Demucs, librosa, HyperFrames, FFmpeg) derrière une seule commande 
 (liangdabiao), `pixelfx` (patch-gg), `shader-art-coding` (gokayfem), `webgpu-threejs-tsl` (dgreenheck),
 `cartoon-3d-short` (mromidev/claude-animated-shorts), `elevenlabs-*` (elevenlabs/skills). HyperFrames et Remotion
 étaient déjà là. Non repris : `comfyui-mcp` (serveur MCP, pas un skill) et `claude-ai-music-skills` (album Suno).
+
+Deuxième lot : `motion-design` (LottieFiles), `motion-ai-kit` (motiondivision/ai-kit), `hairline-create` et
+`hairline-adopt` (lucasmarkes), `anatomy` (wheresryan22), `anatomy-reveal` (annnguyentt), `remotion-license`, et la fiche
+`bibliotheques-3d-fx-export` pour les bibliothèques (Three.js, GSAP, Manim, Lottie, Openverse, WhisperX, FFmpeg…).
+Non repris : `scenario-labs/blender-plugin` (plugin Blender de 163 Mo, à installer côté machine).
