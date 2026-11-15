@@ -29,6 +29,20 @@ dans l'ordre et on saute celles dont le sujet n'a pas besoin.
 | Vue éclatée d'un objet et vidéo de révélation MP4 | `anatomy-reveal` |
 | Three.js, physique, post-traitement, particules, Tweakpane, Manim, Lottie, Openverse, WhisperX, FFmpeg, Blender | `bibliotheques-3d-fx-export` |
 
+## Pack iart.ai (32 skills motion)
+
+| Besoin | Skills |
+|---|---|
+| Sous-titres animés, compte à rebours, short vertical | `caption-animation`, `countdown-video`, `iart-short-form-video` |
+| Rythme et coupes sur la musique | `beat-sync-editing`, `soundtrack` |
+| Titres et logo | `kinetic-typography`, `logo-animation`, `lower-thirds`, `youtube-intro-outro` |
+| Habillage de fond, couleur, cadrage | `motion-background`, `color-motion`, `shot-composition`, `motion-art-direction`, `animation-principles` |
+| B-roll d'une vidéo face caméra | `talking-head-b-roll` |
+| Chiffres, classements, audiences | `chart-animation`, `animated-infographic`, `presentation-video`, `wrapped-video` |
+| Explications | `explainer-video`, `diagram-animation`, `isometric-animation`, `whiteboard-animation` |
+| Pubs et bandes-annonces | `launch-video`, `ad-creative-video`, `testimonial-video`, `audiogram` |
+| 3D et effets | `threejs-animation`, `shader-glsl`, `particle-system`, `javascript-animation`, `remotion-video` |
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes

@@ -24,3 +24,8 @@ Deuxième lot : `motion-design` (LottieFiles), `motion-ai-kit` (motiondivision/a
 `hairline-adopt` (lucasmarkes), `anatomy` (wheresryan22), `anatomy-reveal` (annnguyentt), `remotion-license`, et la fiche
 `bibliotheques-3d-fx-export` pour les bibliothèques (Three.js, GSAP, Manim, Lottie, Openverse, WhisperX, FFmpeg…).
 Non repris : `scenario-labs/blender-plugin` (plugin Blender de 163 Mo, à installer côté machine).
+
+Troisième lot : 32 skills du pack iart.ai (iart-ai/motion-skills, licence MIT, voir `.claude/skills/LICENSE-iart-motion-skills`) :
+sous-titres, rythme, titres, habillage, graphiques, explications, pubs, 3D. `short-form-video` d'iart est renommé
+`iart-short-form-video` (le nom existait déjà). Non repris : packs e-commerce, SMS, cartes, freelance, web, Manim,
+illustration générative, talking-head IA, et le skill After Effects.
