@@ -29,3 +29,9 @@ Troisième lot : 32 skills du pack iart.ai (iart-ai/motion-skills, licence MIT, 
 sous-titres, rythme, titres, habillage, graphiques, explications, pubs, 3D. `short-form-video` d'iart est renommé
 `iart-short-form-video` (le nom existait déjà). Non repris : packs e-commerce, SMS, cartes, freelance, web, Manim,
 illustration générative, talking-head IA, et le skill After Effects.
+
+Quatrième lot : `brief2mp4` (qualixar, MIT) et 17 skills de video-studio-kit (owlinthebarnai, qui regroupe des projets
+MIT/Apache-2.0 : voir son THIRD_PARTY.md) : `kinetic-reel`, `painted-animation`, `claude-animation-styles`, `lemo-opuscar`,
+`animate`, `tvhead-video`, `reverse-any-video`, `remotion-to-hyperframes`, `real-sound`, `earshot`, `media-use`,
+`motion-prompt`, `style-sampling`, `gsap-core/timeline/utils/performance`. Non repris : l'application Video Studio,
+les skills scientifiques et Blender, `figma`, `slideshow`, et deux skills rédigés en russe (`motion-studio`, `ai-montage`).

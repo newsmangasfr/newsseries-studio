@@ -43,6 +43,20 @@ dans l'ordre et on saute celles dont le sujet n'a pas besoin.
 | Pubs et bandes-annonces | `launch-video`, `ad-creative-video`, `testimonial-video`, `audiogram` |
 | 3D et effets | `threejs-animation`, `shader-glsl`, `particle-system`, `javascript-animation`, `remotion-video` |
 
+## Montage vérifié et styles d'animation (video-studio-kit, brief2mp4)
+
+| Besoin | Skill |
+|---|---|
+| Brief écrit → MP4 contrôlé ligne par ligne (REPORT.md), 30 styles, pack montage | `brief2mp4` |
+| Refaire en projet modifiable une vidéo existante (celle du client) | `reverse-any-video`, `remotion-to-hyperframes` |
+| Reels de typographie, aquarelle, styles prêts (pixel art, BD, argile…) | `kinetic-reel`, `painted-animation`, `claude-animation-styles`, `lemo-opuscar`, `animate`, `tvhead-video` |
+| Sons réalistes, écoute et vérification du son, médias libres | `real-sound`, `earshot`, `media-use` |
+| Nommer un effet, nouvel épisode dans un style éprouvé | `motion-prompt`, `style-sampling` |
+| GSAP en détail | `gsap-core`, `gsap-timeline`, `gsap-utils`, `gsap-performance` |
+
+`brief2mp4` est la meilleure base pour un montage exigeant : le brief fixe la durée, le format, les textes exacts et la
+liste « terminé quand », et le rapport prouve chaque ligne avec une mesure ou une image.
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes
