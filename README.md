@@ -35,3 +35,9 @@ MIT/Apache-2.0 : voir son THIRD_PARTY.md) : `kinetic-reel`, `painted-animation`,
 `animate`, `tvhead-video`, `reverse-any-video`, `remotion-to-hyperframes`, `real-sound`, `earshot`, `media-use`,
 `motion-prompt`, `style-sampling`, `gsap-core/timeline/utils/performance`. Non repris : l'application Video Studio,
 les skills scientifiques et Blender, `figma`, `slideshow`, et deux skills rédigés en russe (`motion-studio`, `ai-montage`).
+
+Cinquième lot : `video-use` (browser-use), 13 skills `resolve-*` (DaVinci Resolve MCP, samuelgursky), `canvas-design`, `pptx`,
+`theme-factory`, `frontend-design` (anthropics/skills), `ui-ux-pro-max`, `banner-design`, `brand`, `design-system`
+(nextlevelbuilder), `agent-browser` (Vercel), `astryx` (Meta), `design-md`, `taste-design`, `enhance-prompt`,
+`stitch-generate-design`, `stitch-remotion` (Google Labs), et la fiche `outils-montage-design`. Non repris : les serveurs
+MCP et logiciels eux-mêmes (Resolve, Magic, Figma, Penpot), Excalidraw et tldraw (bibliothèques, décrites dans la fiche).

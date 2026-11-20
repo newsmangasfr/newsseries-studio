@@ -57,6 +57,18 @@ dans l'ordre et on saute celles dont le sujet n'a pas besoin.
 `brief2mp4` est la meilleure base pour un montage exigeant : le brief fixe la durée, le format, les textes exacts et la
 liste « terminé quand », et le rapport prouve chaque ligne avec une mesure ou une image.
 
+## Montage automatique, DaVinci Resolve et design
+
+| Besoin | Skill ou fiche |
+|---|---|
+| Rushes → final.mp4 (tics de langage, étalonnage, sous-titres) | `video-use` |
+| Piloter DaVinci Resolve (montage, couleur, audio, export) | `resolve-mcp`, `resolve-rough-cut`, `resolve-edit`, `resolve-color`, `resolve-audio`, `resolve-delivery`, `resolve-session` (et `resolve-*`) |
+| Affiches, miniatures, visuels PNG et PDF | `canvas-design`, `banner-design`, `brand`, `theme-factory` |
+| Présentation (dossier de pitch, bilan) | `pptx` |
+| Site et interface NewsSeries | `frontend-design`, `ui-ux-pro-max`, `design-system`, `design-md`, `taste-design`, `astryx`, `stitch-generate-design`, `enhance-prompt` |
+| Vérifier une page dans un navigateur | `agent-browser` |
+| MCP, auto-editor, MoviePy, Figma, Penpot, Excalidraw, tldraw | `outils-montage-design` |
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes
