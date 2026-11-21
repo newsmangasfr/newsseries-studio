@@ -46,3 +46,5 @@ Sixième lot : `rea-video` (JuneYaooo, décomposition d'une vidéo de référenc
 officielle du dépôt lemomo-ai, `bibliotheque-prompts-video` (703 prompts, yihui-dev, MIT). La fiche
 `bibliotheques-3d-fx-export` ajoute ComfyUI, EffectCraft, Blender MCP. Déjà présents : PixelFX, Remotion et ses skills,
 HyperFrames, Three.js, GSAP, FFmpeg.
+
+Septième lot : fiche `pipeline-clips` (chaîne vidéo longue → clips verticaux, 20 outils, règle sur les droits des sources).

@@ -77,6 +77,11 @@ liste « terminé quand », et le rapport prouve chaque ligne avec une mesure ou
 | Décortiquer une vidéo de référence (plans, rythme, moyens de fabrication) | `rea-video` |
 | 99 styles de films faits en code | `lemo-opuscar` (version officielle ; le dépôt des styles se clone à la demande) |
 
+## Clips à partir d'une vidéo longue
+
+`long-video-en-cut-reel` fait le travail ; `pipeline-clips` liste les outils de chaque étape (capture, transcription,
+recadrage, export) et fixe la règle sur les droits : seulement des sources du client ou autorisées.
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes

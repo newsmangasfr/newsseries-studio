@@ -94,3 +94,5 @@ prouve seulement que le fichier est valide, pas que le reel est bon.
 - La voix du client reste dans la vidéo : on ne cite pas un tiers qui parle sans qu'il soit identifié sur l'image.
 - Si l'exécution d'un script du skill est refusée par la session, dis-le au client et propose-lui d'ajouter une règle
   de permission pour `python3 .claude/skills/brand-video-studio/scripts/*`.
+
+Outils par étape et règle sur les droits de la source : voir le skill `pipeline-clips`.
