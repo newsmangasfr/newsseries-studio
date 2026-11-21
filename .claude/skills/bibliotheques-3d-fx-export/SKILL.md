@@ -24,6 +24,11 @@ Ce ne sont pas des skills : ce sont des bibliothèques. On les installe dans le 
 | Sous-titres mot à mot | **WhisperX** | m-bain/whisperX | Horodatage précis de chaque mot pour sous-titres animés |
 | Encodage et export | **FFmpeg** | FFmpeg/FFmpeg | Export final, réencodage < 100 Mo (voir `short-actu-serie`, étape 9) |
 | Équipe 3D complète | **Blender via MCP** | scenario-labs/blender-plugin | Rendu 3D lourd. Demande Blender et le plugin installés sur la machine du client ; non inclus ici |
+| Génération d'images par IA, graphes contrôlés | **ComfyUI** | Comfy-Org/ComfyUI | Images clés ou textures en local ; demande un GPU, hors de ce dépôt |
+| Effets visuels sans logiciel payant | **EffectCraft** | storytold/effectcraft | Application Rust (60 Mo) : à installer côté machine, non incluse ici |
+| Blender piloté par l'agent | **Blender MCP** | ahujasid/mcp-for-blender | Serveur MCP, demande Blender 4.2+ sur la machine du client |
+| Décortiquer une vidéo de référence | **Rea-Video** | JuneYaooo/rea-video | Skill `rea-video` et `outils/studiofx.py analyser` |
+| 703 prompts de vidéos en code | **awesome-opus5-5-videos** | yihui-dev/awesome-opus5-5-videos | Skill `bibliotheque-prompts-video` |
 
 ## Règles
 

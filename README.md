@@ -41,3 +41,8 @@ Cinquième lot : `video-use` (browser-use), 13 skills `resolve-*` (DaVinci Resol
 (nextlevelbuilder), `agent-browser` (Vercel), `astryx` (Meta), `design-md`, `taste-design`, `enhance-prompt`,
 `stitch-generate-design`, `stitch-remotion` (Google Labs), et la fiche `outils-montage-design`. Non repris : les serveurs
 MCP et logiciels eux-mêmes (Resolve, Magic, Figma, Penpot), Excalidraw et tldraw (bibliothèques, décrites dans la fiche).
+
+Sixième lot : `rea-video` (JuneYaooo, décomposition d'une vidéo de référence), `lemo-opuscar` remplacé par la version
+officielle du dépôt lemomo-ai, `bibliotheque-prompts-video` (703 prompts, yihui-dev, MIT). La fiche
+`bibliotheques-3d-fx-export` ajoute ComfyUI, EffectCraft, Blender MCP. Déjà présents : PixelFX, Remotion et ses skills,
+HyperFrames, Three.js, GSAP, FFmpeg.

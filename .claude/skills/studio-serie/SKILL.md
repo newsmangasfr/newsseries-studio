@@ -69,6 +69,14 @@ liste « terminé quand », et le rapport prouve chaque ligne avec une mesure ou
 | Vérifier une page dans un navigateur | `agent-browser` |
 | MCP, auto-editor, MoviePy, Figma, Penpot, Excalidraw, tldraw | `outils-montage-design` |
 
+## Références et idées
+
+| Besoin | Skill |
+|---|---|
+| Trouver une idée de motion ou de teaser parmi 703 prompts | `bibliotheque-prompts-video` |
+| Décortiquer une vidéo de référence (plans, rythme, moyens de fabrication) | `rea-video` |
+| 99 styles de films faits en code | `lemo-opuscar` (version officielle ; le dépôt des styles se clone à la demande) |
+
 ## Règles de montage qui font la différence
 
 - **Rythme** : un changement visuel (plan, zoom, texte, effet) toutes les 1,5 à 3 secondes ; jamais plus de 4 secondes
