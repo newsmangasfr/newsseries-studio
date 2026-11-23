@@ -3,5 +3,6 @@
     "allow": [
       "Bash(bash outils/audio8.sh:*)"
     ]
-  }
+  },
+  "autoCompactWindow": 400000
 }
